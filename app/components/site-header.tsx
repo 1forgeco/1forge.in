@@ -1,11 +1,12 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
-  { label: "Products", href: "#products" },
-  { label: "Features", href: "#features" },
-  { label: "Security", href: "#security" },
+  { label: "Services", href: "#products" },
+  { label: "Work", href: "#developers" },
+  { label: "Templates", href: "#templates" },
   { label: "About", href: "#about" },
 ];
 
@@ -51,49 +52,26 @@ export function SiteHeader() {
           padding: "16px 24px",
         }}
       >
-        {/* Logo */}
         <a
           href="#top"
           id="header-logo"
           style={{
-            fontSize: "20px",
-            fontWeight: 600,
-            letterSpacing: "-0.02em",
-            color: "var(--color-ink-black)",
             display: "flex",
             alignItems: "center",
-            gap: "8px",
           }}
         >
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "32px",
-              height: "32px",
-              borderRadius: "10px",
-              background:
-                "linear-gradient(135deg, var(--color-cosmic-violet), #7b6fcc)",
-              color: "white",
-              fontSize: "14px",
-              fontWeight: 700,
-            }}
-          >
-            1F
-          </span>
-          1forge
+          <BrandLogo tone="dark" size="md" />
         </a>
 
         {/* Desktop Navigation */}
         <nav
           id="main-nav"
+          className="header-nav"
           style={{
             display: "flex",
             alignItems: "center",
             gap: "32px",
           }}
-          className="hidden md:flex"
         >
           {navigationItems.map((item) => (
             <a
@@ -118,6 +96,20 @@ export function SiteHeader() {
               }}
             >
               {item.label}
+              {item.label === "Services" && (
+                <span
+                  className="nav-active-dot"
+                  style={{
+                    position: "absolute",
+                    top: "-7px",
+                    right: "-12px",
+                    width: "8px",
+                    height: "8px",
+                    borderRadius: "50%",
+                    background: "var(--color-cosmic-violet)",
+                  }}
+                />
+              )}
             </a>
           ))}
         </nav>
@@ -134,7 +126,7 @@ export function SiteHeader() {
               height: "38px",
               padding: "0 20px",
               borderRadius: "var(--radius-pills)",
-              background: "var(--color-cosmic-violet)",
+              background: "var(--color-ink-black)",
               color: "var(--color-white-canvas)",
               fontSize: "14px",
               fontWeight: 500,
@@ -145,20 +137,20 @@ export function SiteHeader() {
             onMouseEnter={(e) => {
               (e.target as HTMLElement).style.transform = "translateY(-1px)";
               (e.target as HTMLElement).style.boxShadow =
-                "0 8px 24px rgba(153, 142, 255, 0.35)";
+                "0 8px 24px rgba(25, 200, 90, 0.32)";
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLElement).style.transform = "translateY(0)";
               (e.target as HTMLElement).style.boxShadow = "none";
             }}
           >
-            Use 1forge
+            Start a Project
           </a>
 
           {/* Mobile Menu Toggle */}
           <button
             id="mobile-menu-toggle"
-            className="md:hidden"
+            className="mobile-toggle"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
             style={{
               background: "none",

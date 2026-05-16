@@ -1,31 +1,27 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BrandLogo } from "./brand-logo";
 
-const protocolStats = [
+const serviceRows = [
+  ["Websites", "Landing + CMS", "7-21 days", "SEO-ready", "Live deploy"],
+  ["Mobile Apps", "iOS + Android", "4-10 weeks", "Auth + payments", "Store-ready"],
+  ["Hostel/PG Systems", "Rooms + fees", "2-6 weeks", "Reports + staff", "Template base"],
+  ["AI Automation", "Agents + workflows", "1-4 weeks", "CRM + support", "Custom"],
+];
+
+const strategies = [
   {
-    protocol: "USDC Vault",
-    apy: "6.50%",
-    tvl: "$890M",
-    change: "+0.12%",
+    title: "For local businesses",
+    body: "Websites, booking flows, payment pages, and admin panels that are easy to manage.",
   },
   {
-    protocol: "USDT Vault",
-    apy: "5.80%",
-    tvl: "$720M",
-    change: "+0.08%",
+    title: "For operators",
+    body: "Hostel, PG, inventory, staff, and customer systems built around your daily work.",
   },
   {
-    protocol: "DAI Vault",
-    apy: "5.25%",
-    tvl: "$410M",
-    change: "+0.15%",
-  },
-  {
-    protocol: "ETH Staking",
-    apy: "4.20%",
-    tvl: "$380M",
-    change: "+0.05%",
+    title: "For teams using AI",
+    body: "Agents and automations that handle repetitive messages, reports, leads, and tasks.",
   },
 ];
 
@@ -36,274 +32,325 @@ export function DarkSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
   return (
     <section
       ref={sectionRef}
-      id="security"
-      className="dark-section-gradient"
+      id="products"
       style={{
-        padding: "100px 24px",
-        position: "relative",
-        overflow: "hidden",
+        padding: "48px 16px 0",
+        background: "var(--color-white-canvas)",
       }}
     >
-      {/* Ambient glow */}
       <div
+        className="dark-section-gradient soft-grid-motion"
         style={{
-          position: "absolute",
-          top: "50%",
-          left: "50%",
-          transform: "translate(-50%, -50%)",
-          width: "600px",
-          height: "600px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(153,142,255,0.06) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      <div
-        style={{
-          maxWidth: "1100px",
+          maxWidth: "1480px",
           margin: "0 auto",
+          minHeight: "900px",
+          borderRadius: "24px",
+          padding: "120px 24px 96px",
+          overflow: "hidden",
           position: "relative",
-          zIndex: 1,
         }}
       >
-        {/* Header */}
         <div
           style={{
-            textAlign: "center",
-            maxWidth: "640px",
-            margin: "0 auto 64px",
+            position: "absolute",
+            inset: 0,
+            background:
+              "linear-gradient(180deg, transparent 0%, rgba(15,15,16,0.1) 35%, rgba(15,15,16,0.95) 76%)",
+            pointerEvents: "none",
           }}
-        >
+        />
+
+        <div style={{ maxWidth: "1120px", margin: "0 auto", position: "relative" }}>
           <div
-            className={isVisible ? "animate-fade-up" : ""}
+            className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
             style={{
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              padding: "6px 14px 6px 6px",
-              borderRadius: "var(--radius-pills)",
-              background: "rgba(255, 255, 255, 0.06)",
-              fontSize: "12px",
-              color: "rgba(255, 255, 255, 0.6)",
-              fontWeight: 500,
-              marginBottom: "24px",
-              border: "1px solid rgba(255, 255, 255, 0.08)",
-              opacity: isVisible ? 1 : 0,
+              textAlign: "center",
+              opacity: isVisible ? undefined : 0,
             }}
           >
-            <span
+            <div
               style={{
-                width: "22px",
-                height: "22px",
-                borderRadius: "50%",
-                background: "var(--color-cosmic-violet)",
-                color: "white",
-                display: "flex",
+                display: "inline-flex",
                 alignItems: "center",
-                justifyContent: "center",
-                fontSize: "10px",
-                fontWeight: 700,
+                gap: "12px",
+                color: "rgba(255,255,255,0.48)",
+                fontSize: "22px",
+                fontWeight: 500,
+                marginBottom: "48px",
               }}
             >
-              ⚡
-            </span>
-            Live Protocol Data
+              <BrandLogo tone="green" size="sm" showWord={false} />
+              1forge Services
+            </div>
+
+            <h2
+              style={{
+                color: "var(--color-white-canvas)",
+                fontSize: "clamp(48px, 8vw, 92px)",
+                lineHeight: 0.94,
+                letterSpacing: "-0.055em",
+                fontWeight: 500,
+                margin: 0,
+              }}
+            >
+              Build the software your business needs
+            </h2>
+            <p
+              style={{
+                color: "rgba(255,255,255,0.52)",
+                fontSize: "24px",
+                lineHeight: 1.25,
+                margin: "28px 0 0",
+              }}
+            >
+              From your first business website to full management systems,
+              desktop apps, AI agents, and workflow automation.
+            </p>
+
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                gap: "18px",
+                marginTop: "40px",
+                flexWrap: "wrap",
+              }}
+            >
+              <a className="btn-inverse" href="#cta">
+                Get a Quote
+              </a>
+              <a className="btn-muted-dark" href="#developers">
+                See Work
+              </a>
+            </div>
           </div>
 
-          <h2
-            className={isVisible ? "animate-fade-up delay-100" : ""}
+          <div
+            className={isVisible ? "animate-reveal-blur delay-200 motion-shell" : "motion-shell"}
             style={{
-              fontSize: "clamp(32px, 5vw, 48px)",
-              lineHeight: 1.05,
-              letterSpacing: "-0.035em",
-              fontWeight: 500,
-              color: "var(--color-white-canvas)",
-              margin: 0,
+              marginTop: "96px",
+              borderRadius: "18px",
+              border: "1px solid rgba(255,255,255,0.14)",
+              background: "rgba(255,255,255,0.03)",
+              overflow: "hidden",
               opacity: isVisible ? undefined : 0,
             }}
           >
-            The Full Power
-            <br />
-            of{" "}
-            <span style={{ color: "var(--color-cosmic-violet)" }}>DeFi</span>
-          </h2>
+            <div
+              style={{
+                height: "46px",
+                borderBottom: "1px solid rgba(255,255,255,0.1)",
+                display: "flex",
+                alignItems: "center",
+                gap: "8px",
+                padding: "0 20px",
+              }}
+            >
+              {["#ff6b58", "#f7bc4c", "#6bd27d"].map((color) => (
+                <span
+                  key={color}
+                  style={{
+                    width: "9px",
+                    height: "9px",
+                    borderRadius: "50%",
+                    background: color,
+                  }}
+                />
+              ))}
+              <span
+                style={{
+                  margin: "0 auto",
+                  width: "360px",
+                  maxWidth: "45%",
+                  height: "24px",
+                  borderRadius: "8px",
+                  background: "rgba(255,255,255,0.05)",
+                  color: "rgba(255,255,255,0.5)",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  fontSize: "12px",
+                }}
+              >
+                studio.1forge.in
+              </span>
+            </div>
 
-          <p
-            className={isVisible ? "animate-fade-up delay-200" : ""}
+            <div style={{ display: "grid", gridTemplateColumns: "220px 1fr" }} className="pro-shell">
+              <aside
+                style={{
+                  borderRight: "1px solid rgba(255,255,255,0.08)",
+                  padding: "26px 18px",
+                  color: "rgba(255,255,255,0.48)",
+                  minHeight: "420px",
+                }}
+              >
+                <strong style={{ color: "white", fontSize: "18px" }}>1forge</strong>
+                {["Websites", "Apps", "Hostel/PG", "Automation", "Support"].map((item, index) => (
+                  <div
+                    key={item}
+                    className="motion-card"
+                    style={{
+                      marginTop: index === 0 ? "34px" : "8px",
+                      padding: "11px 12px",
+                      borderRadius: "10px",
+                      background: item === "Hostel/PG" ? "rgba(255,255,255,0.08)" : "transparent",
+                      color: item === "Hostel/PG" ? "white" : "rgba(255,255,255,0.52)",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {item}
+                  </div>
+                ))}
+              </aside>
+
+              <div style={{ padding: "44px 52px" }} className="pro-content">
+                <h3
+                  style={{
+                    color: "white",
+                    fontSize: "32px",
+                    letterSpacing: "-0.025em",
+                    margin: 0,
+                  }}
+                >
+                  Services
+                </h3>
+                <p style={{ color: "rgba(255,255,255,0.45)", margin: "10px 0 34px" }}>
+                  Pick a service or combine multiple systems into one business platform.
+                </p>
+
+                <div
+                  style={{
+                    display: "grid",
+                    gridTemplateColumns: "1.2fr .8fr .9fr 1fr 1fr",
+                    gap: "16px",
+                    color: "rgba(255,255,255,0.34)",
+                    fontSize: "12px",
+                    textTransform: "uppercase",
+                    padding: "16px 20px",
+                    borderRadius: "14px 14px 0 0",
+                    background: "rgba(255,255,255,0.04)",
+                  }}
+                  className="market-row"
+                >
+                  <span>Service</span>
+                  <span>Scope</span>
+                  <span>Timeline</span>
+                  <span>Includes</span>
+                  <span>Status</span>
+                </div>
+                {serviceRows.map((row, index) => (
+                  <div
+                    key={row[0]}
+                    className="market-row motion-card"
+                    style={{
+                      display: "grid",
+                      gridTemplateColumns: "1.2fr .8fr .9fr 1fr 1fr",
+                      gap: "16px",
+                      padding: "18px 20px",
+                      background:
+                        index === 1 ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.035)",
+                      borderTop: "1px solid rgba(255,255,255,0.04)",
+                      color: "rgba(255,255,255,0.66)",
+                      fontSize: "14px",
+                    }}
+                  >
+                    {row.map((cell, cellIndex) => (
+                      <span key={`${row[0]}-${cellIndex}`}>{cell}</span>
+                    ))}
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+
+          <div
             style={{
-              marginTop: "16px",
-              fontSize: "16px",
-              lineHeight: 1.5,
-              color: "rgba(255, 255, 255, 0.55)",
-              opacity: isVisible ? undefined : 0,
+              marginTop: "92px",
+              display: "grid",
+              gridTemplateColumns: "1fr auto",
+              gap: "32px",
+              alignItems: "center",
             }}
+            className="split-copy"
           >
-            Access the best yield strategies across multiple protocols, all from
-            a single beautiful interface.
-          </p>
-        </div>
+            <div>
+              <h3
+                style={{
+                  color: "white",
+                  fontSize: "clamp(36px, 5vw, 56px)",
+                  letterSpacing: "-0.04em",
+                  lineHeight: 1,
+                  margin: 0,
+                }}
+              >
+              Services for every digital workflow.
+              </h3>
+              <p
+                style={{
+                  color: "rgba(255,255,255,0.62)",
+                  fontSize: "24px",
+                  lineHeight: 1.35,
+                  maxWidth: "760px",
+                  margin: "28px 0 0",
+                }}
+              >
+                We can build from scratch, customize a template, or automate
+                the manual work your team repeats every day.
+              </p>
+            </div>
+            <a className="btn-muted-dark" href="#developers">
+              Learn More
+            </a>
+          </div>
 
-        {/* Protocol Stats Table */}
-        <div
-          className={isVisible ? "animate-fade-up delay-300" : ""}
-          style={{
-            background: "rgba(255, 255, 255, 0.03)",
-            borderRadius: "var(--radius-cards)",
-            border: "1px solid rgba(255, 255, 255, 0.06)",
-            overflow: "hidden",
-            opacity: isVisible ? undefined : 0,
-          }}
-        >
-          {/* Table Header */}
           <div
             style={{
               display: "grid",
-              gridTemplateColumns: "2fr 1fr 1fr 1fr",
-              padding: "16px 28px",
-              borderBottom: "1px solid rgba(255, 255, 255, 0.06)",
-              fontSize: "12px",
-              fontWeight: 500,
-              color: "rgba(255, 255, 255, 0.35)",
-              letterSpacing: "0.05em",
-              textTransform: "uppercase",
+              gridTemplateColumns: "repeat(3, 1fr)",
+              gap: "28px",
+              marginTop: "72px",
             }}
+            className="strategy-grid"
           >
-            <span>Protocol</span>
-            <span style={{ textAlign: "right" }}>APY</span>
-            <span style={{ textAlign: "right" }}>TVL</span>
-            <span style={{ textAlign: "right" }}>24h</span>
-          </div>
-
-          {/* Table Rows */}
-          {protocolStats.map((row, i) => (
-            <div
-              key={row.protocol}
-              id={`protocol-row-${i}`}
-              style={{
-                display: "grid",
-                gridTemplateColumns: "2fr 1fr 1fr 1fr",
-                padding: "18px 28px",
-                borderBottom:
-                  i < protocolStats.length - 1
-                    ? "1px solid rgba(255, 255, 255, 0.04)"
-                    : "none",
-                transition: "all 0.2s ease",
-                cursor: "default",
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.background =
-                  "rgba(153, 142, 255, 0.06)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.background =
-                  "transparent";
-              }}
-            >
-              <span
+            {strategies.map((item) => (
+              <article
+                key={item.title}
+                className="motion-card"
                 style={{
-                  display: "flex",
-                  alignItems: "center",
-                  gap: "12px",
-                  fontSize: "15px",
-                  fontWeight: 500,
-                  color: "var(--color-white-canvas)",
+                  minHeight: "190px",
+                  borderRadius: "18px",
+                  padding: "34px",
+                  background: "rgba(255,255,255,0.055)",
+                  color: "white",
                 }}
               >
-                <span
+                <h4 style={{ fontSize: "24px", margin: 0 }}>{item.title}</h4>
+                <p
                   style={{
-                    width: "32px",
-                    height: "32px",
-                    borderRadius: "10px",
-                    background: "rgba(153, 142, 255, 0.15)",
-                    display: "flex",
-                    alignItems: "center",
-                    justifyContent: "center",
-                    fontSize: "12px",
-                    fontWeight: 700,
-                    color: "var(--color-cosmic-violet)",
+                    color: "rgba(255,255,255,0.58)",
+                    fontSize: "18px",
+                    lineHeight: 1.35,
+                    margin: "18px 0 0",
                   }}
                 >
-                  {row.protocol.charAt(0)}
-                </span>
-                {row.protocol}
-              </span>
-              <span
-                style={{
-                  textAlign: "right",
-                  fontSize: "15px",
-                  fontWeight: 600,
-                  color: "var(--color-cosmic-violet)",
-                  alignSelf: "center",
-                }}
-              >
-                {row.apy}
-              </span>
-              <span
-                style={{
-                  textAlign: "right",
-                  fontSize: "15px",
-                  fontWeight: 400,
-                  color: "rgba(255, 255, 255, 0.65)",
-                  alignSelf: "center",
-                }}
-              >
-                {row.tvl}
-              </span>
-              <span
-                style={{
-                  textAlign: "right",
-                  fontSize: "14px",
-                  fontWeight: 500,
-                  color: "#4ade80",
-                  alignSelf: "center",
-                }}
-              >
-                {row.change}
-              </span>
-            </div>
-          ))}
-        </div>
-
-        {/* Bottom CTA */}
-        <div
-          className={isVisible ? "animate-fade-up delay-500" : ""}
-          style={{
-            textAlign: "center",
-            marginTop: "48px",
-            opacity: isVisible ? undefined : 0,
-          }}
-        >
-          <button id="dark-section-cta" className="btn-primary">
-            Start Earning Now
-          </button>
-          <p
-            style={{
-              marginTop: "12px",
-              fontSize: "13px",
-              color: "rgba(255, 255, 255, 0.35)",
-            }}
-          >
-            No minimum deposit • Withdraw anytime
-          </p>
+                  {item.body}
+                </p>
+              </article>
+            ))}
+          </div>
         </div>
       </div>
     </section>
