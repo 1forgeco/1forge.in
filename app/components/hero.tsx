@@ -111,7 +111,6 @@ export function Hero() {
           }}
         >
           Savings for
-          <br />
           <span
             style={{
               background:
@@ -123,7 +122,7 @@ export function Hero() {
               animation: "gradient-shift 4s ease infinite",
             }}
           >
-            Everyone
+            &nbsp;Everyone
           </span>
         </h1>
 
@@ -239,30 +238,32 @@ export function Hero() {
           ))}
         </div>
 
-        {/* Phone Mockup Cascade */}
+        {/* ── Phone Mockup Cascade — Aave-style stacked layout ── */}
         <div
           className="animate-scale-in delay-500"
           style={{
-            marginTop: "56px",
+            marginTop: "64px",
             width: "100%",
-            maxWidth: "800px",
+            maxWidth: "860px",
             position: "relative",
-            display: "flex",
-            alignItems: "flex-end",
-            justifyContent: "center",
-            gap: "clamp(12px, 3vw, 28px)",
-            paddingBottom: "0",
+            /* Height drives the cascade; phones are absolute inside */
+            height: "clamp(360px, 52vw, 520px)",
             opacity: 0,
           }}
         >
-          {/* Left Phone */}
+          {/* ── Left Phone (rotated -8°, behind center) ── */}
           <div
             className="animate-float-delayed hidden sm:block"
             style={{
-              position: "relative",
-              width: "clamp(140px, 20vw, 200px)",
+              position: "absolute",
+              width: "clamp(150px, 20vw, 210px)",
               aspectRatio: "390 / 844",
-              flexShrink: 0,
+              bottom: 0,
+              left: "50%",
+              transform:
+                "translateX(-50%) translateX(clamp(-185px,-25vw,-140px)) rotate(-8deg)",
+              transformOrigin: "bottom center",
+              zIndex: 5,
             }}
           >
             <div
@@ -270,19 +271,20 @@ export function Hero() {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                borderRadius: "clamp(24px, 4vw, 40px)",
+                borderRadius: "clamp(28px, 4.5vw, 44px)",
                 overflow: "hidden",
-                boxShadow: "0 30px 60px rgba(16, 16, 16, 0.15)",
+                boxShadow: "0 24px 60px rgba(16,16,16,0.18)",
               }}
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
-                alt="1forge app screen"
+                alt="1forge app interest rate screen"
                 fill
+                sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
                 style={{ objectFit: "cover" }}
                 priority
               />
-              {/* Screen content overlay */}
+              {/* Screen overlay */}
               <div
                 style={{
                   position: "absolute",
@@ -290,99 +292,60 @@ export function Hero() {
                   left: "5%",
                   right: "5%",
                   bottom: "4%",
-                  borderRadius: "clamp(18px, 3vw, 32px)",
-                  background:
-                    "linear-gradient(180deg, #1a1a2e 0%, #0f0f10 100%)",
+                  borderRadius: "clamp(20px, 3.5vw, 36px)",
+                  background: "linear-gradient(180deg,#ffffff 0%,#fafafa 100%)",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "20% 12% 12%",
+                  padding: "18% 12% 10%",
                   overflow: "hidden",
                 }}
               >
+                <div style={{ fontSize: "clamp(9px,1.2vw,13px)", color: "var(--color-ink-black)", fontWeight: 600 }}>
+                  Interest Rate
+                </div>
+                <div style={{ fontSize: "clamp(8px,1vw,11px)", color: "var(--color-misty-gray)", marginTop: "clamp(10px,1.5vw,18px)" }}>
+                  You&apos;re Earning
+                </div>
+                <div style={{ fontSize: "clamp(20px,3.5vw,34px)", fontWeight: 700, color: "var(--color-ink-black)", letterSpacing: "-0.03em", marginTop: "2px" }}>
+                  6.50%
+                </div>
+                <div style={{ fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-misty-gray)" }}>
+                  Annual Percentage Yield
+                </div>
+                {/* Boost card */}
                 <div
                   style={{
-                    fontSize: "clamp(8px, 1.2vw, 11px)",
-                    color: "rgba(255,255,255,0.5)",
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Portfolio
-                </div>
-                <div
-                  style={{
-                    fontSize: "clamp(14px, 2.5vw, 22px)",
-                    fontWeight: 600,
-                    color: "white",
-                    marginTop: "6px",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  $12,847
-                </div>
-                <div
-                  style={{
-                    fontSize: "clamp(7px, 1vw, 10px)",
-                    color: "#4ade80",
-                    fontWeight: 500,
-                    marginTop: "2px",
-                  }}
-                >
-                  +2.4% today
-                </div>
-                {/* Mini chart */}
-                <svg
-                  viewBox="0 0 120 40"
-                  style={{
-                    width: "100%",
-                    height: "30%",
                     marginTop: "auto",
+                    background: "#fffbf0",
+                    borderRadius: "clamp(10px,1.5vw,14px)",
+                    padding: "clamp(8px,1.2vw,14px)",
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "4px",
                   }}
                 >
-                  <defs>
-                    <linearGradient
-                      id="chartGrad1"
-                      x1="0"
-                      y1="0"
-                      x2="0"
-                      y2="1"
-                    >
-                      <stop
-                        offset="0%"
-                        stopColor="var(--color-cosmic-violet)"
-                        stopOpacity="0.3"
-                      />
-                      <stop
-                        offset="100%"
-                        stopColor="var(--color-cosmic-violet)"
-                        stopOpacity="0"
-                      />
-                    </linearGradient>
-                  </defs>
-                  <path
-                    d="M0 35 Q20 30 30 25 T60 15 T90 20 T120 8"
-                    fill="none"
-                    stroke="var(--color-cosmic-violet)"
-                    strokeWidth="2"
-                  />
-                  <path
-                    d="M0 35 Q20 30 30 25 T60 15 T90 20 T120 8 V40 H0 Z"
-                    fill="url(#chartGrad1)"
-                  />
-                </svg>
+                  <span style={{ fontSize: "clamp(14px,2vw,20px)" }}>🚀</span>
+                  <div style={{ fontSize: "clamp(7px,0.95vw,11px)", fontWeight: 600, color: "var(--color-ink-black)" }}>
+                    Boost your rate by 0.50%
+                  </div>
+                  <div style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "var(--color-misty-gray)", lineHeight: 1.4 }}>
+                    Setup a recurring deposit to grow your balance by $200 or more a month.
+                  </div>
+                </div>
               </div>
             </div>
           </div>
 
-          {/* Center Phone — Primary, largest */}
+          {/* ── Center Phone (upright, largest, on top) ── */}
           <div
             className="animate-float"
             style={{
-              position: "relative",
-              width: "clamp(200px, 28vw, 260px)",
+              position: "absolute",
+              width: "clamp(210px, 28vw, 280px)",
               aspectRatio: "390 / 844",
-              flexShrink: 0,
+              bottom: 0,
+              left: "50%",
+              transform: "translateX(-50%)",
               zIndex: 10,
             }}
           >
@@ -392,19 +355,20 @@ export function Hero() {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                borderRadius: "clamp(28px, 5vw, 48px)",
+                borderRadius: "clamp(32px,5.5vw,52px)",
                 overflow: "hidden",
-                boxShadow: "0 40px 80px rgba(16, 16, 16, 0.2)",
+                boxShadow: "0 40px 90px rgba(16,16,16,0.22), 0 0 0 1px rgba(0,0,0,0.06)",
               }}
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
                 alt="1forge app main screen"
                 fill
+                sizes="clamp(210px, 28vw, 280px)"
                 style={{ objectFit: "cover" }}
                 priority
               />
-              {/* Screen content overlay */}
+              {/* Screen overlay */}
               <div
                 style={{
                   position: "absolute",
@@ -412,175 +376,74 @@ export function Hero() {
                   left: "5%",
                   right: "5%",
                   bottom: "4%",
-                  borderRadius: "clamp(22px, 4vw, 38px)",
-                  background:
-                    "linear-gradient(180deg, var(--color-white-canvas) 0%, #f5f4ff 100%)",
+                  borderRadius: "clamp(26px,4.5vw,44px)",
+                  background: "linear-gradient(180deg,#fafbff 0%,#f5f4ff 100%)",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "18% 10% 8%",
+                  padding: "16% 10% 7%",
                   overflow: "hidden",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "clamp(8px, 1.2vw, 10px)",
-                    color: "var(--color-misty-gray)",
-                    fontWeight: 500,
-                    letterSpacing: "0.06em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Total Balance
+                {/* Earning badge */}
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "clamp(8px,1.5vw,16px)" }}>
+                  <div style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-cosmic-violet)", fontWeight: 500 }}>
+                    🪙 Earning 6.50%
+                  </div>
                 </div>
-                <div
-                  style={{
-                    fontSize: "clamp(20px, 3.5vw, 32px)",
-                    fontWeight: 600,
-                    color: "var(--color-ink-black)",
-                    marginTop: "4px",
-                    letterSpacing: "-0.03em",
-                  }}
-                >
-                  $48,291
+                {/* Balance */}
+                <div style={{ fontSize: "clamp(22px,4vw,38px)", fontWeight: 700, color: "var(--color-ink-black)", letterSpacing: "-0.04em", lineHeight: 1 }}>
+                  $9,326<span style={{ fontSize: "60%", fontWeight: 500, opacity: 0.5 }}>.45</span>
                 </div>
-                <div
-                  style={{
-                    display: "flex",
-                    alignItems: "center",
-                    gap: "4px",
-                    marginTop: "4px",
-                  }}
-                >
-                  <span
-                    style={{
-                      fontSize: "clamp(8px, 1vw, 12px)",
-                      color: "#4ade80",
-                      fontWeight: 500,
-                    }}
-                  >
-                    ↑ 6.50% APY
-                  </span>
+                <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "4px" }}>
+                  <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
+                  <span style={{ fontSize: "clamp(7px,0.9vw,10px)", color: "#4ade80", fontWeight: 500 }}>$13.09 Earned</span>
+                  <span style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "var(--color-misty-gray)" }}>This Week</span>
                 </div>
-
-                {/* Assets list */}
-                <div style={{ marginTop: "auto" }}>
+                {/* Transactions */}
+                <div style={{ marginTop: "clamp(8px,1.5vw,14px)" }}>
                   {[
-                    {
-                      name: "USDC",
-                      amount: "$24,150",
-                      color: "#2775ca",
-                    },
-                    {
-                      name: "USDT",
-                      amount: "$18,341",
-                      color: "#26a17b",
-                    },
-                    {
-                      name: "DAI",
-                      amount: "$5,800",
-                      color: "#f5ac37",
-                    },
-                  ].map((asset, i) => (
-                    <div
-                      key={asset.name}
-                      style={{
-                        display: "flex",
-                        alignItems: "center",
-                        justifyContent: "space-between",
-                        padding: "clamp(4px, 0.8vw, 8px) 0",
-                        borderTop:
-                          i > 0
-                            ? "1px solid rgba(34,29,29,0.05)"
-                            : "none",
-                      }}
-                    >
-                      <div
-                        style={{
-                          display: "flex",
-                          alignItems: "center",
-                          gap: "6px",
-                        }}
-                      >
-                        <div
-                          style={{
-                            width: "clamp(16px, 2vw, 22px)",
-                            height: "clamp(16px, 2vw, 22px)",
-                            borderRadius: "50%",
-                            background: asset.color,
-                          }}
-                        />
-                        <span
-                          style={{
-                            fontSize: "clamp(8px, 1.1vw, 12px)",
-                            fontWeight: 500,
-                            color: "var(--color-ink-black)",
-                          }}
-                        >
-                          {asset.name}
-                        </span>
-                      </div>
-                      <span
-                        style={{
-                          fontSize: "clamp(8px, 1.1vw, 12px)",
-                          fontWeight: 500,
-                          color: "var(--color-pewter)",
-                        }}
-                      >
-                        {asset.amount}
-                      </span>
+                    { label: "Added $2,000", icon: "➕", color: "#4ade80" },
+                    { label: "Withdrew $40", icon: "➖", color: "var(--color-misty-gray)" },
+                  ].map((t) => (
+                    <div key={t.label} style={{ display: "flex", alignItems: "center", gap: "5px", padding: "clamp(3px,0.5vw,5px) 0", fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-pewter)" }}>
+                      <span style={{ color: t.color }}>{t.icon}</span> {t.label}
                     </div>
                   ))}
                 </div>
-
-                {/* Action buttons */}
-                <div
-                  style={{
-                    display: "flex",
-                    gap: "6px",
-                    marginTop: "clamp(8px, 1.5vw, 16px)",
-                  }}
-                >
-                  <div
-                    style={{
-                      flex: 1,
-                      padding: "clamp(5px, 0.8vw, 8px) 0",
-                      borderRadius: "12px",
-                      background: "var(--color-cosmic-violet)",
-                      color: "white",
-                      fontSize: "clamp(7px, 0.9vw, 10px)",
-                      fontWeight: 600,
-                      textAlign: "center",
-                    }}
-                  >
-                    Deposit
-                  </div>
-                  <div
-                    style={{
-                      flex: 1,
-                      padding: "clamp(5px, 0.8vw, 8px) 0",
-                      borderRadius: "12px",
-                      background: "var(--color-light-alabaster)",
-                      color: "var(--color-ink-black)",
-                      fontSize: "clamp(7px, 0.9vw, 10px)",
-                      fontWeight: 600,
-                      textAlign: "center",
-                    }}
-                  >
-                    Withdraw
-                  </div>
+                {/* Bar chart */}
+                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: "clamp(3px,0.5vw,5px)", height: "30%" }}>
+                  {[30, 55, 40, 70, 85, 100, 75].map((h, i) => (
+                    <div
+                      key={i}
+                      style={{
+                        flex: 1,
+                        height: `${h}%`,
+                        borderRadius: "4px 4px 0 0",
+                        background: i === 5 ? "var(--color-cosmic-violet)" : "rgba(153,142,255,0.18)",
+                      }}
+                    />
+                  ))}
+                </div>
+                <div style={{ fontSize: "clamp(6px,0.7vw,8px)", color: "var(--color-misty-gray)", textAlign: "center", marginTop: "3px" }}>
+                  Jun 27
                 </div>
               </div>
             </div>
           </div>
 
-          {/* Right Phone */}
+          {/* ── Right Phone (rotated +8°, behind center) ── */}
           <div
             className="animate-float-delayed-right hidden sm:block"
             style={{
-              position: "relative",
-              width: "clamp(140px, 20vw, 200px)",
+              position: "absolute",
+              width: "clamp(150px, 20vw, 210px)",
               aspectRatio: "390 / 844",
-              flexShrink: 0,
+              bottom: 0,
+              left: "50%",
+              transform:
+                "translateX(-50%) translateX(clamp(140px,25vw,185px)) rotate(8deg)",
+              transformOrigin: "bottom center",
+              zIndex: 5,
             }}
           >
             <div
@@ -588,19 +451,20 @@ export function Hero() {
                 position: "relative",
                 width: "100%",
                 height: "100%",
-                borderRadius: "clamp(24px, 4vw, 40px)",
+                borderRadius: "clamp(28px,4.5vw,44px)",
                 overflow: "hidden",
-                boxShadow: "0 30px 60px rgba(16, 16, 16, 0.15)",
+                boxShadow: "0 24px 60px rgba(16,16,16,0.18)",
               }}
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
-                alt="1forge app analytics screen"
+                alt="1forge app 30-year earnings screen"
                 fill
+                sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
                 style={{ objectFit: "cover" }}
                 priority
               />
-              {/* Screen content overlay */}
+              {/* Screen overlay */}
               <div
                 style={{
                   position: "absolute",
@@ -608,73 +472,39 @@ export function Hero() {
                   left: "5%",
                   right: "5%",
                   bottom: "4%",
-                  borderRadius: "clamp(18px, 3vw, 32px)",
-                  background:
-                    "linear-gradient(180deg, var(--color-cosmic-violet) 0%, #6b5ce7 100%)",
+                  borderRadius: "clamp(20px,3.5vw,36px)",
+                  background: "linear-gradient(180deg,#0d0d14 0%,#0f0f1a 100%)",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "20% 12% 12%",
+                  padding: "18% 12% 10%",
                   overflow: "hidden",
                 }}
               >
-                <div
-                  style={{
-                    fontSize: "clamp(8px, 1.2vw, 11px)",
-                    color: "rgba(255,255,255,0.7)",
-                    fontWeight: 500,
-                    letterSpacing: "0.08em",
-                    textTransform: "uppercase",
-                  }}
-                >
-                  Earnings
+                <div style={{ fontSize: "clamp(8px,1vw,11px)", color: "rgba(255,255,255,0.5)", marginBottom: "2px" }}>
+                  6.50% APY 🔵
                 </div>
-                <div
-                  style={{
-                    fontSize: "clamp(14px, 2.5vw, 22px)",
-                    fontWeight: 600,
-                    color: "white",
-                    marginTop: "6px",
-                    letterSpacing: "-0.02em",
-                  }}
-                >
-                  $3,142
+                <div style={{ fontSize: "clamp(20px,3.2vw,30px)", fontWeight: 700, color: "var(--color-cosmic-violet)", letterSpacing: "-0.03em" }}>
+                  $92,603
                 </div>
-                <div
-                  style={{
-                    fontSize: "clamp(7px, 1vw, 10px)",
-                    color: "rgba(255,255,255,0.7)",
-                    fontWeight: 400,
-                    marginTop: "2px",
-                  }}
-                >
-                  This month
+                <div style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "rgba(255,255,255,0.35)", marginTop: "3px" }}>
+                  $1,622,711 Earned in 30 Years
                 </div>
-
-                {/* Earnings bars */}
-                <div
-                  style={{
-                    marginTop: "auto",
-                    display: "flex",
-                    alignItems: "flex-end",
-                    gap: "clamp(3px, 0.5vw, 6px)",
-                    height: "40%",
-                  }}
-                >
-                  {[45, 65, 50, 80, 60, 90, 75].map((h, i) => (
+                {/* Growth chart */}
+                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: "clamp(2px,0.3vw,3px)", height: "45%" }}>
+                  {[5,7,8,9,10,12,14,16,18,21,25,30,35,42,50,60,72,85,100].map((h, i) => (
                     <div
                       key={i}
                       style={{
                         flex: 1,
                         height: `${h}%`,
-                        borderRadius: "4px",
-                        background:
-                          i === 5
-                            ? "white"
-                            : "rgba(255,255,255,0.25)",
-                        transition: "height 0.3s ease",
+                        borderRadius: "2px 2px 0 0",
+                        background: i >= 16 ? "rgba(153,142,255,0.9)" : "rgba(153,142,255,0.25)",
                       }}
                     />
                   ))}
+                </div>
+                <div style={{ fontSize: "clamp(6px,0.7vw,8px)", color: "rgba(255,255,255,0.3)", textAlign: "right", marginTop: "3px" }}>
+                  30Y
                 </div>
               </div>
             </div>
