@@ -12,8 +12,8 @@ export default function Home() {
       <SiteHeader />
       <main>
         <Hero />
-        <FeatureGrid />
         <DarkSection />
+        <FeatureGrid />
         <TrustSection />
         <InputShowcase />
       </main>

@@ -1,170 +1,229 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
+
+const faqs = [
+  [
+    "What is 1forge?",
+    "1forge is a software studio that builds websites, apps, hostel and PG management systems, desktop tools, AI agents, and automations for businesses.",
+  ],
+  [
+    "Can you build a hostel or PG management system?",
+    "Yes. We can start from a hostel/PG template and customize rooms, tenants, rent, complaints, staff tasks, notices, reports, and owner dashboards.",
+  ],
+  [
+    "Do you only make websites?",
+    "No. We build websites, mobile apps, desktop apps, management dashboards, internal tools, AI agents, and automation workflows.",
+  ],
+  [
+    "How do customers start?",
+    "Share your business type, required features, timeline, and examples you like. We convert that into a scope, design direction, and build plan.",
+  ],
+];
 
 export function InputShowcase() {
-  const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
   const [email, setEmail] = useState("");
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
-      },
-      { threshold: 0.15 }
-    );
-
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
-    return () => observer.disconnect();
-  }, []);
+  const [openIndex, setOpenIndex] = useState<number | null>(null);
 
   return (
-    <section
-      ref={sectionRef}
-      id="cta"
-      style={{
-        padding: "100px 24px",
-        background: "var(--color-white-canvas)",
-      }}
-    >
-      <div
-        className={isVisible ? "animate-scale-in" : ""}
+    <>
+      <section
+        id="faq"
         style={{
-          maxWidth: "720px",
-          margin: "0 auto",
-          textAlign: "center",
-          padding: "64px 40px",
-          borderRadius: "var(--radius-cards)",
-          background:
-            "linear-gradient(135deg, var(--color-light-alabaster), #f0efff)",
-          position: "relative",
-          overflow: "hidden",
-          opacity: isVisible ? undefined : 0,
+          padding: "120px 24px 140px",
+          background: "var(--color-white-canvas)",
+          borderTop: "1px solid rgba(34,29,29,0.06)",
         }}
       >
-        {/* Decorative orb */}
         <div
           style={{
-            position: "absolute",
-            top: "-40px",
-            right: "-40px",
-            width: "160px",
-            height: "160px",
-            borderRadius: "50%",
-            background:
-              "radial-gradient(circle, rgba(153,142,255,0.15) 0%, transparent 70%)",
-            pointerEvents: "none",
+            maxWidth: "1120px",
+            margin: "0 auto",
+            display: "grid",
+            gridTemplateColumns: "260px 1fr",
+            gap: "90px",
           }}
-        />
-
-        <h2
-          style={{
-            fontSize: "clamp(28px, 4vw, 36px)",
-            lineHeight: 1.1,
-            letterSpacing: "-0.025em",
-            fontWeight: 500,
-            color: "var(--color-ink-black)",
-            margin: 0,
-          }}
+          className="faq-layout section-rule-motion"
         >
-          Ready to start saving?
-        </h2>
-
-        <p
-          style={{
-            marginTop: "14px",
-            fontSize: "16px",
-            lineHeight: 1.5,
-            color: "var(--color-pewter)",
-            maxWidth: "440px",
-            margin: "14px auto 0",
-          }}
-        >
-          Join 180,000+ users earning industry-leading rates. Enter your email
-          and we&apos;ll get you started.
-        </p>
-
-        <div
-          style={{
-            marginTop: "32px",
-            display: "flex",
-            maxWidth: "460px",
-            margin: "32px auto 0",
-            gap: "0",
-          }}
-        >
-          <input
-            id="email-input"
-            type="email"
-            placeholder="Enter your email"
-            value={email}
-            onChange={(e) => setEmail(e.target.value)}
+          <h2
             style={{
-              flex: 1,
-              padding: "14px 20px",
-              borderRadius: "20px 0 0 20px",
-              border: "1px solid rgba(34, 29, 29, 0.12)",
-              borderRight: "none",
-              background: "var(--color-white-canvas)",
-              fontSize: "15px",
-              color: "var(--color-ink-black)",
-              outline: "none",
-              fontFamily: "inherit",
-              transition: "border-color 0.2s ease",
-            }}
-            onFocus={(e) => {
-              (e.target as HTMLElement).style.borderColor =
-                "var(--color-cosmic-violet)";
-            }}
-            onBlur={(e) => {
-              (e.target as HTMLElement).style.borderColor =
-                "rgba(34, 29, 29, 0.12)";
-            }}
-          />
-          <button
-            id="email-submit"
-            style={{
-              padding: "14px 28px",
-              borderRadius: "0 20px 20px 0",
-              background: "var(--color-obsidian)",
-              color: "var(--color-white-canvas)",
-              fontSize: "15px",
-              fontWeight: 500,
-              border: "none",
-              cursor: "pointer",
-              fontFamily: "inherit",
-              transition: "all 0.3s ease",
-              whiteSpace: "nowrap",
-            }}
-            onMouseEnter={(e) => {
-              (e.target as HTMLElement).style.background =
-                "var(--color-cosmic-violet)";
-            }}
-            onMouseLeave={(e) => {
-              (e.target as HTMLElement).style.background =
-                "var(--color-obsidian)";
+              fontSize: "54px",
+              letterSpacing: "-0.055em",
+              lineHeight: 1,
+              margin: 0,
             }}
           >
-            Get Started
-          </button>
-        </div>
+            FAQs
+          </h2>
 
-        <p
+          <div>
+            {faqs.map(([question, answer], index) => {
+              const isOpen = openIndex === index;
+              return (
+                <div
+                  key={question}
+                  style={{
+                    borderBottom: "1px solid rgba(34,29,29,0.08)",
+                  }}
+                >
+                  <button
+                    type="button"
+                    onClick={() => setOpenIndex(isOpen ? null : index)}
+                    aria-expanded={isOpen}
+                    style={{
+                      width: "100%",
+                      minHeight: "92px",
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "space-between",
+                      gap: "24px",
+                      background: "transparent",
+                      border: "none",
+                      padding: 0,
+                      cursor: "pointer",
+                      color: "var(--color-ink-black)",
+                      fontFamily: "inherit",
+                      textAlign: "left",
+                    }}
+                  >
+                    <span style={{ fontSize: "25px", fontWeight: 500 }}>{question}</span>
+                    <span
+                      style={{
+                        color: "var(--color-cosmic-violet)",
+                        fontSize: "42px",
+                        lineHeight: 1,
+                        transform: isOpen ? "rotate(45deg)" : "rotate(0deg)",
+                        transition: "transform 0.2s ease",
+                      }}
+                    >
+                      +
+                    </span>
+                  </button>
+                  {isOpen && (
+                    <p
+                      className="animate-fade-up"
+                      style={{
+                        color: "var(--color-pewter)",
+                        fontSize: "18px",
+                        lineHeight: 1.45,
+                        maxWidth: "740px",
+                        margin: "-12px 0 28px",
+                      }}
+                    >
+                      {answer}
+                    </p>
+                  )}
+                </div>
+              );
+            })}
+
+            <a
+              href="#about"
+              className="btn-soft-gray"
+              style={{ marginTop: "38px", display: "inline-flex" }}
+            >
+              Learn More About Our Work
+            </a>
+          </div>
+        </div>
+      </section>
+
+      <section
+        id="cta"
+        style={{
+          padding: "0 24px 116px",
+          background: "var(--color-white-canvas)",
+        }}
+      >
+        <div
           style={{
-            marginTop: "14px",
-            fontSize: "12px",
-            color: "var(--color-misty-gray)",
+            maxWidth: "1120px",
+            margin: "0 auto",
+            paddingTop: "88px",
+            borderTop: "1px solid rgba(34,29,29,0.08)",
+            display: "grid",
+            gridTemplateColumns: "1fr 1.25fr",
+            gap: "80px",
+            alignItems: "start",
           }}
+          className="newsletter-layout"
         >
-          Free forever • No credit card required
-        </p>
-      </div>
-    </section>
+          <h2
+            style={{
+              fontSize: "34px",
+              lineHeight: 1.35,
+              letterSpacing: "-0.035em",
+              margin: 0,
+              maxWidth: "440px",
+            }}
+          >
+            Tell us what you want to build.
+          </h2>
+
+          <form
+            className="motion-card"
+            onSubmit={(event) => event.preventDefault()}
+            style={{
+              borderRadius: "24px",
+              background: "var(--color-light-alabaster)",
+              padding: "38px",
+            }}
+          >
+            <label
+              htmlFor="email-input"
+              style={{
+                display: "block",
+                color: "var(--color-pewter)",
+                fontSize: "22px",
+                marginBottom: "12px",
+              }}
+            >
+              Email or WhatsApp <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
+            </label>
+            <div style={{ display: "flex", gap: "8px" }} className="email-row">
+              <input
+                id="email-input"
+                type="email"
+                placeholder="yourname@business.com"
+                value={email}
+                onChange={(event) => setEmail(event.target.value)}
+                style={{
+                  flex: 1,
+                  minWidth: 0,
+                  height: "58px",
+                  borderRadius: "18px 6px 6px 18px",
+                  border: "none",
+                  background: "white",
+                  padding: "0 22px",
+                  fontSize: "20px",
+                  fontFamily: "inherit",
+                  color: "var(--color-ink-black)",
+                  outline: "none",
+                }}
+              />
+              <button
+                id="email-submit"
+                type="submit"
+                style={{
+                  height: "58px",
+                  borderRadius: "6px 28px 28px 6px",
+                  border: "none",
+                  background: "var(--color-ink-black)",
+                  color: "white",
+                  padding: "0 28px",
+                  fontSize: "22px",
+                  fontWeight: 500,
+                  fontFamily: "inherit",
+                  cursor: "pointer",
+                  whiteSpace: "nowrap",
+                }}
+              >
+                Request Call →
+              </button>
+            </div>
+          </form>
+        </div>
+      </section>
+    </>
   );
 }

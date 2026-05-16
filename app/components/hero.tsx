@@ -1,6 +1,7 @@
 "use client";
 
 import Image from "next/image";
+import { BrandLogo } from "./brand-logo";
 
 export function Hero() {
   return (
@@ -13,38 +14,9 @@ export function Hero() {
         padding: "80px 24px 0",
       }}
     >
-      {/* Subtle geometric decoration */}
       <div
         style={{
-          position: "absolute",
-          top: "-120px",
-          right: "-120px",
-          width: "400px",
-          height: "400px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(153,142,255,0.08) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-      <div
-        style={{
-          position: "absolute",
-          bottom: "100px",
-          left: "-80px",
-          width: "300px",
-          height: "300px",
-          borderRadius: "50%",
-          background:
-            "radial-gradient(circle, rgba(153,142,255,0.06) 0%, transparent 70%)",
-          pointerEvents: "none",
-        }}
-      />
-
-      {/* Content */}
-      <div
-        style={{
-          maxWidth: "900px",
+          maxWidth: "1440px",
           margin: "0 auto",
           display: "flex",
           flexDirection: "column",
@@ -52,52 +24,25 @@ export function Hero() {
           textAlign: "center",
         }}
       >
-        {/* Badge */}
         <div
           className="animate-fade-up"
           style={{
             display: "inline-flex",
             alignItems: "center",
-            gap: "10px",
-            padding: "6px 16px 6px 6px",
+            gap: "12px",
+            padding: 0,
             borderRadius: "var(--radius-pills)",
-            background: "var(--color-light-alabaster)",
-            fontSize: "13px",
+            background: "transparent",
+            fontSize: "20px",
             color: "var(--color-pewter)",
             fontWeight: 450,
             marginBottom: "32px",
-            border: "1px solid rgba(34, 29, 29, 0.06)",
           }}
         >
-          <span
-            style={{
-              display: "flex",
-              alignItems: "center",
-              justifyContent: "center",
-              width: "28px",
-              height: "28px",
-              borderRadius: "50%",
-              background: "rgba(153, 142, 255, 0.12)",
-              color: "var(--color-cosmic-violet)",
-            }}
-          >
-            <svg
-              width="14"
-              height="14"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z" />
-            </svg>
-          </span>
-          Now live — Earn 6.50% APY
+          <BrandLogo tone="green" size="sm" />
+          1forge Studio
         </div>
 
-        {/* Headline */}
         <h1
           className="animate-fade-up delay-100"
           style={{
@@ -110,29 +55,15 @@ export function Hero() {
             margin: 0,
           }}
         >
-          Savings for
-          <span
-            style={{
-              background:
-                "linear-gradient(135deg, var(--color-cosmic-violet) 0%, #7b6fcc 50%, var(--color-cosmic-violet) 100%)",
-              backgroundSize: "200% auto",
-              WebkitBackgroundClip: "text",
-              WebkitTextFillColor: "transparent",
-              backgroundClip: "text",
-              animation: "gradient-shift 4s ease infinite",
-            }}
-          >
-            &nbsp;Everyone
-          </span>
+          Websites, Apps & AI for Businesses
         </h1>
 
-        {/* Subheading */}
         <p
           className="animate-fade-up delay-200"
           style={{
             marginTop: "24px",
-            maxWidth: "520px",
-            fontSize: "18px",
+            maxWidth: "640px",
+            fontSize: "22px",
             lineHeight: 1.5,
             letterSpacing: "-0.01em",
             fontWeight: 400,
@@ -140,20 +71,22 @@ export function Hero() {
             opacity: 0,
           }}
         >
-          Earn up to{" "}
+          We design and build{" "}
           <span
             style={{
               color: "var(--color-cosmic-violet)",
               fontWeight: 500,
+              textDecoration: "underline",
+              textDecorationThickness: "2px",
+              textUnderlineOffset: "5px",
             }}
           >
-            6.50%
+            websites
           </span>{" "}
-          on your stablecoins with industry-leading rates and balance
-          protection up to $1M.
+          , mobile apps, hostel and PG management systems, desktop software,
+          AI agents, and automations that make daily operations easier.
         </p>
 
-        {/* CTAs */}
         <div
           className="animate-fade-up delay-300"
           style={{
@@ -175,98 +108,44 @@ export function Hero() {
             >
               <path d="M16.2 13.1c.02 2.2 1.9 2.9 1.92 2.92-.02.05-.3 1.02-1 2-.6.86-1.23 1.73-2.2 1.74-.96.02-1.27-.57-2.37-.57-1.1 0-1.44.55-2.35.59-.94.04-1.66-.94-2.27-1.8-1.23-1.75-2.17-4.96-.91-7.12.62-1.07 1.74-1.75 2.95-1.77.92-.02 1.79.62 2.37.62.58 0 1.66-.77 2.8-.66.47.02 1.79.19 2.64 1.44-.07.05-1.57.92-1.55 2.73Zm-1.85-6.2c.5-.6.83-1.44.74-2.28-.72.03-1.6.47-2.12 1.07-.46.53-.87 1.39-.76 2.2.79.06 1.63-.41 2.14-.99Z" />
             </svg>
-            Download on iOS
+            Start a Project
           </button>
 
           <button id="hero-cta-secondary" className="btn-ghost-dark">
-            Learn More
-            <svg
-              width="16"
-              height="16"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="currentColor"
-              strokeWidth="2"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-              style={{ marginLeft: "4px" }}
-            >
-              <path d="M7 17L17 7" />
-              <path d="M7 7h10v10" />
-            </svg>
+            View Services
           </button>
         </div>
 
-        {/* Stats Row */}
-        <div
-          className="animate-fade-up delay-400"
-          style={{
-            marginTop: "48px",
-            display: "flex",
-            alignItems: "center",
-            gap: "40px",
-            opacity: 0,
-          }}
-        >
-          {[
-            { value: "$2.4B+", label: "Total Value Locked" },
-            { value: "180K+", label: "Active Users" },
-            { value: "99.9%", label: "Uptime" },
-          ].map((stat) => (
-            <div key={stat.label} style={{ textAlign: "center" }}>
-              <div
-                style={{
-                  fontSize: "24px",
-                  fontWeight: 600,
-                  letterSpacing: "-0.02em",
-                  color: "var(--color-ink-black)",
-                }}
-              >
-                {stat.value}
-              </div>
-              <div
-                style={{
-                  fontSize: "12px",
-                  fontWeight: 400,
-                  color: "var(--color-misty-gray)",
-                  marginTop: "2px",
-                }}
-              >
-                {stat.label}
-              </div>
-            </div>
-          ))}
-        </div>
-
-        {/* ── Phone Mockup Cascade — Aave-style stacked layout ── */}
+        {/* ── Product mockup cascade ── */}
         <div
           className="animate-scale-in delay-500"
           style={{
-            marginTop: "64px",
+            marginTop: "42px",
             width: "100%",
-            maxWidth: "860px",
+            maxWidth: "640px",
             position: "relative",
-            /* Height drives the cascade; phones are absolute inside */
-            height: "clamp(360px, 52vw, 520px)",
+            height: "clamp(370px, 36vw, 460px)",
             opacity: 0,
           }}
         >
           {/* ── Left Phone (rotated -8°, behind center) ── */}
           <div
-            className="animate-float-delayed hidden sm:block"
+            className="hero-side-phone"
             style={{
               position: "absolute",
-              width: "clamp(150px, 20vw, 210px)",
+              width: "clamp(135px, 13.5vw, 180px)",
+              display: "block",
               aspectRatio: "390 / 844",
               bottom: 0,
               left: "50%",
               transform:
-                "translateX(-50%) translateX(clamp(-185px,-25vw,-140px)) rotate(-8deg)",
+                "translateX(-50%) translateX(clamp(-185px,-16vw,-140px)) rotate(-2deg)",
               transformOrigin: "bottom center",
               zIndex: 5,
             }}
           >
             <div
+              className="animate-float"
               style={{
                 position: "relative",
                 width: "100%",
@@ -278,7 +157,7 @@ export function Hero() {
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
-                alt="1forge app interest rate screen"
+                alt="1forge website project screen"
                 fill
                 sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
                 style={{ objectFit: "cover" }}
@@ -293,44 +172,52 @@ export function Hero() {
                   right: "5%",
                   bottom: "4%",
                   borderRadius: "clamp(20px, 3.5vw, 36px)",
-                  background: "linear-gradient(180deg,#ffffff 0%,#fafafa 100%)",
+                  background: "#f7fbf7",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "18% 12% 10%",
+                  padding: "10% 9% 9%",
                   overflow: "hidden",
                 }}
               >
-                <div style={{ fontSize: "clamp(9px,1.2vw,13px)", color: "var(--color-ink-black)", fontWeight: 600 }}>
-                  Interest Rate
+                <div className="phone-status">
+                  <span>9:41</span>
+                  <span>▮▮ Wi-Fi ▰</span>
                 </div>
-                <div style={{ fontSize: "clamp(8px,1vw,11px)", color: "var(--color-misty-gray)", marginTop: "clamp(10px,1.5vw,18px)" }}>
-                  You&apos;re Earning
+                <div style={{ marginTop: "14%", textAlign: "left" }}>
+                  <div style={{ fontSize: "clamp(11px,1vw,13px)", color: "var(--color-misty-gray)", fontWeight: 700 }}>
+                    Hostel / PG
+                  </div>
+                  <div style={{ fontSize: "clamp(18px,1.8vw,24px)", color: "var(--color-ink-black)", fontWeight: 800, letterSpacing: "-0.06em", marginTop: "3px" }}>
+                    Operations
+                  </div>
                 </div>
-                <div style={{ fontSize: "clamp(20px,3.5vw,34px)", fontWeight: 700, color: "var(--color-ink-black)", letterSpacing: "-0.03em", marginTop: "2px" }}>
-                  6.50%
-                </div>
-                <div style={{ fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-misty-gray)" }}>
-                  Annual Percentage Yield
-                </div>
-                {/* Boost card */}
                 <div
                   style={{
-                    marginTop: "auto",
-                    background: "#fffbf0",
-                    borderRadius: "clamp(10px,1.5vw,14px)",
-                    padding: "clamp(8px,1.2vw,14px)",
-                    display: "flex",
-                    flexDirection: "column",
-                    gap: "4px",
+                    display: "grid",
+                    gridTemplateColumns: "1fr 1fr",
+                    gap: "8px",
+                    marginTop: "12%",
                   }}
                 >
-                  <span style={{ fontSize: "clamp(14px,2vw,20px)" }}>🚀</span>
-                  <div style={{ fontSize: "clamp(7px,0.95vw,11px)", fontWeight: 600, color: "var(--color-ink-black)" }}>
-                    Boost your rate by 0.50%
-                  </div>
-                  <div style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "var(--color-misty-gray)", lineHeight: 1.4 }}>
-                    Setup a recurring deposit to grow your balance by $200 or more a month.
-                  </div>
+                  {[
+                    ["Rooms", "42"],
+                    ["Due", "8"],
+                    ["Leads", "19"],
+                    ["Tasks", "6"],
+                  ].map(([label, value]) => (
+                    <div key={label} style={{ background: "white", borderRadius: "12px", padding: "10px", textAlign: "left", boxShadow: "0 10px 24px rgba(0,0,0,0.04)" }}>
+                      <div style={{ fontSize: "10px", color: "var(--color-misty-gray)", fontWeight: 700 }}>{label}</div>
+                      <div style={{ fontSize: "20px", color: "var(--color-ink-black)", fontWeight: 800, lineHeight: 1.1 }}>{value}</div>
+                    </div>
+                  ))}
+                </div>
+                <div style={{ marginTop: "12%", background: "white", borderRadius: "14px", padding: "12px", textAlign: "left", boxShadow: "0 14px 30px rgba(0,0,0,0.05)" }}>
+                  {["Rent reminder sent", "Complaint assigned", "New inquiry added"].map((item, index) => (
+                    <div key={item} style={{ display: "flex", alignItems: "center", gap: "8px", padding: index === 0 ? "0 0 8px" : "8px 0", borderTop: index === 0 ? "none" : "1px solid #eef2ee" }}>
+                      <span style={{ width: "8px", height: "8px", borderRadius: "50%", background: "var(--color-forge-green)" }} />
+                      <span style={{ fontSize: "11px", color: "var(--color-pewter)", fontWeight: 650 }}>{item}</span>
+                    </div>
+                  ))}
                 </div>
               </div>
             </div>
@@ -338,10 +225,9 @@ export function Hero() {
 
           {/* ── Center Phone (upright, largest, on top) ── */}
           <div
-            className="animate-float"
             style={{
               position: "absolute",
-              width: "clamp(210px, 28vw, 280px)",
+              width: "clamp(165px, 16vw, 220px)",
               aspectRatio: "390 / 844",
               bottom: 0,
               left: "50%",
@@ -362,7 +248,7 @@ export function Hero() {
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
-                alt="1forge app main screen"
+                alt="1forge business dashboard screen"
                 fill
                 sizes="clamp(210px, 28vw, 280px)"
                 style={{ objectFit: "cover" }}
@@ -377,55 +263,67 @@ export function Hero() {
                   right: "5%",
                   bottom: "4%",
                   borderRadius: "clamp(26px,4.5vw,44px)",
-                  background: "linear-gradient(180deg,#fafbff 0%,#f5f4ff 100%)",
+                  background: "linear-gradient(180deg,#fbfffb 0%,#eefaf1 100%)",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "16% 10% 7%",
+                  padding: "8% 9% 7%",
                   overflow: "hidden",
                 }}
               >
-                {/* Earning badge */}
-                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginBottom: "clamp(8px,1.5vw,16px)" }}>
-                  <div style={{ display: "flex", alignItems: "center", gap: "4px", fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-cosmic-violet)", fontWeight: 500 }}>
-                    🪙 Earning 6.50%
+                <div className="phone-status">
+                  <span>9:41</span>
+                  <span>▮▮ Wi-Fi ▰</span>
+                </div>
+                <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", marginTop: "10%" }}>
+                  <div style={{ textAlign: "left" }}>
+                    <div style={{ fontSize: "11px", color: "var(--color-misty-gray)", fontWeight: 700 }}>Website build</div>
+                    <div style={{ fontSize: "22px", color: "var(--color-ink-black)", fontWeight: 850, letterSpacing: "-0.06em" }}>Client Portal</div>
+                  </div>
+                  <span style={{ width: "32px", height: "32px", borderRadius: "50%", background: "var(--color-forge-green)", color: "white", display: "inline-flex", alignItems: "center", justifyContent: "center", fontSize: "15px", fontWeight: 800 }}>1F</span>
+                </div>
+                <div style={{ marginTop: "12%", background: "white", borderRadius: "16px", padding: "13px", boxShadow: "0 14px 34px rgba(0,0,0,0.06)" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", fontSize: "11px", fontWeight: 800, color: "var(--color-ink-black)" }}>
+                    <span>Progress</span>
+                    <span style={{ color: "var(--color-forge-green)" }}>72%</span>
+                  </div>
+                  <div style={{ height: "8px", borderRadius: "999px", background: "#e8efe9", marginTop: "9px", overflow: "hidden" }}>
+                    <div style={{ width: "72%", height: "100%", background: "var(--color-forge-green)", borderRadius: "999px" }} />
                   </div>
                 </div>
-                {/* Balance */}
-                <div style={{ fontSize: "clamp(22px,4vw,38px)", fontWeight: 700, color: "var(--color-ink-black)", letterSpacing: "-0.04em", lineHeight: 1 }}>
-                  $9,326<span style={{ fontSize: "60%", fontWeight: 500, opacity: 0.5 }}>.45</span>
-                </div>
-                <div style={{ display: "flex", alignItems: "center", gap: "4px", marginTop: "4px" }}>
-                  <span style={{ width: "6px", height: "6px", borderRadius: "50%", background: "#4ade80", display: "inline-block" }} />
-                  <span style={{ fontSize: "clamp(7px,0.9vw,10px)", color: "#4ade80", fontWeight: 500 }}>$13.09 Earned</span>
-                  <span style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "var(--color-misty-gray)" }}>This Week</span>
-                </div>
-                {/* Transactions */}
-                <div style={{ marginTop: "clamp(8px,1.5vw,14px)" }}>
+                <div style={{ marginTop: "10%", display: "grid", gap: "8px" }}>
                   {[
-                    { label: "Added $2,000", icon: "➕", color: "#4ade80" },
-                    { label: "Withdrew $40", icon: "➖", color: "var(--color-misty-gray)" },
+                    { label: "UI approved", tag: "Done" },
+                    { label: "Admin panel", tag: "Build" },
+                    { label: "Lead forms", tag: "Test" },
                   ].map((t) => (
-                    <div key={t.label} style={{ display: "flex", alignItems: "center", gap: "5px", padding: "clamp(3px,0.5vw,5px) 0", fontSize: "clamp(7px,0.9vw,10px)", color: "var(--color-pewter)" }}>
-                      <span style={{ color: t.color }}>{t.icon}</span> {t.label}
+                    <div key={t.label} style={{ display: "flex", alignItems: "center", justifyContent: "space-between", background: "rgba(255,255,255,0.82)", borderRadius: "12px", padding: "9px 10px", fontSize: "11px", color: "var(--color-pewter)", fontWeight: 700 }}>
+                      <span>{t.label}</span>
+                      <span style={{ color: "var(--color-forge-green)" }}>{t.tag}</span>
                     </div>
                   ))}
                 </div>
-                {/* Bar chart */}
-                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: "clamp(3px,0.5vw,5px)", height: "30%" }}>
-                  {[30, 55, 40, 70, 85, 100, 75].map((h, i) => (
+                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: "5px", height: "24%" }}>
+                  {[35, 66, 42, 80, 92, 100, 84].map((h, i) => (
                     <div
                       key={i}
+                      className="chart-bar"
                       style={{
                         flex: 1,
                         height: `${h}%`,
-                        borderRadius: "4px 4px 0 0",
-                        background: i === 5 ? "var(--color-cosmic-violet)" : "rgba(153,142,255,0.18)",
+                        animationDelay: `${i * 70}ms`,
+                        borderRadius: "6px 6px 0 0",
+                        background: i === 5 ? "var(--color-cosmic-violet)" : "rgba(25,200,90,0.14)",
                       }}
                     />
                   ))}
                 </div>
-                <div style={{ fontSize: "clamp(6px,0.7vw,8px)", color: "var(--color-misty-gray)", textAlign: "center", marginTop: "3px" }}>
-                  Jun 27
+                <div style={{ fontSize: "clamp(9px,0.9vw,13px)", color: "var(--color-cosmic-violet)", textAlign: "center", marginTop: "8px" }}>
+                  Launch timeline
+                </div>
+                <div style={{ display: "flex", justifyContent: "space-around", color: "var(--color-misty-gray)", fontSize: "10px", marginTop: "8%" }}>
+                  {["Plan", "UI", "Build", "Test", "Live"].map((range) => (
+                    <span key={range} style={{ color: range === "Plan" ? "var(--color-ink-black)" : undefined, fontWeight: range === "Plan" ? 700 : 500 }}>{range}</span>
+                  ))}
                 </div>
               </div>
             </div>
@@ -433,24 +331,27 @@ export function Hero() {
 
           {/* ── Right Phone (rotated +8°, behind center) ── */}
           <div
-            className="animate-float-delayed-right hidden sm:block"
+            className="hero-side-phone"
             style={{
               position: "absolute",
-              width: "clamp(150px, 20vw, 210px)",
+              width: "clamp(135px, 13.5vw, 180px)",
+              display: "block",
               aspectRatio: "390 / 844",
               bottom: 0,
               left: "50%",
               transform:
-                "translateX(-50%) translateX(clamp(140px,25vw,185px)) rotate(8deg)",
+                "translateX(-50%) translateX(clamp(140px,16vw,185px)) rotate(2deg)",
               transformOrigin: "bottom center",
               zIndex: 5,
             }}
           >
             <div
+              className="animate-float"
               style={{
                 position: "relative",
                 width: "100%",
                 height: "100%",
+                animationDelay: "350ms",
                 borderRadius: "clamp(28px,4.5vw,44px)",
                 overflow: "hidden",
                 boxShadow: "0 24px 60px rgba(16,16,16,0.18)",
@@ -458,7 +359,7 @@ export function Hero() {
             >
               <Image
                 src="/vecteezy_realistic-smartphone-interface-high-quality-mobile-phone_22227368.png"
-                alt="1forge app 30-year earnings screen"
+                alt="1forge automation results screen"
                 fill
                 sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
                 style={{ objectFit: "cover" }}
@@ -476,35 +377,39 @@ export function Hero() {
                   background: "linear-gradient(180deg,#0d0d14 0%,#0f0f1a 100%)",
                   display: "flex",
                   flexDirection: "column",
-                  padding: "18% 12% 10%",
+                  padding: "10% 10% 8%",
                   overflow: "hidden",
                 }}
               >
-                <div style={{ fontSize: "clamp(8px,1vw,11px)", color: "rgba(255,255,255,0.5)", marginBottom: "2px" }}>
-                  6.50% APY 🔵
+                <div className="phone-status phone-status-dark">
+                  <span>9:41</span>
+                  <span>▮▮ Wi-Fi ▰</span>
                 </div>
-                <div style={{ fontSize: "clamp(20px,3.2vw,30px)", fontWeight: 700, color: "var(--color-cosmic-violet)", letterSpacing: "-0.03em" }}>
-                  $92,603
+                <div style={{ textAlign: "left", marginTop: "16%" }}>
+                  <span style={{ borderRadius: "999px", background: "rgba(255,255,255,0.08)", color: "rgba(255,255,255,0.58)", padding: "7px 10px", fontSize: "10px", fontWeight: 700 }}>AI Agent</span>
                 </div>
-                <div style={{ fontSize: "clamp(6px,0.8vw,9px)", color: "rgba(255,255,255,0.35)", marginTop: "3px" }}>
-                  $1,622,711 Earned in 30 Years
+                <div style={{ marginTop: "14%", fontSize: "clamp(18px,1.7vw,23px)", color: "white", fontWeight: 850, letterSpacing: "-0.05em", textAlign: "left", lineHeight: 1 }}>
+                  Lead follow-up
                 </div>
-                {/* Growth chart */}
-                <div style={{ marginTop: "auto", display: "flex", alignItems: "flex-end", gap: "clamp(2px,0.3vw,3px)", height: "45%" }}>
-                  {[5,7,8,9,10,12,14,16,18,21,25,30,35,42,50,60,72,85,100].map((h, i) => (
-                    <div
-                      key={i}
-                      style={{
-                        flex: 1,
-                        height: `${h}%`,
-                        borderRadius: "2px 2px 0 0",
-                        background: i >= 16 ? "rgba(153,142,255,0.9)" : "rgba(153,142,255,0.25)",
-                      }}
-                    />
+                <div style={{ fontSize: "11px", color: "rgba(255,255,255,0.52)", marginTop: "7px", textAlign: "left", lineHeight: 1.35 }}>
+                  Auto-replies, CRM notes, reminders and daily summaries.
+                </div>
+                <div style={{ marginTop: "14%", display: "grid", gap: "9px" }}>
+                  {[
+                    ["New lead", "reply"],
+                    ["Demo booked", "calendar"],
+                    ["Owner report", "daily"],
+                  ].map(([left, right], index) => (
+                    <div key={left} style={{ display: "flex", alignItems: "center", gap: "8px", background: "rgba(255,255,255,0.07)", borderRadius: "12px", padding: "9px" }}>
+                      <span style={{ width: "9px", height: "9px", borderRadius: "50%", background: index === 0 ? "var(--color-forge-green)" : "rgba(25,200,90,0.42)" }} />
+                      <span style={{ flex: 1, color: "rgba(255,255,255,0.76)", fontSize: "11px", fontWeight: 700 }}>{left}</span>
+                      <span style={{ color: "rgba(255,255,255,0.38)", fontSize: "10px" }}>{right}</span>
+                    </div>
                   ))}
                 </div>
-                <div style={{ fontSize: "clamp(6px,0.7vw,8px)", color: "rgba(255,255,255,0.3)", textAlign: "right", marginTop: "3px" }}>
-                  30Y
+                <div style={{ marginTop: "auto", background: "rgba(25,200,90,0.14)", border: "1px solid rgba(25,200,90,0.24)", borderRadius: "14px", padding: "12px", textAlign: "left" }}>
+                  <div style={{ color: "var(--color-forge-green)", fontSize: "20px", fontWeight: 850, lineHeight: 1 }}>120+ hrs</div>
+                  <div style={{ color: "rgba(255,255,255,0.52)", fontSize: "10px", marginTop: "4px" }}>manual work saved monthly</div>
                 </div>
               </div>
             </div>

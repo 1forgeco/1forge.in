@@ -1,85 +1,15 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { BrandLogo } from "./brand-logo";
 
-const trustItems = [
-  {
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <rect x="3" y="11" width="18" height="11" rx="2" ry="2" />
-        <path d="M7 11V7a5 5 0 0 1 10 0v4" />
-      </svg>
-    ),
-    title: "End-to-End Encryption",
-    description: "All data encrypted in transit and at rest with AES-256.",
-  },
-  {
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14" />
-        <polyline points="22 4 12 14.01 9 11.01" />
-      </svg>
-    ),
-    title: "Audited Smart Contracts",
-    description: "Multiple third-party audits ensure protocol safety.",
-  },
-  {
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <circle cx="12" cy="12" r="10" />
-        <line x1="2" y1="12" x2="22" y2="12" />
-        <path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z" />
-      </svg>
-    ),
-    title: "Global Availability",
-    description: "Access your savings from anywhere in the world, 24/7.",
-  },
-  {
-    icon: (
-      <svg
-        width="24"
-        height="24"
-        viewBox="0 0 24 24"
-        fill="none"
-        stroke="currentColor"
-        strokeWidth="1.5"
-        strokeLinecap="round"
-        strokeLinejoin="round"
-      >
-        <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z" />
-        <path d="M9 12l2 2 4-4" />
-      </svg>
-    ),
-    title: "Insurance Protection",
-    description: "Deposits protected with up to $1M balance coverage.",
-  },
+const metrics = [
+  ["Websites", "Business, portfolio, booking, and lead-generation sites."],
+  ["Apps", "Mobile and desktop apps built around your actual workflow."],
+  ["Systems", "Hostel, PG, CRM, billing, inventory, and staff dashboards."],
+  ["AI Agents", "Support, lead capture, reporting, and workflow assistants."],
+  ["Automation", "Email, sheets, reports, browser tasks, and repeat operations."],
+  ["Support", "Deployment, iteration, handover, and long-term maintenance."],
 ];
 
 export function TrustSection() {
@@ -89,17 +19,12 @@ export function TrustSection() {
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-        }
+        if (entry.isIntersecting) setIsVisible(true);
       },
       { threshold: 0.1 }
     );
 
-    if (sectionRef.current) {
-      observer.observe(sectionRef.current);
-    }
-
+    if (sectionRef.current) observer.observe(sectionRef.current);
     return () => observer.disconnect();
   }, []);
 
@@ -108,111 +33,120 @@ export function TrustSection() {
       ref={sectionRef}
       id="about"
       style={{
-        padding: "80px 24px",
-        background: "var(--color-light-alabaster)",
+        padding: "120px 24px 92px",
+        background: "var(--color-white-canvas)",
       }}
     >
-      <div style={{ maxWidth: "1100px", margin: "0 auto" }}>
-        <div
-          style={{
-            textAlign: "center",
-            maxWidth: "600px",
-            margin: "0 auto 56px",
-          }}
-        >
-          <h2
-            className={isVisible ? "animate-fade-up" : ""}
+      <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
+        <div style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
+          <div
+            className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
             style={{
-              fontSize: "clamp(28px, 4vw, 36px)",
-              lineHeight: 1.1,
-              letterSpacing: "-0.025em",
-              fontWeight: 500,
-              color: "var(--color-ink-black)",
-              margin: 0,
+              color: "var(--color-cosmic-violet)",
+              display: "inline-flex",
+              alignItems: "center",
+              gap: "8px",
+              fontSize: "30px",
+              fontWeight: 700,
+              letterSpacing: "-0.06em",
               opacity: isVisible ? undefined : 0,
             }}
           >
-            Security you can trust
-          </h2>
-          <p
+            <BrandLogo tone="green" size="lg" />
+          </div>
+          <h2
             className={isVisible ? "animate-fade-up delay-100" : ""}
             style={{
-              marginTop: "14px",
-              fontSize: "16px",
-              lineHeight: 1.5,
-              color: "var(--color-pewter)",
+              fontSize: "clamp(54px, 8vw, 98px)",
+              lineHeight: 0.94,
+              letterSpacing: "-0.06em",
+              fontWeight: 500,
+              margin: "60px 0 0",
               opacity: isVisible ? undefined : 0,
             }}
           >
-            Your peace of mind is our top priority.
+            Built for practical business outcomes
+          </h2>
+          <p
+            className={isVisible ? "animate-fade-up delay-200" : ""}
+            style={{
+              margin: "34px auto 0",
+              maxWidth: "760px",
+              color: "var(--color-misty-gray)",
+              fontSize: "28px",
+              lineHeight: 1.25,
+              opacity: isVisible ? undefined : 0,
+            }}
+          >
+            We turn business ideas into working software with clear scope,
+            clean design, fast delivery, and systems your team can actually use.
           </p>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              gap: "18px",
+              flexWrap: "wrap",
+              marginTop: "48px",
+            }}
+          >
+            <a href="#faq" className="btn-black">
+              Explore Services
+            </a>
+            <a href="#cta" className="btn-soft-gray">
+              Talk to Us
+            </a>
+          </div>
         </div>
 
         <div
           style={{
             display: "grid",
-            gridTemplateColumns: "repeat(auto-fit, minmax(240px, 1fr))",
-            gap: "16px",
+            gridTemplateColumns: "repeat(3, 1fr)",
+            gap: "28px",
           }}
+          className="metric-grid"
         >
-          {trustItems.map((item, index) => (
-            <div
-              key={item.title}
-              className={
-                isVisible
-                  ? `animate-fade-up delay-${(index + 2) * 100}`
-                  : ""
-              }
+          {metrics.map(([title, body], index) => (
+            <article
+              key={title}
+              className={`motion-card ${
+                isVisible ? `animate-fade-up delay-${Math.min(index + 3, 8) * 100}` : ""
+              }`}
               style={{
-                padding: "28px 24px",
-                borderRadius: "20px",
-                background: "var(--color-white-canvas)",
-                transition: "all 0.3s cubic-bezier(0.16, 1, 0.3, 1)",
-                cursor: "default",
+                minHeight: "190px",
+                borderRadius: "8px",
+                background: "var(--color-light-alabaster)",
+                padding: "38px 32px",
                 opacity: isVisible ? undefined : 0,
-              }}
-              onMouseEnter={(e) => {
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(-3px)";
-                (e.currentTarget as HTMLElement).style.boxShadow =
-                  "0 12px 32px rgba(0,0,0,0.06)";
-              }}
-              onMouseLeave={(e) => {
-                (e.currentTarget as HTMLElement).style.transform =
-                  "translateY(0)";
-                (e.currentTarget as HTMLElement).style.boxShadow = "none";
               }}
             >
               <div
                 style={{
-                  color: "var(--color-cosmic-violet)",
-                  marginBottom: "14px",
+                  width: "32px",
+                  height: "32px",
+                  color: "var(--color-misty-gray)",
+                  marginBottom: "32px",
                 }}
               >
-                {item.icon}
+                <svg viewBox="0 0 24 24" width="32" height="32" fill="currentColor" aria-hidden="true">
+                  <path d="M12 2 20 6v8c0 4.5-3.3 7.2-8 8-4.7-.8-8-3.5-8-8V6l8-4Z" opacity=".55" />
+                </svg>
               </div>
               <h3
                 style={{
-                  fontSize: "16px",
-                  fontWeight: 500,
-                  letterSpacing: "-0.01em",
-                  color: "var(--color-ink-black)",
+                  fontSize: "34px",
+                  lineHeight: 1,
+                  letterSpacing: "-0.045em",
                   margin: 0,
                 }}
               >
-                {item.title}
+                {title}
               </h3>
-              <p
-                style={{
-                  marginTop: "8px",
-                  fontSize: "14px",
-                  lineHeight: 1.5,
-                  color: "var(--color-pewter)",
-                }}
-              >
-                {item.description}
+              <p style={{ color: "var(--color-pewter)", fontSize: "20px", margin: "18px 0 0" }}>
+                {body}
               </p>
-            </div>
+            </article>
           ))}
         </div>
       </div>
