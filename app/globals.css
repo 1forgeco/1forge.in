@@ -679,6 +679,26 @@ a {
   );
 }
 
+.stats-strip {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 10px;
+  margin-top: 30px;
+}
+
+.stats-strip span {
+  display: inline-flex;
+  align-items: center;
+  min-height: 32px;
+  border-radius: 999px;
+  background: var(--color-light-alabaster);
+  color: var(--color-ink-black);
+  padding: 0 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
 @media (max-width: 900px) {
   #main-nav {
     display: none !important;
@@ -917,4 +937,3 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-pewter);
 }
-

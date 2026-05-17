@@ -4,12 +4,21 @@ import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./brand-logo";
 
 const metrics = [
-  ["Websites", "Business, portfolio, booking, and lead-generation sites."],
-  ["Apps", "Mobile and desktop apps built around your actual workflow."],
-  ["Systems", "Hostel, PG, CRM, billing, inventory, and staff dashboards."],
-  ["AI Agents", "Support, lead capture, reporting, and workflow assistants."],
-  ["Automation", "Email, sheets, reports, browser tasks, and repeat operations."],
-  ["Support", "Deployment, iteration, handover, and long-term maintenance."],
+  ["Clean modern design", "Premium interfaces that feel trustworthy and easy to scan."],
+  ["Fast delivery", "Lean scope, practical timelines, and quick launch cycles."],
+  ["Custom-built solutions", "Software shaped around your actual business workflow."],
+  ["Mobile responsive", "Websites, dashboards, and portals that work across devices."],
+  ["SEO-ready websites", "Clean structure for discoverability, speed, and local search."],
+  ["Scalable systems", "Room to add modules, roles, reports, and integrations later."],
+  ["Secure admin dashboards", "Role-aware dashboards for business data and operations."],
+  ["Post-launch support", "Help with updates, improvements, training, and maintenance."],
+];
+
+const stats = [
+  "10+ Digital Products Planned",
+  "Web + App + AI Solutions",
+  "Custom Business Systems",
+  "Support After Launch",
 ];
 
 export function TrustSection() {
@@ -65,7 +74,7 @@ export function TrustSection() {
               opacity: isVisible ? undefined : 0,
             }}
           >
-            Built for practical business outcomes
+            Why businesses choose 1Forge
           </h2>
           <p
             className={isVisible ? "animate-fade-up delay-200" : ""}
@@ -78,9 +87,15 @@ export function TrustSection() {
               opacity: isVisible ? undefined : 0,
             }}
           >
-            We turn business ideas into working software with clear scope,
-            clean design, fast delivery, and systems your team can actually use.
+            Clean modern design, fast delivery, custom-built systems, and
+            support after launch. No fake client numbers, just a clear promise
+            to build useful software.
           </p>
+          <div className="stats-strip">
+            {stats.map((item) => (
+              <span key={item}>{item}</span>
+            ))}
+          </div>
           <div
             style={{
               display: "flex",
@@ -90,11 +105,11 @@ export function TrustSection() {
               marginTop: "48px",
             }}
           >
-            <a href="#faq" className="btn-black">
+            <a href="#products" className="btn-black">
               Explore Services
             </a>
             <a href="#cta" className="btn-soft-gray">
-              Talk to Us
+              Request a Call
             </a>
           </div>
         </div>
