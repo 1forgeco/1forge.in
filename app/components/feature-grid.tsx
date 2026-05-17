@@ -187,7 +187,7 @@ export function FeatureGrid() {
                 width: "34px",
                 height: "34px",
                 borderRadius: "10px",
-                background: "rgba(25,200,90,0.16)",
+                background: "rgba(200,90,0,0.12)",
                 color: "var(--color-cosmic-violet)",
                 display: "inline-flex",
                 alignItems: "center",
@@ -212,7 +212,7 @@ export function FeatureGrid() {
         style={{
           maxWidth: "1480px",
           margin: "74px auto 0",
-          background: "linear-gradient(180deg, #effff3 0%, #d8f7e2 100%)",
+          background: "linear-gradient(180deg, #fff6f0 0%, #ffd8b0 55%, #f89e6a 85%, #eb9477 100%)",
           borderRadius: "24px",
           padding: "74px 24px",
           position: "relative",

@@ -10,10 +10,10 @@
   --color-obsidian: #0f0f10;
   --color-light-alabaster: #f6f7f4;
   --color-slate-dust: #858387;
-  --color-forge-green: #19c85a;
-  --color-forge-green-dark: #0b7d39;
-  --color-forge-green-soft: #e8fff0;
-  --color-cosmic-violet: #19c85a;
+  --color-forge-green: #E85428;
+  --color-forge-green-dark: #dc5935a7;
+  --color-forge-green-soft: #fff3ee;
+  --color-cosmic-violet: #E85428;
 
   /* Font Families */
   --font-aave-repro: "Inter", ui-sans-serif, system-ui, -apple-system,
@@ -191,10 +191,10 @@ a {
 @keyframes pulse-glow {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(25, 200, 90, 0.4);
+    box-shadow: 0 0 0 0 rgba(235, 148, 119, 0.5);
   }
   50% {
-    box-shadow: 0 0 24px 8px rgba(25, 200, 90, 0.16);
+    box-shadow: 0 0 28px 10px rgba(235, 148, 119, 0.22);
   }
 }
 
@@ -255,10 +255,10 @@ a {
 @keyframes nav-pulse {
   0%,
   100% {
-    box-shadow: 0 0 0 0 rgba(25, 200, 90, 0.28);
+    box-shadow: 0 0 0 0 rgba(235, 148, 119, 0.35);
   }
   50% {
-    box-shadow: 0 0 0 7px rgba(25, 200, 90, 0);
+    box-shadow: 0 0 0 7px rgba(235, 148, 119, 0);
   }
 }
 
@@ -498,7 +498,7 @@ a {
 }
 
 .market-row.motion-card:hover {
-  background: rgba(25, 200, 90, 0.13) !important;
+  background: rgba(235, 148, 119, 0.15) !important;
 }
 
 .chart-bar {
@@ -583,7 +583,7 @@ a {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 32px rgba(25, 200, 90, 0.3);
+  box-shadow: 0 12px 40px rgba(235, 148, 119, 0.5);
 }
 
 .btn-primary:active {
@@ -656,7 +656,7 @@ a {
 
 .card-dark:hover {
   background: rgba(255, 255, 255, 0.08);
-  border-color: rgba(25, 200, 90, 0.24);
+  border-color: rgba(235, 148, 119, 0.45);
 }
 
 /* ─── Gradient Backgrounds ─── */
@@ -664,9 +664,10 @@ a {
   background: linear-gradient(
     180deg,
     #ffffff 0%,
-    #f4fff7 34%,
-    #eafff1 66%,
-    #96e9b9 100%
+    #fff6f0 30%,
+    #ffd8b0 60%,
+    #f89e6a 85%,
+    #eb9477 100%
   );
 }
 
@@ -674,7 +675,7 @@ a {
   background: linear-gradient(
     180deg,
     var(--color-obsidian) 0%,
-    #06140b 50%,
+    #2a1008 50%,
     var(--color-obsidian) 100%
   );
 }
