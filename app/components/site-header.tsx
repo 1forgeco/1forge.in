@@ -49,7 +49,7 @@ export function SiteHeader() {
           display: "flex",
           alignItems: "center",
           justifyContent: "space-between",
-          padding: "16px 24px",
+          padding: "10px 24px",
         }}
       >
         <a

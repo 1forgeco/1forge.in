@@ -12,6 +12,8 @@ export function Hero() {
         position: "relative",
         overflow: "hidden",
         padding: "80px 24px 0",
+        margin: "0 20px",
+        borderRadius: "24px",
       }}
     >
       <div

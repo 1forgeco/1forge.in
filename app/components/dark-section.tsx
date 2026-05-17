@@ -46,7 +46,7 @@ export function DarkSection() {
       ref={sectionRef}
       id="products"
       style={{
-        padding: "48px 16px 0",
+        padding: "48px 20px 0",
         background: "var(--color-white-canvas)",
       }}
     >

@@ -36,12 +36,16 @@ type ProductGroup = keyof typeof productGroups;
 export function FeatureGrid() {
   const sectionRef = useRef<HTMLElement>(null);
   const [isVisible, setIsVisible] = useState(false);
+  const [hasAnimated, setHasAnimated] = useState(false);
   const [activeGroup, setActiveGroup] = useState<ProductGroup>("Websites");
 
   useEffect(() => {
     const observer = new IntersectionObserver(
       ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
+        if (entry.isIntersecting) {
+          setIsVisible(true);
+          setTimeout(() => setHasAnimated(true), 900); // after animation completes
+        }
       },
       { threshold: 0.12 }
     );
@@ -168,15 +172,14 @@ export function FeatureGrid() {
         {productGroups[activeGroup].map(([title, body], index) => (
           <article
             key={title}
-            className={`motion-card ${
-              isVisible ? `animate-fade-up delay-${Math.min(index + 2, 8) * 100}` : ""
-            }`}
+            className={`motion-card ${isVisible && !hasAnimated ? `animate-fade-up delay-${Math.min(index + 2, 8) * 100}` : ""}`}
             style={{
               borderRadius: "18px",
               background: "var(--color-light-alabaster)",
               minHeight: "150px",
               padding: "24px",
-              opacity: isVisible ? undefined : 0,
+              opacity: hasAnimated ? 1 : isVisible ? undefined : 0,
+              animation: hasAnimated ? "none" : undefined,
             }}
           >
             <span

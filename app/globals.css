@@ -494,7 +494,7 @@ a {
 }
 
 .motion-card:hover {
-  transform: translateY(-8px);
+  /* hover lift removed */
 }
 
 .market-row.motion-card:hover {
@@ -643,7 +643,6 @@ a {
 }
 
 .card-alabaster:hover {
-  transform: translateY(-4px);
   box-shadow: 0 20px 40px rgba(0, 0, 0, 0.06);
 }
 
@@ -658,7 +657,6 @@ a {
 .card-dark:hover {
   background: rgba(255, 255, 255, 0.08);
   border-color: rgba(25, 200, 90, 0.24);
-  transform: translateY(-4px);
 }
 
 /* ─── Gradient Backgrounds ─── */
@@ -668,7 +666,7 @@ a {
     #ffffff 0%,
     #f4fff7 34%,
     #eafff1 66%,
-    #dff7e8 100%
+    #96e9b9 100%
   );
 }
 
@@ -919,3 +917,4 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-pewter);
 }
+
