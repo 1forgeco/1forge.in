@@ -55,7 +55,7 @@ export function Hero() {
             margin: 0,
           }}
         >
-          Websites, Apps & AI for Businesses
+          Websites, Apps &amp; AI for Businesses
         </h1>
 
         <p
@@ -115,59 +115,41 @@ export function Hero() {
             View Services
           </button>
         </div>
-
-        {/* ── Product mockup cascade ── */}
+        {/* ── Phone mockup cascade — inside flex, bleeds into dark section via negative margin ── */}
         <div
           className="animate-scale-in delay-500"
           style={{
-            marginTop: "42px",
+            marginTop: "80px",
+            marginBottom: "-160px", // pulls next section up over phone bottoms
             width: "100%",
-            maxWidth: "640px",
+            maxWidth: "860px",
             position: "relative",
-            height: "clamp(370px, 36vw, 460px)",
+            height: "clamp(380px, 42vw, 520px)",
             opacity: 0,
           }}
         >
-          {/* ── Left Phone (rotated -2°, behind center) ── */}
+          {/* Left Phone */}
           <div
-            className="hero-side-phone"
             style={{
               position: "absolute",
-              width: "clamp(135px, 13.5vw, 180px)",
-              display: "block",
+              width: "clamp(160px, 18vw, 230px)",
               aspectRatio: "418 / 850",
               bottom: 0,
               left: "50%",
-              transform:
-                "translateX(-50%) translateX(clamp(-185px,-16vw,-140px)) rotate(-2deg)",
-              transformOrigin: "bottom center",
+              transform: "translateX(-50%) translateX(clamp(-220px,-21vw,-160px))",
               zIndex: 5,
             }}
           >
-            <div
-              className="animate-float"
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Image
-                src="/Pill=true, Color=Silver.svg"
-                alt="1forge website project screen"
-                fill
-                sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
-                style={{ objectFit: "contain" }}
-                priority
-              />
+            <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%" }}>
+              <Image src="/Pill=true, Color=Silver.svg" alt="1forge website project screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
 
-          {/* ── Center Phone (upright, largest, on top) ── */}
+          {/* Center Phone */}
           <div
             style={{
               position: "absolute",
-              width: "clamp(165px, 16vw, 220px)",
+              width: "clamp(180px, 20vw, 260px)",
               aspectRatio: "418 / 850",
               bottom: 0,
               left: "50%",
@@ -175,73 +157,29 @@ export function Hero() {
               zIndex: 10,
             }}
           >
-            <div
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Image
-                src="/Pill=true, Color=Silver.svg"
-                alt="1forge business dashboard screen"
-                fill
-                sizes="clamp(210px, 28vw, 280px)"
-                style={{ objectFit: "contain" }}
-                priority
-              />
+            <div style={{ position: "relative", width: "100%", height: "100%" }}>
+              <Image src="/Pill=true, Color=Silver.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
 
-          {/* ── Right Phone (rotated +2°, behind center) ── */}
+          {/* Right Phone */}
           <div
-            className="hero-side-phone"
             style={{
               position: "absolute",
-              width: "clamp(135px, 13.5vw, 180px)",
-              display: "block",
+              width: "clamp(160px, 18vw, 230px)",
               aspectRatio: "418 / 850",
               bottom: 0,
               left: "50%",
-              transform:
-                "translateX(-50%) translateX(clamp(140px,16vw,185px)) rotate(2deg)",
-              transformOrigin: "bottom center",
+              transform: "translateX(-50%) translateX(clamp(160px,21vw,220px))",
               zIndex: 5,
             }}
           >
-            <div
-              className="animate-float"
-              style={{
-                position: "relative",
-                width: "100%",
-                height: "100%",
-                animationDelay: "350ms",
-              }}
-            >
-              <Image
-                src="/Pill=true, Color=Silver.svg"
-                alt="1forge automation results screen"
-                fill
-                sizes="(max-width: 640px) 0px, clamp(150px, 20vw, 210px)"
-                style={{ objectFit: "contain" }}
-                priority
-              />
+            <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%", animationDelay: "350ms" }}>
+              <Image src="/Pill=true, Color=Silver.svg" alt="1forge automation results screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
         </div>
       </div>
-
-      {/* Bottom fade */}
-      <div
-        style={{
-          height: "120px",
-          background:
-            "linear-gradient(180deg, transparent, var(--color-white-canvas))",
-          position: "relative",
-          zIndex: 5,
-          marginTop: "-60px",
-        }}
-      />
     </section>
   );
 }
