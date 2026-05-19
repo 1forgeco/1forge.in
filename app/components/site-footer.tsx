@@ -90,16 +90,6 @@ export function SiteFooter() {
             >
               studio@1forge.in
             </a>
-            {["X", "IG", "TK", "in", "GH"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                aria-label={item}
-                style={{ color: "#bdbdbd", fontSize: "14px" }}
-              >
-                {item}
-              </a>
-            ))}
           </div>
         </div>
 

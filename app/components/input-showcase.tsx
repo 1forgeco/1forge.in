@@ -190,7 +190,7 @@ export function InputShowcase() {
                 marginBottom: "12px",
               }}
             >
-              Email or WhatsApp <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
+              Email <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
             </label>
             <p
               style={{
@@ -200,10 +200,7 @@ export function InputShowcase() {
                 lineHeight: 1.35,
               }}
             >
-              Prefer email? Write to{" "}
-              <a href="mailto:studio@1forge.in" style={{ color: "var(--color-cosmic-violet)" }}>
-                studio@1forge.in
-              </a>
+              Tell us more about what you want to build{" "}
             </p>
             <div style={{ display: "flex", gap: "8px" }} className="email-row">
               <input
