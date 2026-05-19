@@ -183,14 +183,15 @@ export function Hero() {
           </div>
         </div>
 
-        {/* ── Gradient bridge: fades hero purple into the dark section ── */}
+        {/* ── Gradient bridge: mobile only — fades hero into dark section ── */}
         <div
+          className="hero-gradient-bridge"
           style={{
             position: "absolute",
             bottom: 0,
             left: 0,
             right: 0,
-            height: "120px",
+            height: "80px",
             background: "linear-gradient(to bottom, transparent 0%, #0f0f10 100%)",
             pointerEvents: "none",
             zIndex: 20,

@@ -706,8 +706,28 @@ a {
   background: var(--color-white-canvas);
 }
 
+/* ─── Footer grid ─── */
+.footer-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+/* ─── Gradient bridge: desktop OFF, mobile ON ─── */
+.hero-gradient-bridge {
+  display: none; /* hidden on desktop — not needed with card layout */
+}
+
 /* ─── Mobile Full Width & Navbar Fixes ─── */
 @media (max-width: 640px) {
+  /* Show gradient bridge only on mobile */
+  .hero-gradient-bridge {
+    display: block !important;
+  }
+
+  /* Trim the large black gap at the top of the dark section */
+  .dark-section-card {
+    padding-top: 52px !important;
+  }
   /* Make hero and dark sections span full width on mobile */
   .hero-section-card {
     width: 100% !important;
@@ -744,6 +764,61 @@ a {
   /* Tighten navbar padding on mobile */
   #site-header > div {
     padding: 10px 16px !important;
+  }
+
+  /* ── Section spacing: kill the big top/bottom padding on every section ── */
+  #developers {
+    padding: 40px 16px 0 !important;
+  }
+
+  #about {
+    padding: 48px 16px 40px !important;
+  }
+
+  /* Tighten the large margin-bottom on the trust section's intro block */
+  #about > div > div:first-child {
+    margin-bottom: 40px !important;
+  }
+
+  /* Trust section heading margin-top */
+  #about h2 {
+    margin-top: 24px !important;
+  }
+
+  #faq {
+    padding: 32px 16px 24px !important;
+  }
+
+  /* FAQ layout: stack heading above questions, no side-by-side */
+  .faq-layout {
+    grid-template-columns: 1fr !important;
+    gap: 16px !important;
+  }
+
+  /* FAQ item min-height is too tall on mobile */
+  .faq-layout button[aria-expanded] {
+    min-height: 56px !important;
+  }
+
+  /* "Learn More" button margin */
+  .faq-layout a.btn-soft-gray {
+    margin-top: 16px !important;
+  }
+
+  #cta {
+    padding: 0 16px 32px !important;
+  }
+
+  /* Target the CTA inner div by class — avoids inline-style override issues */
+  .newsletter-layout {
+    padding-top: 28px !important;
+    gap: 20px !important;
+    grid-template-columns: 1fr !important;
+  }
+
+  /* Feature grid: remove huge gap between tab bar and first card */
+  #developers > div:nth-child(2) {
+    margin-top: 16px !important;
   }
 }
 
@@ -796,7 +871,7 @@ a {
   }
 
   .footer-grid {
-    grid-template-columns: repeat(2, 1fr) !important;
+    grid-template-columns: repeat(2, 1fr);
   }
 }
 
@@ -830,7 +905,9 @@ a {
   }
 
   .footer-grid {
-    grid-template-columns: 1fr !important;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 28px;
+    padding-top: 40px;
   }
 }
 

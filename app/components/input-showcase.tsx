@@ -30,7 +30,7 @@ export function InputShowcase() {
       <section
         id="faq"
         style={{
-          padding: "120px 24px 140px",
+          padding: "80px 24px 80px",
           background: "var(--color-white-canvas)",
           borderTop: "1px solid rgba(34,29,29,0.06)",
         }}
@@ -131,7 +131,7 @@ export function InputShowcase() {
       <section
         id="cta"
         style={{
-          padding: "0 24px 116px",
+          padding: "0 24px 64px",
           background: "var(--color-white-canvas)",
         }}
       >
@@ -139,11 +139,11 @@ export function InputShowcase() {
           style={{
             maxWidth: "1120px",
             margin: "0 auto",
-            paddingTop: "88px",
+            paddingTop: "52px",
             borderTop: "1px solid rgba(34,29,29,0.08)",
             display: "grid",
             gridTemplateColumns: "1fr 1.25fr",
-            gap: "80px",
+            gap: "60px",
             alignItems: "start",
           }}
           className="newsletter-layout"
