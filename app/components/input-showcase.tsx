@@ -1,6 +1,8 @@
 "use client";
 
 import { useState } from "react";
+import { PhoneInput } from "react-international-phone";
+import "react-international-phone/style.css";
 
 const faqs = [
   [
@@ -21,9 +23,57 @@ const faqs = [
   ],
 ];
 
+type FormStatus = "idle" | "loading" | "success" | "error";
+
 export function InputShowcase() {
   const [email, setEmail] = useState("");
+  const [phone, setPhone] = useState("");
+  const [message, setMessage] = useState("");
+  const [status, setStatus] = useState<FormStatus>("idle");
+  const [errorMsg, setErrorMsg] = useState("");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  const handleSubmit = async (event: React.FormEvent) => {
+    event.preventDefault();
+
+    if (!email || !email.includes("@")) {
+      setStatus("error");
+      setErrorMsg("Please enter a valid email address.");
+      return;
+    }
+    if (!phone || phone.length < 6) {
+      setStatus("error");
+      setErrorMsg("Please enter a valid phone number.");
+      return;
+    }
+
+    setStatus("loading");
+    setErrorMsg("");
+
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({ email, phone, message }),
+      });
+
+      const data = await res.json();
+
+      if (!res.ok) {
+        setStatus("error");
+        setErrorMsg(data.error || "Something went wrong.");
+        return;
+      }
+
+      setStatus("success");
+      setEmail("");
+      setPhone("");
+      setMessage("");
+    } catch {
+      setStatus("error");
+      setErrorMsg("Network error. Please check your connection.");
+    }
+  };
 
   return (
     <>
@@ -174,75 +224,230 @@ export function InputShowcase() {
 
           <form
             className="motion-card"
-            onSubmit={(event) => event.preventDefault()}
+            onSubmit={handleSubmit}
             style={{
               borderRadius: "24px",
               background: "var(--color-light-alabaster)",
               padding: "38px",
             }}
           >
-            <label
-              htmlFor="email-input"
-              style={{
-                display: "block",
-                color: "var(--color-pewter)",
-                fontSize: "22px",
-                marginBottom: "12px",
-              }}
-            >
-              Email <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
-            </label>
-            <p
-              style={{
-                margin: "-4px 0 18px",
-                color: "var(--color-pewter)",
-                fontSize: "16px",
-                lineHeight: 1.35,
-              }}
-            >
-              Tell us more about what you want to build{" "}
-            </p>
-            <div style={{ display: "flex", gap: "8px" }} className="email-row">
-              <input
-                id="email-input"
-                type="email"
-                placeholder="yourname@business.com"
-                value={email}
-                onChange={(event) => setEmail(event.target.value)}
+            {status === "success" ? (
+              <div
+                className="animate-fade-up"
                 style={{
-                  flex: 1,
-                  minWidth: 0,
-                  height: "58px",
-                  borderRadius: "18px 6px 6px 18px",
-                  border: "none",
-                  background: "white",
-                  padding: "0 22px",
-                  fontSize: "20px",
-                  fontFamily: "inherit",
-                  color: "var(--color-ink-black)",
-                  outline: "none",
-                }}
-              />
-              <button
-                id="email-submit"
-                type="submit"
-                style={{
-                  height: "58px",
-                  borderRadius: "6px 28px 28px 6px",
-                  border: "none",
-                  background: "var(--color-ink-black)",
-                  color: "white",
-                  padding: "0 28px",
-                  fontSize: "22px",
-                  fontWeight: 500,
-                  fontFamily: "inherit",
-                  cursor: "pointer",
-                  whiteSpace: "nowrap",
+                  textAlign: "center",
+                  padding: "32px 0",
                 }}
               >
-                Request Call →
-              </button>
-            </div>
+                <div
+                  style={{
+                    width: "56px",
+                    height: "56px",
+                    borderRadius: "50%",
+                    background: "var(--color-cosmic-violet)",
+                    display: "inline-flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    marginBottom: "16px",
+                  }}
+                >
+                  <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="white" strokeWidth="2.5" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+                <h3 style={{ fontSize: "22px", margin: "0 0 8px", color: "var(--color-ink-black)" }}>
+                  Request Sent!
+                </h3>
+                <p style={{ color: "var(--color-pewter)", fontSize: "15px", margin: 0 }}>
+                  We&apos;ll get back to you shortly at your email.
+                </p>
+                <button
+                  type="button"
+                  onClick={() => setStatus("idle")}
+                  className="btn-soft"
+                  style={{ marginTop: "20px" }}
+                >
+                  Send Another
+                </button>
+              </div>
+            ) : (
+              <>
+                <label
+                  htmlFor="email-input"
+                  style={{
+                    display: "block",
+                    color: "var(--color-pewter)",
+                    fontSize: "22px",
+                    marginBottom: "6px",
+                  }}
+                >
+                  Contact Details <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
+                </label>
+                <p
+                  style={{
+                    margin: "-4px 0 18px",
+                    color: "var(--color-pewter)",
+                    fontSize: "16px",
+                    lineHeight: 1.35,
+                  }}
+                >
+                  Tell us more about what you want to build{" "}
+                </p>
+
+                {/* Email field */}
+                <div style={{ marginBottom: "12px" }}>
+                  <label
+                    htmlFor="email-input"
+                    style={{
+                      display: "block",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      color: "var(--color-ink-black)",
+                      marginBottom: "6px",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email-input"
+                    type="email"
+                    placeholder="yourname@business.com"
+                    value={email}
+                    onChange={(event) => {
+                      setEmail(event.target.value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    required
+                    style={{
+                      width: "100%",
+                      height: "52px",
+                      borderRadius: "14px",
+                      border: "none",
+                      background: "white",
+                      padding: "0 18px",
+                      fontSize: "17px",
+                      fontFamily: "inherit",
+                      color: "var(--color-ink-black)",
+                      outline: "none",
+                    }}
+                  />
+                </div>
+
+                {/* Phone field */}
+                <div style={{ marginBottom: "18px" }}>
+                  <label
+                    htmlFor="phone-input"
+                    style={{
+                      display: "block",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      color: "var(--color-ink-black)",
+                      marginBottom: "6px",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    Phone Number
+                  </label>
+                  <PhoneInput
+                    defaultCountry="in"
+                    value={phone}
+                    onChange={(value) => {
+                      setPhone(value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    inputClassName="phone-input-field"
+                    countrySelectorStyleProps={{
+                      buttonClassName: "phone-country-btn",
+                    }}
+                    inputProps={{
+                      id: "phone-input",
+                    }}
+                  />
+                </div>
+
+                {/* Message field */}
+                <div style={{ marginBottom: "18px" }}>
+                  <label
+                    htmlFor="message-input"
+                    style={{
+                      display: "block",
+                      fontSize: "13px",
+                      fontWeight: 500,
+                      color: "var(--color-ink-black)",
+                      marginBottom: "6px",
+                      letterSpacing: "0.02em",
+                    }}
+                  >
+                    Message <span style={{ color: "var(--color-misty-gray)", fontWeight: 400 }}>(optional)</span>
+                  </label>
+                  <textarea
+                    id="message-input"
+                    placeholder="Tell us about your project, business, or idea…"
+                    value={message}
+                    onChange={(event) => {
+                      setMessage(event.target.value);
+                      if (status === "error") setStatus("idle");
+                    }}
+                    rows={4}
+                    style={{
+                      width: "100%",
+                      borderRadius: "14px",
+                      border: "none",
+                      background: "white",
+                      padding: "14px 18px",
+                      fontSize: "17px",
+                      fontFamily: "inherit",
+                      color: "var(--color-ink-black)",
+                      outline: "none",
+                      resize: "vertical",
+                      minHeight: "100px",
+                    }}
+                  />
+                </div>
+
+                {/* Error message */}
+                {status === "error" && (
+                  <p
+                    className="animate-fade-up"
+                    style={{
+                      color: "#e53e3e",
+                      fontSize: "14px",
+                      margin: "0 0 12px",
+                      fontWeight: 500,
+                    }}
+                  >
+                    {errorMsg}
+                  </p>
+                )}
+
+                <button
+                  id="email-submit"
+                  type="submit"
+                  className="btn-primary"
+                  disabled={status === "loading"}
+                  style={{
+                    width: "100%",
+                    justifyContent: "center",
+                    height: "52px",
+                    fontSize: "18px",
+                    opacity: status === "loading" ? 0.7 : 1,
+                    cursor: status === "loading" ? "not-allowed" : "pointer",
+                  }}
+                >
+                  {status === "loading" ? (
+                    <span style={{ display: "inline-flex", alignItems: "center", gap: "10px" }}>
+                      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" style={{ animation: "spin 1s linear infinite" }}>
+                        <path d="M21 12a9 9 0 1 1-6.219-8.56" />
+                      </svg>
+                      Sending…
+                    </span>
+                  ) : (
+                    "Request Call →"
+                  )}
+                </button>
+              </>
+            )}
           </form>
         </div>
       </section>
