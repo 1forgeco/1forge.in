@@ -93,7 +93,7 @@ export function DarkSection() {
                 marginBottom: "48px",
               }}
             >
-              <BrandLogo tone="purple" size="sm" showWord={false} />
+              <BrandLogo tone="light" size="sm" showWord={false} />
               1forge Services
             </div>
 
