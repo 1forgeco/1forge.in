@@ -58,7 +58,7 @@ export function Hero() {
             margin: 0,
           }}
         >
-          Websites, Apps &amp; AI for Businesses
+          AI for Businesses &amp; Apps, Websites  
         </h1>
 
         <p
