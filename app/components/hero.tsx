@@ -143,7 +143,7 @@ export function Hero() {
             }}
           >
             <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src="/Pill=true, Color=Silver.svg" alt="1forge website project screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
+              <Image src="/Left.svg" alt="1forge website project screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
 
@@ -160,7 +160,7 @@ export function Hero() {
             }}
           >
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src="/Pill=true, Color=Silver.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority />
+              <Image src="/Mid.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
 
@@ -177,7 +177,7 @@ export function Hero() {
             }}
           >
             <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%", animationDelay: "350ms" }}>
-              <Image src="/Pill=true, Color=Silver.svg" alt="1forge automation results screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
+              <Image src="/Right.svg" alt="1forge automation results screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority />
             </div>
           </div>
         </div>
