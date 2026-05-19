@@ -712,22 +712,8 @@ a {
   grid-template-columns: repeat(5, 1fr);
 }
 
-/* ─── Gradient bridge: desktop OFF, mobile ON ─── */
-.hero-gradient-bridge {
-  display: none; /* hidden on desktop — not needed with card layout */
-}
-
 /* ─── Mobile Full Width & Navbar Fixes ─── */
 @media (max-width: 640px) {
-  /* Show gradient bridge only on mobile */
-  .hero-gradient-bridge {
-    display: block !important;
-  }
-
-  /* Trim the large black gap at the top of the dark section */
-  .dark-section-card {
-    padding-top: 52px !important;
-  }
   /* Make hero and dark sections span full width on mobile */
   .hero-section-card {
     width: 100% !important;
