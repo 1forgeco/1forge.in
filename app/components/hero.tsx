@@ -12,7 +12,8 @@ export function Hero() {
         position: "relative",
         overflow: "hidden",
         padding: "80px 24px 0",
-        margin: "0 20px",
+        width: "calc(100% - 40px)",
+        margin: "0 auto",
         borderRadius: "24px",
       }}
     >
@@ -41,7 +42,7 @@ export function Hero() {
             marginBottom: "32px",
           }}
         >
-          <BrandLogo tone="green" size="sm" />
+          <BrandLogo tone="purple" size="sm" />
           1forge Studio
         </div>
 

@@ -46,7 +46,7 @@ export function SiteFooter() {
                 {links.map((link) => (
                   <li key={link} style={{ marginBottom: "18px" }}>
                     <a
-                      href="#"
+                      href={link === "Contact" ? "mailto:studio@1forge.in" : "#"}
                       style={{
                         fontSize: "20px",
                         color: "var(--color-ink-black)",
@@ -83,10 +83,20 @@ export function SiteFooter() {
               letterSpacing: "-0.06em",
             }}
           >
-            <BrandLogo tone="green" size="lg" />
+            <BrandLogo tone="purple" size="lg" />
           </a>
 
           <div style={{ display: "flex", gap: "24px", color: "#bdbdbd", fontSize: "26px" }}>
+            <a
+              href="mailto:studio@1forge.in"
+              style={{
+                color: "var(--color-cosmic-violet)",
+                fontSize: "18px",
+                fontWeight: 600,
+              }}
+            >
+              studio@1forge.in
+            </a>
             {["X", "IG", "TK", "in", "GH"].map((item) => (
               <a key={item} href="#" aria-label={item} style={{ color: "inherit", fontSize: item.length > 1 ? "18px" : "26px" }}>
                 {item}

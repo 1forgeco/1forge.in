@@ -60,10 +60,10 @@ export function FeatureGrid() {
       id="developers"
       style={{
         background: "var(--color-white-canvas)",
-        padding: "110px 16px 0",
+        padding: "110px 0 0",
       }}
     >
-      <div style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center" }}>
+      <div style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", padding: "0 16px" }}>
         <div
           className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
           style={{
@@ -187,7 +187,7 @@ export function FeatureGrid() {
                 width: "34px",
                 height: "34px",
                 borderRadius: "10px",
-                background: "rgba(200,90,0,0.12)",
+              background: "rgba(124, 92, 255, 0.14)",
                 color: "var(--color-cosmic-violet)",
                 display: "inline-flex",
                 alignItems: "center",
@@ -210,9 +210,9 @@ export function FeatureGrid() {
       <div
         id="templates"
         style={{
-          maxWidth: "1480px",
+          width: "calc(100% - 40px)",
           margin: "74px auto 0",
-          background: "linear-gradient(180deg, #fff6f0 0%, #ffd8b0 55%, #f89e6a 85%, #eb9477 100%)",
+          background: "linear-gradient(180deg, #f7f5ff 0%, #e7e0ff 55%, #cfc2ff 85%, #b7a6ff 100%)",
           borderRadius: "24px",
           padding: "74px 24px",
           position: "relative",

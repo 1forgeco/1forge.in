@@ -137,7 +137,7 @@ export function SiteHeader() {
             onMouseEnter={(e) => {
               (e.target as HTMLElement).style.transform = "translateY(-1px)";
               (e.target as HTMLElement).style.boxShadow =
-                "0 8px 24px rgba(25, 200, 90, 0.32)";
+                "0 8px 24px rgba(124, 92, 255, 0.32)";
             }}
             onMouseLeave={(e) => {
               (e.target as HTMLElement).style.transform = "translateY(0)";
