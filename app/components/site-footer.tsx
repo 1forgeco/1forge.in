@@ -2,6 +2,8 @@
 
 import { BrandLogo } from "./brand-logo";
 
+const linkedinUrl = "https://www.linkedin.com/company/1forgeworks/?viewAsMember=true";
+
 const footerLinks = {
   Services: ["Websites", "Mobile Apps", "Desktop Apps", "AI Agents"],
   Systems: ["Hostel / PG", "CRM", "Inventory", "Billing"],
@@ -89,6 +91,44 @@ export function SiteFooter() {
               style={{ color: "var(--color-cosmic-violet)", fontSize: "14px", fontWeight: 600 }}
             >
               studio@1forge.in
+            </a>
+            <a
+              href={linkedinUrl}
+              aria-label="1forge on LinkedIn"
+              title="LinkedIn"
+              target="_blank"
+              rel="noreferrer"
+              style={{
+                display: "inline-flex",
+                alignItems: "center",
+                justifyContent: "center",
+                width: "38px",
+                height: "38px",
+                borderRadius: "50%",
+                color: "var(--color-cosmic-violet)",
+                border: "1px solid rgba(124, 92, 255, 0.22)",
+                transition: "background 0.2s ease, color 0.2s ease, transform 0.2s ease",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.background = "var(--color-cosmic-violet)";
+                e.currentTarget.style.color = "var(--color-white-canvas)";
+                e.currentTarget.style.transform = "translateY(-1px)";
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.background = "transparent";
+                e.currentTarget.style.color = "var(--color-cosmic-violet)";
+                e.currentTarget.style.transform = "translateY(0)";
+              }}
+            >
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                width="18"
+                height="18"
+                fill="currentColor"
+              >
+                <path d="M20.45 20.45h-3.56v-5.58c0-1.33-.02-3.04-1.85-3.04-1.85 0-2.14 1.45-2.14 2.95v5.67H9.34V9h3.42v1.56h.05c.48-.9 1.64-1.85 3.37-1.85 3.61 0 4.27 2.37 4.27 5.46v6.28ZM5.32 7.43a2.06 2.06 0 1 1 0-4.13 2.06 2.06 0 0 1 0 4.13Zm1.78 13.02H3.54V9H7.1v11.45Z" />
+              </svg>
             </a>
           </div>
         </div>
