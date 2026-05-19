@@ -9,10 +9,13 @@ type BrandLogoProps = {
 };
 
 const sizes = {
-  sm: { width: 74, height: 22 },
-  md: { width: 116, height: 34 },
-  lg: { width: 148, height: 44 },
+  sm: { height: 24 },
+  md: { height: 34 },
+  lg: { height: 48 },
 };
+
+const logoAspectRatio = 973 / 276;
+const markAspectRatio = 315 / 225;
 
 export function BrandLogo({
   tone = "dark",
@@ -20,7 +23,9 @@ export function BrandLogo({
   showWord = true,
 }: BrandLogoProps) {
   const selected = sizes[size];
-  const width = showWord ? selected.width : selected.height;
+  const width = Math.round(
+    selected.height * (showWord ? logoAspectRatio : markAspectRatio),
+  );
 
   return (
     <span
@@ -31,26 +36,23 @@ export function BrandLogo({
         justifyContent: "center",
         width,
         height: selected.height,
-        borderRadius: selected.height * 0.22,
+        borderRadius: tone === "light" ? selected.height * 0.3 : 0,
         overflow: "hidden",
-        background: tone === "light" ? "#050505" : "#020202",
-        boxShadow:
-          tone === "dark"
-            ? "0 0 0 1px rgba(255,255,255,0.04)"
-            : "0 0 0 1px rgba(0,0,0,0.08)",
+        background: tone === "light" ? "rgba(255, 255, 255, 0.96)" : "transparent",
+        boxShadow: tone === "light" ? "0 0 0 1px rgba(255,255,255,0.18)" : "none",
         lineHeight: 1,
         position: "relative",
+        padding: tone === "light" ? "3px 5px" : 0,
       }}
     >
       <Image
-        src="/1forge.png"
+        src={showWord ? "/1forge-logo.png" : "/1forge-mark.png"}
         alt="1forge"
         fill
         sizes={`${width}px`}
         style={{
-          objectFit: "cover",
-          objectPosition: showWord ? "center center" : "30% center",
-          transform: showWord ? "scale(1.08)" : "scale(3.4)",
+          objectFit: "contain",
+          objectPosition: "center center",
         }}
         priority
       />

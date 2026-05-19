@@ -42,7 +42,7 @@ export function Hero() {
             marginBottom: "32px",
           }}
         >
-          <BrandLogo tone="purple" size="sm" />
+          <BrandLogo tone="purple" size="sm" showWord={false} />
           1forge Studio
         </div>
 

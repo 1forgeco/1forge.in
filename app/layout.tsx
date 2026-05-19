@@ -6,6 +6,15 @@ export const metadata: Metadata = {
   description:
     "1forge builds business websites, mobile apps, desktop apps, hostel and PG management systems, AI agents, and workflow automations.",
   keywords: ["websites", "apps", "hostel management system", "AI agents", "automation", "1forge"],
+  manifest: "/site.webmanifest",
+  icons: {
+    icon: [
+      { url: "/favicon.ico" },
+      { url: "/favicon-32x32.png", sizes: "32x32", type: "image/png" },
+      { url: "/favicon-16x16.png", sizes: "16x16", type: "image/png" },
+    ],
+    apple: [{ url: "/apple-touch-icon.png", sizes: "180x180", type: "image/png" }],
+  },
   openGraph: {
     title: "1forge — Business Software Studio",
     description:
@@ -25,4 +34,3 @@ export default function RootLayout({
     </html>
   );
 }
-
