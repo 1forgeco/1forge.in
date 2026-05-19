@@ -420,9 +420,10 @@ a {
   font-weight: var(--font-weight-w450);
   border: none;
   cursor: pointer;
-  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+  transition: all 0.15s cubic-bezier(0.16, 1, 0.3, 1);
   position: relative;
   overflow: hidden;
+  box-shadow: 0 4px 0 0 #4a32cc, 0 6px 16px rgba(124, 92, 255, 0.25);
 }
 
 .btn-black,
@@ -440,35 +441,41 @@ a {
   border: none;
   font-size: 22px;
   font-weight: var(--font-weight-w450);
-  transition: transform 0.25s ease, background 0.25s ease;
+  transition: transform 0.15s ease, background 0.25s ease, box-shadow 0.15s ease;
   white-space: nowrap;
+  cursor: pointer;
 }
 
 .btn-black {
   background: var(--color-ink-black);
   color: var(--color-white-canvas);
+  box-shadow: 0 4px 0 0 #000000, 0 6px 16px rgba(0, 0, 0, 0.2);
 }
 
 .btn-inverse,
 .btn-white {
   background: var(--color-white-canvas);
   color: var(--color-ink-black);
+  box-shadow: 0 4px 0 0 #c5c5c5, 0 6px 16px rgba(0, 0, 0, 0.1);
 }
 
 .btn-muted-dark {
   background: rgba(255, 255, 255, 0.12);
   color: var(--color-white-canvas);
+  box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.06), 0 6px 16px rgba(0, 0, 0, 0.15);
 }
 
 .btn-soft,
 .btn-soft-gray {
   background: var(--color-accent-purple-soft);
   color: var(--color-cosmic-violet);
+  box-shadow: 0 4px 0 0 #d4c9f7, 0 6px 16px rgba(124, 92, 255, 0.1);
 }
 
 .btn-soft-gray {
   background: #e7e7e7;
   color: var(--color-ink-black);
+  box-shadow: 0 4px 0 0 #c2c2c2, 0 6px 16px rgba(0, 0, 0, 0.08);
 }
 
 .btn-black:hover,
@@ -477,7 +484,17 @@ a {
 .btn-soft:hover,
 .btn-soft-gray:hover,
 .btn-white:hover {
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.btn-black:active,
+.btn-inverse:active,
+.btn-muted-dark:active,
+.btn-soft:active,
+.btn-soft-gray:active,
+.btn-white:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 rgba(0, 0, 0, 0.15), 0 2px 6px rgba(0, 0, 0, 0.1);
 }
 
 .motion-shell {
@@ -583,11 +600,12 @@ a {
 
 .btn-primary:hover {
   transform: translateY(-2px);
-  box-shadow: 0 12px 40px rgba(124, 92, 255, 0.36);
+  box-shadow: 0 6px 0 0 #4a32cc, 0 14px 40px rgba(124, 92, 255, 0.36);
 }
 
 .btn-primary:active {
-  transform: translateY(0);
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 #4a32cc, 0 2px 8px rgba(124, 92, 255, 0.2);
 }
 
 /* Ghost Button (Dark) */
@@ -606,10 +624,20 @@ a {
   transition: all 0.3s ease;
 }
 
+.btn-ghost-dark {
+  box-shadow: 0 4px 0 0 rgba(15, 15, 16, 0.5), 0 6px 12px rgba(0, 0, 0, 0.08);
+  transition: all 0.15s ease;
+}
+
 .btn-ghost-dark:hover {
   background: var(--color-obsidian);
   color: var(--color-white-canvas);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-dark:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 rgba(15, 15, 16, 0.3), 0 2px 4px rgba(0, 0, 0, 0.06);
 }
 
 /* Ghost Button (Light) */
@@ -628,10 +656,20 @@ a {
   transition: all 0.3s ease;
 }
 
+.btn-ghost-light {
+  box-shadow: 0 4px 0 0 rgba(255, 255, 255, 0.1), 0 6px 12px rgba(0, 0, 0, 0.1);
+  transition: all 0.15s ease;
+}
+
 .btn-ghost-light:hover {
   background: rgba(255, 255, 255, 0.1);
   border-color: rgba(255, 255, 255, 0.5);
-  transform: translateY(-1px);
+  transform: translateY(-2px);
+}
+
+.btn-ghost-light:active {
+  transform: translateY(3px);
+  box-shadow: 0 1px 0 0 rgba(255, 255, 255, 0.05), 0 2px 4px rgba(0, 0, 0, 0.08);
 }
 
 /* Cards */
@@ -720,6 +758,10 @@ a {
     border-radius: 0 !important;
     margin: 0 !important;
     margin-bottom: -2px !important; /* seal sub-pixel gap at bottom */
+    min-height: 100svh !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
   }
 
   .dark-section-card {
@@ -938,6 +980,31 @@ a {
 
 #hero {
   padding-top: 38px !important;
+}
+
+@media (max-width: 640px) {
+  #hero {
+    min-height: 100svh !important;
+    padding-top: 24px !important;
+    padding-bottom: 0 !important;
+    display: flex !important;
+    flex-direction: column !important;
+  }
+
+  #hero > div:first-child {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-start;
+    padding-top: 8px;
+  }
+
+  /* Keep phone mockups inside hero — remove the bleed into dark section */
+  #hero > div:first-child > div:last-child {
+    margin-bottom: 0 !important;
+    margin-top: auto;
+  }
 }
 
 #hero > div:first-child > div:first-child {
