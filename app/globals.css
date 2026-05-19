@@ -701,6 +701,69 @@ a {
   font-weight: 700;
 }
 
+/* ─── Products section background ─── */
+.products-outer-section {
+  background: var(--color-white-canvas);
+}
+
+/* ─── Mobile Full Width & Navbar Fixes ─── */
+@media (max-width: 640px) {
+  /* Make hero and dark sections span full width on mobile */
+  .hero-section-card {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+    margin-bottom: -2px !important; /* seal sub-pixel gap at bottom */
+  }
+
+  .dark-section-card {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin: 0 !important;
+  }
+
+  .template-section-card {
+    width: 100% !important;
+    border-radius: 0 !important;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
+  }
+
+  /* Remove white gap between hero and dark section — outer wrapper goes dark */
+  .products-outer-section {
+    padding-top: 0 !important;
+    background: #0f0f10 !important;
+    margin-top: -2px !important; /* close sub-pixel rendering gap */
+  }
+
+  /* Hide the CTA button in navbar on mobile — keep only logo + hamburger */
+  #header-cta {
+    display: none !important;
+  }
+
+  /* Tighten navbar padding on mobile */
+  #site-header > div {
+    padding: 10px 16px !important;
+  }
+}
+
+/* Service table: desktop vs mobile card toggle */
+.service-table-desktop {
+  display: block;
+}
+.service-cards-mobile {
+  display: none;
+}
+
+@media (max-width: 640px) {
+  .service-table-desktop {
+    display: none;
+  }
+  .service-cards-mobile {
+    display: block;
+  }
+}
+
 @media (max-width: 900px) {
   #main-nav {
     display: none !important;
@@ -725,13 +788,6 @@ a {
     padding: 28px 18px !important;
   }
 
-  .market-row {
-    grid-template-columns: 1fr 1fr !important;
-  }
-
-  .market-row span:nth-child(n + 3) {
-    display: none;
-  }
 
   .strategy-grid,
   .metric-grid,

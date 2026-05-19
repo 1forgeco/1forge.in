@@ -45,13 +45,13 @@ export function DarkSection() {
     <section
       ref={sectionRef}
       id="products"
+      className="products-outer-section"
       style={{
         padding: "48px 0 0",
-        background: "var(--color-white-canvas)",
       }}
     >
       <div
-        className="dark-section-gradient-purple soft-grid-motion"
+        className="dark-section-gradient-purple soft-grid-motion dark-section-card"
         style={{
           width: "calc(100% - 40px)",
           margin: "0 auto",
@@ -156,27 +156,32 @@ export function DarkSection() {
                 borderBottom: "1px solid rgba(255,255,255,0.1)",
                 display: "flex",
                 alignItems: "center",
-                gap: "8px",
+                justifyContent: "space-between",
                 padding: "0 20px",
               }}
             >
-              {["#7c5cff", "#a994ff", "#d7ceff"].map((color) => (
-                <span
-                  key={color}
-                  style={{
-                    width: "9px",
-                    height: "9px",
-                    borderRadius: "50%",
-                    background: color,
-                  }}
-                />
-              ))}
+              {/* Left: traffic-light dots */}
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0 }}>
+                {["#7c5cff", "#a994ff", "#d7ceff"].map((color) => (
+                  <span
+                    key={color}
+                    style={{
+                      width: "9px",
+                      height: "9px",
+                      borderRadius: "50%",
+                      background: color,
+                    }}
+                  />
+                ))}
+              </div>
+
+              {/* Centre: URL bar — flex:1 so it fills available space and text-aligns centre */}
               <span
                 style={{
-                  margin: "0 auto",
-                  width: "360px",
-                  maxWidth: "45%",
+                  flex: 1,
+                  maxWidth: "360px",
                   height: "24px",
+                  margin: "0 16px",
                   borderRadius: "8px",
                   background: "rgba(255,255,255,0.05)",
                   color: "rgba(255,255,255,0.5)",
@@ -188,6 +193,13 @@ export function DarkSection() {
               >
                 studio.1forge.in
               </span>
+
+              {/* Right: invisible spacer matching dots width so URL stays centred */}
+              <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0, visibility: "hidden" }}>
+                {["a", "b", "c"].map((k) => (
+                  <span key={k} style={{ width: "9px", height: "9px", borderRadius: "50%" }} />
+                ))}
+              </div>
             </div>
 
             <div style={{ display: "grid", gridTemplateColumns: "220px 1fr" }} className="pro-shell">
@@ -233,47 +245,92 @@ export function DarkSection() {
                   Pick a service or combine multiple systems into one business platform.
                 </p>
 
-                <div
-                  style={{
-                    display: "grid",
-                    gridTemplateColumns: "1.2fr .8fr .9fr 1fr 1fr",
-                    gap: "16px",
-                    color: "rgba(255,255,255,0.34)",
-                    fontSize: "12px",
-                    textTransform: "uppercase",
-                    padding: "16px 20px",
-                    borderRadius: "14px 14px 0 0",
-                    background: "rgba(255,255,255,0.04)",
-                  }}
-                  className="market-row"
-                >
-                  <span>Service</span>
-                  <span>Scope</span>
-                  <span>Timeline</span>
-                  <span>Includes</span>
-                  <span>Status</span>
-                </div>
-                {serviceRows.map((row, index) => (
+                {/* ── Desktop Table ── */}
+                <div className="service-table-desktop">
                   <div
-                    key={row[0]}
-                    className="market-row motion-card"
                     style={{
                       display: "grid",
                       gridTemplateColumns: "1.2fr .8fr .9fr 1fr 1fr",
                       gap: "16px",
-                      padding: "18px 20px",
-                      background:
-                        index === 1 ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.035)",
-                      borderTop: "1px solid rgba(255,255,255,0.04)",
-                      color: "rgba(255,255,255,0.66)",
-                      fontSize: "14px",
+                      color: "rgba(255,255,255,0.34)",
+                      fontSize: "12px",
+                      textTransform: "uppercase",
+                      padding: "16px 20px",
+                      borderRadius: "14px 14px 0 0",
+                      background: "rgba(255,255,255,0.04)",
                     }}
                   >
-                    {row.map((cell, cellIndex) => (
-                      <span key={`${row[0]}-${cellIndex}`}>{cell}</span>
-                    ))}
+                    <span>Service</span>
+                    <span>Scope</span>
+                    <span>Timeline</span>
+                    <span>Includes</span>
+                    <span>Status</span>
                   </div>
-                ))}
+                  {serviceRows.map((row, index) => (
+                    <div
+                      key={row[0]}
+                      className="motion-card"
+                      style={{
+                        display: "grid",
+                        gridTemplateColumns: "1.2fr .8fr .9fr 1fr 1fr",
+                        gap: "16px",
+                        padding: "18px 20px",
+                        background:
+                          index === 1 ? "rgba(255,255,255,0.08)" : "rgba(255,255,255,0.035)",
+                        borderTop: "1px solid rgba(255,255,255,0.04)",
+                        color: "rgba(255,255,255,0.66)",
+                        fontSize: "14px",
+                      }}
+                    >
+                      {row.map((cell, cellIndex) => (
+                        <span key={`${row[0]}-${cellIndex}`}>{cell}</span>
+                      ))}
+                    </div>
+                  ))}
+                </div>
+
+                {/* ── Mobile Cards (shows all data as label/value pairs) ── */}
+                <div className="service-cards-mobile">
+                  {serviceRows.map((row, index) => (
+                    <div
+                      key={row[0]}
+                      className="motion-card"
+                      style={{
+                        borderRadius: "14px",
+                        padding: "16px 18px",
+                        background:
+                          index === 1 ? "rgba(255,255,255,0.10)" : "rgba(255,255,255,0.04)",
+                        border: "1px solid rgba(255,255,255,0.08)",
+                        marginBottom: "10px",
+                      }}
+                    >
+                      <div style={{ color: "white", fontWeight: 600, fontSize: "15px", marginBottom: "12px" }}>
+                        {row[0]}
+                      </div>
+                      {[["Scope", row[1]], ["Timeline", row[2]], ["Includes", row[3]], ["Status", row[4]]].map(
+                        ([label, value]) => (
+                          <div
+                            key={label}
+                            style={{
+                              display: "flex",
+                              justifyContent: "space-between",
+                              alignItems: "center",
+                              padding: "7px 0",
+                              borderTop: "1px solid rgba(255,255,255,0.06)",
+                            }}
+                          >
+                            <span style={{ color: "rgba(255,255,255,0.34)", fontSize: "11px", textTransform: "uppercase", letterSpacing: "0.04em" }}>
+                              {label}
+                            </span>
+                            <span style={{ color: "rgba(255,255,255,0.72)", fontSize: "13px", fontWeight: 500 }}>
+                              {value}
+                            </span>
+                          </div>
+                        )
+                      )}
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </div>

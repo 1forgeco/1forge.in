@@ -209,6 +209,7 @@ export function FeatureGrid() {
 
       <div
         id="templates"
+        className="template-section-card"
         style={{
           width: "calc(100% - 40px)",
           margin: "74px auto 0",
