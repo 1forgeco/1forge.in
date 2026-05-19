@@ -61,7 +61,7 @@ export function TrustSection() {
               opacity: isVisible ? undefined : 0,
             }}
           >
-            <BrandLogo tone="green" size="lg" />
+            <BrandLogo tone="purple" size="lg" />
           </div>
           <h2
             className={isVisible ? "animate-fade-up delay-100" : ""}

@@ -46,20 +46,22 @@ export function DarkSection() {
       ref={sectionRef}
       id="products"
       style={{
-        padding: "48px 20px 0",
+        padding: "48px 0 0",
         background: "var(--color-white-canvas)",
       }}
     >
       <div
-        className="dark-section-gradient soft-grid-motion"
+        className="dark-section-gradient-purple soft-grid-motion"
         style={{
-          maxWidth: "1480px",
+          width: "calc(100% - 40px)",
           margin: "0 auto",
           minHeight: "900px",
           borderRadius: "24px",
           padding: "120px 24px 96px",
           overflow: "hidden",
           position: "relative",
+          background:
+            "linear-gradient(180deg, var(--color-obsidian) 0%, #161323 48%, #20183a 68%, var(--color-obsidian) 100%)",
         }}
       >
         <div
@@ -91,7 +93,7 @@ export function DarkSection() {
                 marginBottom: "48px",
               }}
             >
-              <BrandLogo tone="green" size="sm" showWord={false} />
+              <BrandLogo tone="purple" size="sm" showWord={false} />
               1forge Services
             </div>
 
@@ -158,7 +160,7 @@ export function DarkSection() {
                 padding: "0 20px",
               }}
             >
-              {["#ff6b58", "#f7bc4c", "#6bd27d"].map((color) => (
+              {["#7c5cff", "#a994ff", "#d7ceff"].map((color) => (
                 <span
                   key={color}
                   style={{

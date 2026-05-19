@@ -158,6 +158,18 @@ export function InputShowcase() {
             }}
           >
             Tell us what you want to build.
+            <a
+              href="mailto:studio@1forge.in"
+              style={{
+                display: "block",
+                marginTop: "18px",
+                color: "var(--color-cosmic-violet)",
+                fontSize: "20px",
+                letterSpacing: 0,
+              }}
+            >
+              studio@1forge.in
+            </a>
           </h2>
 
           <form
@@ -180,6 +192,19 @@ export function InputShowcase() {
             >
               Email or WhatsApp <span style={{ color: "var(--color-cosmic-violet)" }}>•</span>
             </label>
+            <p
+              style={{
+                margin: "-4px 0 18px",
+                color: "var(--color-pewter)",
+                fontSize: "16px",
+                lineHeight: 1.35,
+              }}
+            >
+              Prefer email? Write to{" "}
+              <a href="mailto:studio@1forge.in" style={{ color: "var(--color-cosmic-violet)" }}>
+                studio@1forge.in
+              </a>
+            </p>
             <div style={{ display: "flex", gap: "8px" }} className="email-row">
               <input
                 id="email-input"

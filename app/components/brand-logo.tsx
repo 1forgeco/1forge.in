@@ -3,7 +3,7 @@
 import Image from "next/image";
 
 type BrandLogoProps = {
-  tone?: "light" | "dark" | "green";
+  tone?: "light" | "dark" | "purple";
   size?: "sm" | "md" | "lg";
   showWord?: boolean;
 };
