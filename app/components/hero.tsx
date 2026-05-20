@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { BrandLogo } from "./brand-logo";
+import { DynamicIsland } from "./dynamic-island";
 
 export function Hero() {
   return (
@@ -154,6 +155,8 @@ export function Hero() {
           >
             <div style={{ position: "relative", width: "100%", height: "100%" }}>
               <Image src="/Mid.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority />
+              {/* Dynamic Island overlay */}
+              <DynamicIsland />
             </div>
           </div>
 

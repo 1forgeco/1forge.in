@@ -1170,3 +1170,10 @@ a {
 ::-webkit-scrollbar-thumb:hover {
   background: var(--color-pewter);
 }
+
+/* ─── Dynamic Island: hide on mobile ─── */
+@media (max-width: 640px) {
+  .dynamic-island {
+    display: none !important;
+  }
+}

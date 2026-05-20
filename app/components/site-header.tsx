@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { AnimatedLogo } from "./animated-logo";
 import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
@@ -57,7 +58,7 @@ export function SiteHeader() {
           }}
         >
           <a href="#top" id="header-logo" style={{ display: "flex", alignItems: "center" }}>
-            <BrandLogo tone="dark" size="md" />
+            <AnimatedLogo width={100} height={29} />
           </a>
 
           {/* Desktop Navigation */}
