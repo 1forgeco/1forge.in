@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "1forge — Websites, Apps, Systems & AI Automation",
+  title: "1forge Studio",
   description:
     "1forge builds business websites, mobile apps, desktop apps, hostel and PG management systems, AI agents, and workflow automations.",
   keywords: ["websites", "apps", "hostel management system", "AI agents", "automation", "1forge"],
