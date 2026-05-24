@@ -111,7 +111,7 @@ export function TrustSection() {
       }}
     >
       <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
-        <div ref={introRef} style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
+        <div ref={introRef} className="gsap-reveal" style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
           <div
             className="motion-shell"
             style={{
@@ -180,7 +180,7 @@ export function TrustSection() {
             gridTemplateColumns: "repeat(3, 1fr)",
             gap: "28px",
           }}
-          className="metric-grid"
+          className="metric-grid gsap-reveal"
         >
           {metrics.map(([title, body]) => (
             <article

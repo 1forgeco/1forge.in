@@ -74,6 +74,7 @@ export function Hero() {
       >
         <div
           ref={badgeRef}
+          className="gsap-reveal"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -94,6 +95,7 @@ export function Hero() {
 
         <h1
           ref={h1Ref}
+          className="gsap-reveal"
           style={{
             fontSize: "clamp(40px, 7vw, 72px)",
             lineHeight: 0.92,
@@ -109,6 +111,7 @@ export function Hero() {
 
         <p
           ref={pRef}
+          className="gsap-reveal"
           style={{
             marginTop: "24px",
             maxWidth: "640px",
@@ -138,6 +141,7 @@ export function Hero() {
 
         <div
           ref={ctaRef}
+          className="gsap-reveal"
           style={{
             marginTop: "40px",
             display: "flex",
@@ -159,6 +163,7 @@ export function Hero() {
         {/* ── Phone mockup cascade — inside flex, bleeds into dark section via negative margin ── */}
         <div
           ref={phonesRef}
+          className="gsap-reveal"
           style={{
             marginTop: "80px",
             marginBottom: "-160px", // pulls next section up over phone bottoms

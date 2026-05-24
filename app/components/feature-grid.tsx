@@ -177,7 +177,7 @@ export function FeatureGrid() {
         padding: "110px 0 0",
       }}
     >
-      <div ref={headerRef} style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", padding: "0 16px" }}>
+      <div ref={headerRef} className="gsap-reveal" style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", padding: "0 16px" }}>
         <div
           className="motion-shell"
           style={{
@@ -277,7 +277,7 @@ export function FeatureGrid() {
           gridTemplateColumns: "repeat(3, 1fr)",
           gap: "16px",
         }}
-        className="builder-grid"
+        className="builder-grid gsap-reveal"
       >
         {productGroups[activeGroup].map(([title, body], index) => (
           <article
@@ -318,7 +318,7 @@ export function FeatureGrid() {
       <div
         ref={templateRef}
         id="templates"
-        className="template-section-card"
+        className="template-section-card gsap-reveal"
         style={{
           width: "calc(100% - 40px)",
           margin: "74px auto 0",

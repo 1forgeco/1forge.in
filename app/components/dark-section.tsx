@@ -187,7 +187,7 @@ export function DarkSection() {
         <div style={{ maxWidth: "1120px", margin: "0 auto", position: "relative" }}>
           <div
             ref={headerRef}
-            className="motion-shell"
+            className="motion-shell gsap-reveal"
             style={{
               textAlign: "center",
             }}
@@ -251,7 +251,7 @@ export function DarkSection() {
 
           <div
             ref={browserRef}
-            className="motion-shell"
+            className="motion-shell gsap-reveal"
             style={{
               marginTop: "96px",
               borderRadius: "18px",
@@ -447,6 +447,7 @@ export function DarkSection() {
 
           <div
             ref={splitRef}
+            className="gsap-reveal"
             style={{
               marginTop: "92px",
               display: "grid",
@@ -494,7 +495,7 @@ export function DarkSection() {
               gap: "28px",
               marginTop: "72px",
             }}
-            className="strategy-grid"
+            className="strategy-grid gsap-reveal"
           >
             {strategies.map((item) => (
               <article

@@ -117,6 +117,11 @@ a {
   color: inherit;
 }
 
+/* ─── GSAP: hide elements before JS hydrates ─── */
+.gsap-reveal {
+  visibility: hidden;
+}
+
 /* ─── Animations ─── */
 @keyframes fade-up {
   from {
