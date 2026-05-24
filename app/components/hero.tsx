@@ -1,12 +1,56 @@
 "use client";
 
+import { useEffect, useRef } from "react";
 import Image from "next/image";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BrandLogo } from "./brand-logo";
 import { DynamicIsland } from "./dynamic-island";
 
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
+
 export function Hero() {
+  const sectionRef = useRef<HTMLElement>(null);
+  const badgeRef = useRef<HTMLDivElement>(null);
+  const h1Ref = useRef<HTMLHeadingElement>(null);
+  const pRef = useRef<HTMLParagraphElement>(null);
+  const ctaRef = useRef<HTMLDivElement>(null);
+  const phonesRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const ctx = gsap.context(() => {
+      const tl = gsap.timeline({ defaults: { ease: "power3.out" } });
+
+      // Immediately set initial state — prevents flicker
+      // autoAlpha handles both opacity AND visibility atomically
+      gsap.set([badgeRef.current, h1Ref.current, pRef.current, ctaRef.current], {
+        autoAlpha: 0,
+        y: 30,
+        willChange: "transform, opacity",
+      });
+
+      gsap.set(phonesRef.current, {
+        autoAlpha: 0,
+        scale: 0.92,
+        y: 0,
+      });
+
+      // Staggered reveal timeline
+      tl.to(badgeRef.current, { autoAlpha: 1, y: 0, duration: 0.4 })
+        .to(h1Ref.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.25")
+        .to(pRef.current, { autoAlpha: 1, y: 0, duration: 0.5 }, "-=0.3")
+        .to(ctaRef.current, { autoAlpha: 1, y: 0, duration: 0.4 }, "-=0.25")
+        .to(phonesRef.current, { autoAlpha: 1, scale: 1, duration: 0.55, ease: "power2.out" }, "-=0.2");
+    }, sectionRef);
+
+    return () => ctx.revert();
+  }, []);
+
   return (
     <section
+      ref={sectionRef}
       id="hero"
       className="hero-gradient hero-section-card"
       style={{
@@ -29,7 +73,7 @@ export function Hero() {
         }}
       >
         <div
-          className="animate-fade-up"
+          ref={badgeRef}
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -41,6 +85,7 @@ export function Hero() {
             color: "var(--color-pewter)",
             fontWeight: 450,
             marginBottom: "32px",
+
           }}
         >
           <BrandLogo tone="purple" size="sm" showWord={false} />
@@ -48,22 +93,22 @@ export function Hero() {
         </div>
 
         <h1
-          className="animate-fade-up delay-100"
+          ref={h1Ref}
           style={{
             fontSize: "clamp(40px, 7vw, 72px)",
             lineHeight: 0.92,
             letterSpacing: "-0.05em",
             fontWeight: 500,
             color: "var(--color-ink-black)",
-            opacity: 0,
             margin: 0,
+
           }}
         >
           AI , Apps &amp; Websites for Businesses 
         </h1>
 
         <p
-          className="animate-fade-up delay-200"
+          ref={pRef}
           style={{
             marginTop: "24px",
             maxWidth: "640px",
@@ -72,7 +117,7 @@ export function Hero() {
             letterSpacing: "-0.01em",
             fontWeight: 400,
             color: "var(--color-pewter)",
-            opacity: 0,
+
           }}
         >
           We design and build{" "}
@@ -92,7 +137,7 @@ export function Hero() {
         </p>
 
         <div
-          className="animate-fade-up delay-300"
+          ref={ctaRef}
           style={{
             marginTop: "40px",
             display: "flex",
@@ -100,7 +145,7 @@ export function Hero() {
             alignItems: "center",
             justifyContent: "center",
             gap: "16px",
-            opacity: 0,
+
           }}
         >
           <button id="hero-cta-primary" className="btn-primary">
@@ -113,7 +158,7 @@ export function Hero() {
         </div>
         {/* ── Phone mockup cascade — inside flex, bleeds into dark section via negative margin ── */}
         <div
-          className="animate-scale-in delay-500"
+          ref={phonesRef}
           style={{
             marginTop: "80px",
             marginBottom: "-160px", // pulls next section up over phone bottoms
@@ -121,7 +166,7 @@ export function Hero() {
             maxWidth: "860px",
             position: "relative",
             height: "clamp(380px, 42vw, 520px)",
-            opacity: 0,
+
           }}
         >
           {/* Left Phone */}

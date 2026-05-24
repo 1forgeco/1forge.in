@@ -1,6 +1,12 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const productGroups = {
   Websites: [
@@ -35,24 +41,132 @@ type ProductGroup = keyof typeof productGroups;
 
 export function FeatureGrid() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
-  const [hasAnimated, setHasAnimated] = useState(false);
+  const headerRef = useRef<HTMLDivElement>(null);
+  const cardsRef = useRef<HTMLDivElement>(null);
+  const templateRef = useRef<HTMLDivElement>(null);
   const [activeGroup, setActiveGroup] = useState<ProductGroup>("Websites");
+  const hasInitialized = useRef(false);
 
+  // Initial scroll-triggered reveal
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) {
-          setIsVisible(true);
-          setTimeout(() => setHasAnimated(true), 900); // after animation completes
-        }
-      },
-      { threshold: 0.12 }
-    );
+    const ctx = gsap.context(() => {
+      // Header: badge, h2, p, tab bar
+      if (headerRef.current) {
+        const children = headerRef.current.children;
+        gsap.set(children, {
+          autoAlpha: 0,
+          y: 30,
+          willChange: "transform, opacity",
+        });
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+        gsap.to(children, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.5,
+          stagger: 0.06,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: headerRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+          onComplete() {
+            gsap.set(children, { willChange: "auto" });
+          },
+        });
+      }
+
+      // Cards grid: stagger
+      if (cardsRef.current) {
+        const cards = cardsRef.current.querySelectorAll("article");
+        gsap.set(cards, {
+          autoAlpha: 0,
+          y: 30,
+          willChange: "transform, opacity",
+        });
+
+        gsap.to(cards, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+          stagger: 0.06,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: cardsRef.current,
+            start: "top 90%",
+            toggleActions: "play none none none",
+          },
+          onComplete() {
+            gsap.set(cards, { willChange: "auto" });
+            hasInitialized.current = true;
+          },
+        });
+      }
+
+      // Template section
+      if (templateRef.current) {
+        const templateCards = templateRef.current.querySelectorAll("article");
+        const templateHeader = templateRef.current.querySelector(".split-copy");
+
+        if (templateHeader) {
+          gsap.set(templateHeader, { autoAlpha: 0, y: 30, willChange: "transform, opacity" });
+          gsap.to(templateHeader, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.5,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: templateRef.current,
+              start: "top 85%",
+              toggleActions: "play none none none",
+            },
+            onComplete() {
+              gsap.set(templateHeader, { willChange: "auto" });
+            },
+          });
+        }
+
+        if (templateCards.length) {
+          gsap.set(templateCards, { autoAlpha: 0, y: 25, willChange: "transform, opacity" });
+          gsap.to(templateCards, {
+            autoAlpha: 1,
+            y: 0,
+            duration: 0.45,
+            stagger: 0.06,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: templateRef.current,
+              start: "top 80%",
+              toggleActions: "play none none none",
+            },
+            onComplete() {
+              gsap.set(templateCards, { willChange: "auto" });
+            },
+          });
+        }
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
+
+  // Animate card swap when changing tabs (only after initial animation)
+  useEffect(() => {
+    if (!hasInitialized.current || !cardsRef.current) return;
+
+    const cards = cardsRef.current.querySelectorAll("article");
+    gsap.fromTo(
+      cards,
+      { opacity: 0, y: 12 },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        stagger: 0.04,
+        ease: "power2.out",
+      }
+    );
+  }, [activeGroup]);
 
   return (
     <section
@@ -63,9 +177,9 @@ export function FeatureGrid() {
         padding: "110px 0 0",
       }}
     >
-      <div style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", padding: "0 16px" }}>
+      <div ref={headerRef} style={{ maxWidth: "1040px", margin: "0 auto", textAlign: "center", padding: "0 16px" }}>
         <div
-          className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
+          className="motion-shell"
           style={{
             display: "inline-flex",
             alignItems: "center",
@@ -73,7 +187,6 @@ export function FeatureGrid() {
             color: "var(--color-pewter)",
             fontSize: "18px",
             fontWeight: 500,
-            opacity: isVisible ? undefined : 0,
           }}
         >
           <span
@@ -94,27 +207,23 @@ export function FeatureGrid() {
         </div>
 
         <h2
-          className={isVisible ? "animate-fade-up delay-100" : ""}
           style={{
             fontSize: "clamp(34px, 5vw, 64px)",
             lineHeight: 0.98,
             letterSpacing: "-0.055em",
             fontWeight: 500,
             margin: "30px 0 0",
-            opacity: isVisible ? undefined : 0,
           }}
         >
           See what we can build for you.
         </h2>
         <p
-          className={isVisible ? "animate-fade-up delay-200" : ""}
           style={{
             maxWidth: "620px",
             margin: "18px auto 0",
             color: "var(--color-misty-gray)",
             fontSize: "18px",
             lineHeight: 1.28,
-            opacity: isVisible ? undefined : 0,
           }}
         >
           Toggle through example products we create for businesses. Each can be
@@ -160,6 +269,7 @@ export function FeatureGrid() {
       </div>
 
       <div
+        ref={cardsRef}
         style={{
           maxWidth: "1040px",
           margin: "38px auto 0",
@@ -172,14 +282,12 @@ export function FeatureGrid() {
         {productGroups[activeGroup].map(([title, body], index) => (
           <article
             key={title}
-            className={`motion-card ${isVisible && !hasAnimated ? `animate-fade-up delay-${Math.min(index + 2, 8) * 100}` : ""}`}
+            className="motion-card"
             style={{
               borderRadius: "18px",
               background: "var(--color-light-alabaster)",
               minHeight: "150px",
               padding: "24px",
-              opacity: hasAnimated ? 1 : isVisible ? undefined : 0,
-              animation: hasAnimated ? "none" : undefined,
             }}
           >
             <span
@@ -208,6 +316,7 @@ export function FeatureGrid() {
       </div>
 
       <div
+        ref={templateRef}
         id="templates"
         className="template-section-card"
         style={{

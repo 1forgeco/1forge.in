@@ -1,7 +1,13 @@
 "use client";
 
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
+import gsap from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BrandLogo } from "./brand-logo";
+
+if (typeof window !== "undefined") {
+  gsap.registerPlugin(ScrollTrigger);
+}
 
 const metrics = [
   ["Clean modern design", "Premium interfaces that feel trustworthy and easy to scan."],
@@ -23,18 +29,76 @@ const stats = [
 
 export function TrustSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const [isVisible, setIsVisible] = useState(false);
+  const introRef = useRef<HTMLDivElement>(null);
+  const gridRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const observer = new IntersectionObserver(
-      ([entry]) => {
-        if (entry.isIntersecting) setIsVisible(true);
-      },
-      { threshold: 0.1 }
-    );
+    const ctx = gsap.context(() => {
+      // Intro block: logo, heading, paragraph, stats, buttons
+      if (introRef.current) {
+        const children = introRef.current.children;
+        gsap.set(children, {
+          autoAlpha: 0,
+          y: 35,
+          willChange: "transform, opacity",
+        });
 
-    if (sectionRef.current) observer.observe(sectionRef.current);
-    return () => observer.disconnect();
+        // Brand logo gets reveal-blur treatment
+        const firstChild = children[0];
+        if (firstChild) {
+          gsap.set(firstChild, {
+            filter: "blur(18px)",
+            scale: 0.985,
+          });
+        }
+
+        gsap.to(children, {
+          autoAlpha: 1,
+          y: 0,
+          filter: "blur(0px)",
+          scale: 1,
+          duration: 0.55,
+          stagger: 0.07,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: introRef.current,
+            start: "top 85%",
+            toggleActions: "play none none none",
+          },
+          onComplete() {
+            gsap.set(children, { willChange: "auto", clearProps: "filter" });
+          },
+        });
+      }
+
+      // Metric cards: staggered fade-up
+      if (gridRef.current) {
+        const cards = gridRef.current.querySelectorAll("article");
+        gsap.set(cards, {
+          autoAlpha: 0,
+          y: 30,
+          willChange: "transform, opacity",
+        });
+
+        gsap.to(cards, {
+          autoAlpha: 1,
+          y: 0,
+          duration: 0.45,
+          stagger: 0.05,
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: gridRef.current,
+            start: "top 88%",
+            toggleActions: "play none none none",
+          },
+          onComplete() {
+            gsap.set(cards, { willChange: "auto" });
+          },
+        });
+      }
+    }, sectionRef);
+
+    return () => ctx.revert();
   }, []);
 
   return (
@@ -47,9 +111,9 @@ export function TrustSection() {
       }}
     >
       <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
-        <div style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
+        <div ref={introRef} style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
           <div
-            className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
+            className="motion-shell"
             style={{
               color: "var(--color-cosmic-violet)",
               display: "inline-flex",
@@ -58,33 +122,28 @@ export function TrustSection() {
               fontSize: "30px",
               fontWeight: 700,
               letterSpacing: "-0.06em",
-              opacity: isVisible ? undefined : 0,
             }}
           >
             <BrandLogo tone="purple" size="lg" />
           </div>
           <h2
-            className={isVisible ? "animate-fade-up delay-100" : ""}
             style={{
               fontSize: "clamp(54px, 8vw, 98px)",
               lineHeight: 0.94,
               letterSpacing: "-0.06em",
               fontWeight: 500,
               margin: "60px 0 0",
-              opacity: isVisible ? undefined : 0,
             }}
           >
             Why businesses choose 1Forge
           </h2>
           <p
-            className={isVisible ? "animate-fade-up delay-200" : ""}
             style={{
               margin: "34px auto 0",
               maxWidth: "760px",
               color: "var(--color-misty-gray)",
               fontSize: "28px",
               lineHeight: 1.25,
-              opacity: isVisible ? undefined : 0,
             }}
           >
             Clean modern design, fast delivery, custom-built systems, and
@@ -115,6 +174,7 @@ export function TrustSection() {
         </div>
 
         <div
+          ref={gridRef}
           style={{
             display: "grid",
             gridTemplateColumns: "repeat(3, 1fr)",
@@ -122,18 +182,15 @@ export function TrustSection() {
           }}
           className="metric-grid"
         >
-          {metrics.map(([title, body], index) => (
+          {metrics.map(([title, body]) => (
             <article
               key={title}
-              className={`motion-card ${
-                isVisible ? `animate-fade-up delay-${Math.min(index + 3, 8) * 100}` : ""
-              }`}
+              className="motion-card"
               style={{
                 minHeight: "190px",
                 borderRadius: "8px",
                 background: "var(--color-light-alabaster)",
                 padding: "38px 32px",
-                opacity: isVisible ? undefined : 0,
               }}
             >
               <div
