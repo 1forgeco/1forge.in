@@ -1,13 +1,7 @@
 "use client";
 
-import { useEffect, useRef } from "react";
-import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
+import { useEffect, useRef, useState } from "react";
 import { BrandLogo } from "./brand-logo";
-
-if (typeof window !== "undefined") {
-  gsap.registerPlugin(ScrollTrigger);
-}
 
 const serviceRows = [
   ["Websites", "Landing + CMS", "7-21 days", "SEO-ready", "Live deploy"],
@@ -33,122 +27,18 @@ const strategies = [
 
 export function DarkSection() {
   const sectionRef = useRef<HTMLElement>(null);
-  const headerRef = useRef<HTMLDivElement>(null);
-  const browserRef = useRef<HTMLDivElement>(null);
-  const splitRef = useRef<HTMLDivElement>(null);
-  const strategyRef = useRef<HTMLDivElement>(null);
+  const [isVisible, setIsVisible] = useState(false);
 
   useEffect(() => {
-    const ctx = gsap.context(() => {
-      // Header block: reveal-blur effect
-      if (headerRef.current) {
-        gsap.set(headerRef.current, {
-          autoAlpha: 0,
-          y: 42,
-          filter: "blur(18px)",
-          scale: 0.985,
-          willChange: "transform, opacity, filter",
-        });
+    const observer = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) setIsVisible(true);
+      },
+      { threshold: 0.1 }
+    );
 
-        gsap.to(headerRef.current, {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          scale: 1,
-          duration: 0.55,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: headerRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-          onComplete() {
-            gsap.set(headerRef.current, { willChange: "auto", clearProps: "filter" });
-          },
-        });
-      }
-
-      // Browser mockup: reveal-blur with delay
-      if (browserRef.current) {
-        gsap.set(browserRef.current, {
-          autoAlpha: 0,
-          y: 42,
-          filter: "blur(18px)",
-          scale: 0.985,
-          willChange: "transform, opacity, filter",
-        });
-
-        gsap.to(browserRef.current, {
-          autoAlpha: 1,
-          y: 0,
-          filter: "blur(0px)",
-          scale: 1,
-          duration: 0.55,
-          delay: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: browserRef.current,
-            start: "top 92%",
-            toggleActions: "play none none none",
-          },
-          onComplete() {
-            gsap.set(browserRef.current, { willChange: "auto", clearProps: "filter" });
-          },
-        });
-      }
-
-      // Split copy block
-      if (splitRef.current) {
-        gsap.set(splitRef.current, {
-          autoAlpha: 0,
-          y: 30,
-          willChange: "transform, opacity",
-        });
-
-        gsap.to(splitRef.current, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.5,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: splitRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-          onComplete() {
-            gsap.set(splitRef.current, { willChange: "auto" });
-          },
-        });
-      }
-
-      // Strategy cards: stagger
-      if (strategyRef.current) {
-        const cards = strategyRef.current.querySelectorAll("article");
-        gsap.set(cards, {
-          autoAlpha: 0,
-          y: 30,
-          willChange: "transform, opacity",
-        });
-
-        gsap.to(cards, {
-          autoAlpha: 1,
-          y: 0,
-          duration: 0.5,
-          stagger: 0.07,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: strategyRef.current,
-            start: "top 88%",
-            toggleActions: "play none none none",
-          },
-          onComplete() {
-            gsap.set(cards, { willChange: "auto" });
-          },
-        });
-      }
-    }, sectionRef);
-
-    return () => ctx.revert();
+    if (sectionRef.current) observer.observe(sectionRef.current);
+    return () => observer.disconnect();
   }, []);
 
   return (
@@ -186,10 +76,10 @@ export function DarkSection() {
 
         <div style={{ maxWidth: "1120px", margin: "0 auto", position: "relative" }}>
           <div
-            ref={headerRef}
-            className="motion-shell gsap-reveal"
+            className={isVisible ? "animate-reveal-blur motion-shell" : "motion-shell"}
             style={{
               textAlign: "center",
+              opacity: isVisible ? undefined : 0,
             }}
           >
             <div
@@ -250,14 +140,14 @@ export function DarkSection() {
           </div>
 
           <div
-            ref={browserRef}
-            className="motion-shell gsap-reveal"
+            className={isVisible ? "animate-reveal-blur delay-200 motion-shell" : "motion-shell"}
             style={{
               marginTop: "96px",
               borderRadius: "18px",
               border: "1px solid rgba(255,255,255,0.14)",
               background: "rgba(255,255,255,0.03)",
               overflow: "hidden",
+              opacity: isVisible ? undefined : 0,
             }}
           >
             <div
@@ -285,7 +175,7 @@ export function DarkSection() {
                 ))}
               </div>
 
-              {/* Centre: URL bar */}
+              {/* Centre: URL bar — flex:1 so it fills available space and text-aligns centre */}
               <span
                 style={{
                   flex: 1,
@@ -304,7 +194,7 @@ export function DarkSection() {
                 studio.1forge.in
               </span>
 
-              {/* Right: invisible spacer */}
+              {/* Right: invisible spacer matching dots width so URL stays centred */}
               <div style={{ display: "flex", alignItems: "center", gap: "6px", flexShrink: 0, visibility: "hidden" }}>
                 {["a", "b", "c"].map((k) => (
                   <span key={k} style={{ width: "9px", height: "9px", borderRadius: "50%" }} />
@@ -399,7 +289,7 @@ export function DarkSection() {
                   ))}
                 </div>
 
-                {/* ── Mobile Cards ── */}
+                {/* ── Mobile Cards (shows all data as label/value pairs) ── */}
                 <div className="service-cards-mobile">
                   {serviceRows.map((row, index) => (
                     <div
@@ -446,8 +336,6 @@ export function DarkSection() {
           </div>
 
           <div
-            ref={splitRef}
-            className="gsap-reveal"
             style={{
               marginTop: "92px",
               display: "grid",
@@ -488,14 +376,13 @@ export function DarkSection() {
           </div>
 
           <div
-            ref={strategyRef}
             style={{
               display: "grid",
               gridTemplateColumns: "repeat(3, 1fr)",
               gap: "28px",
               marginTop: "72px",
             }}
-            className="strategy-grid gsap-reveal"
+            className="strategy-grid"
           >
             {strategies.map((item) => (
               <article
