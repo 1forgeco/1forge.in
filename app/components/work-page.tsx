@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { SiteHeader } from "./site-header";
@@ -357,12 +358,12 @@ export function WorkPage() {
                 out and let&apos;s discuss how we can help.
               </p>
               <div className="mt-8 flex flex-wrap items-center justify-center gap-3">
-                <a
+                <Link
                   href="/#cta"
                   className="btn-primary inline-flex items-center gap-2"
                 >
                   Start a Project
-                </a>
+                </Link>
                 <a
                   href="https://www.linkedin.com/company/1forgeworks/"
                   target="_blank"

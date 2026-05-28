@@ -1,14 +1,15 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Link from "next/link";
 import { AnimatedLogo } from "./animated-logo";
 import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
-  { label: "Services", href: "#products" },
+  { label: "Services", href: "/#products" },
   { label: "Work", href: "/work" },
-  { label: "Templates", href: "#templates" },
-  { label: "About", href: "#about" },
+  { label: "Templates", href: "/#templates" },
+  { label: "About", href: "/#about" },
 ];
 
 export function SiteHeader() {
@@ -57,14 +58,14 @@ export function SiteHeader() {
             padding: "10px 24px",
           }}
         >
-          <a href="/" id="header-logo" style={{ display: "flex", alignItems: "center" }}>
+          <Link href="/" id="header-logo" style={{ display: "flex", alignItems: "center" }}>
             <AnimatedLogo width={100} height={29} />
-          </a>
+          </Link>
 
           {/* Desktop Navigation */}
           <nav id="main-nav" className="header-nav" style={{ display: "flex", alignItems: "center", gap: "32px" }}>
             {navigationItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 id={`nav-${item.label.toLowerCase()}`}
@@ -94,14 +95,14 @@ export function SiteHeader() {
                     }}
                   />
                 )}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* CTA + Hamburger */}
           <div style={{ display: "flex", alignItems: "center", gap: "12px" }}>
-            <a
-              href="#cta"
+            <Link
+              href="/#cta"
               id="header-cta"
               style={{
                 display: "inline-flex",
@@ -128,7 +129,7 @@ export function SiteHeader() {
               }}
             >
               Start a Project
-            </a>
+            </Link>
 
             {/* Mobile Hamburger */}
             <button
@@ -175,7 +176,7 @@ export function SiteHeader() {
         >
           <nav style={{ flex: 1 }}>
             {navigationItems.map((item) => (
-              <a
+              <Link
                 key={item.label}
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
@@ -190,13 +191,13 @@ export function SiteHeader() {
                 }}
               >
                 {item.label}
-              </a>
+              </Link>
             ))}
           </nav>
 
           {/* CTA at bottom of overlay */}
-          <a
-            href="#cta"
+          <Link
+            href="/#cta"
             onClick={() => setIsMobileMenuOpen(false)}
             style={{
               display: "flex",
@@ -213,7 +214,7 @@ export function SiteHeader() {
             }}
           >
             Start a Project
-          </a>
+          </Link>
         </div>
       )}
     </>
