@@ -82,15 +82,15 @@ export function Hero() {
             padding: 0,
             borderRadius: "var(--radius-pills)",
             background: "transparent",
-            fontSize: "20px",
+            fontSize: "15px",
             color: "var(--color-pewter)",
-            fontWeight: 450,
+            fontWeight: 700,
+            letterSpacing: "0.08em",
             marginBottom: "32px",
 
           }}
         >
-          <BrandLogo tone="purple" size="sm" showWord={false} />
-          1forge Studio
+          1FORGE STUDIO
         </div>
 
         <h1

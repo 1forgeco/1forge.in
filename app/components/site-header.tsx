@@ -6,7 +6,7 @@ import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
   { label: "Services", href: "#products" },
-  { label: "Work", href: "#developers" },
+  { label: "Work", href: "/work" },
   { label: "Templates", href: "#templates" },
   { label: "About", href: "#about" },
 ];
@@ -57,7 +57,7 @@ export function SiteHeader() {
             padding: "10px 24px",
           }}
         >
-          <a href="#top" id="header-logo" style={{ display: "flex", alignItems: "center" }}>
+          <a href="/" id="header-logo" style={{ display: "flex", alignItems: "center" }}>
             <AnimatedLogo width={100} height={29} />
           </a>
 

@@ -334,7 +334,16 @@ a {
   to { transform: rotate(360deg); }
 }
 
+@keyframes logo-scroll {
+  0% { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
 /* ─── Utility Classes ─── */
+.animate-logo-scroll {
+  animation: logo-scroll 35s linear infinite;
+}
+
 .animate-fade-up {
   animation: fade-up 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
 }

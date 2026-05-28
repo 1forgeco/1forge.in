@@ -114,30 +114,16 @@ export function TrustSection() {
     >
       <div style={{ maxWidth: "1120px", margin: "0 auto" }}>
         <div ref={introRef} className="gsap-reveal" style={{ textAlign: "center", maxWidth: "820px", margin: "0 auto 96px" }}>
-          <div
-            className="motion-shell"
-            style={{
-              color: "var(--color-cosmic-violet)",
-              display: "inline-flex",
-              alignItems: "center",
-              gap: "8px",
-              fontSize: "30px",
-              fontWeight: 700,
-              letterSpacing: "-0.06em",
-            }}
-          >
-            <BrandLogo tone="purple" size="lg" />
-          </div>
           <h2
             style={{
               fontSize: "clamp(54px, 8vw, 98px)",
               lineHeight: 0.94,
               letterSpacing: "-0.06em",
               fontWeight: 500,
-              margin: "60px 0 0",
+              margin: 0,
             }}
           >
-            Why businesses choose 1Forge
+            Why businesses choose 1forge
           </h2>
           <p
             style={{
