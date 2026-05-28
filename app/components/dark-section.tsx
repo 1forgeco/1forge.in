@@ -129,6 +129,7 @@ export function DarkSection() {
           y: 30,
           willChange: "transform, opacity",
         });
+        gsap.set(strategyRef.current, { visibility: "visible" });
 
         gsap.to(cards, {
           autoAlpha: 1,

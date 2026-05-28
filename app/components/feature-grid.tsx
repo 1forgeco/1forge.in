@@ -58,6 +58,8 @@ export function FeatureGrid() {
           y: 30,
           willChange: "transform, opacity",
         });
+        // Children are now hidden via autoAlpha — safe to show container
+        gsap.set(headerRef.current, { visibility: "visible" });
 
         gsap.to(children, {
           autoAlpha: 1,
@@ -84,6 +86,7 @@ export function FeatureGrid() {
           y: 30,
           willChange: "transform, opacity",
         });
+        gsap.set(cardsRef.current, { visibility: "visible" });
 
         gsap.to(cards, {
           autoAlpha: 1,
@@ -106,6 +109,8 @@ export function FeatureGrid() {
       // Template section
       if (templateRef.current) {
         const templateCards = templateRef.current.querySelectorAll("article");
+        // Make container visible immediately — children will be hidden by autoAlpha
+        gsap.set(templateRef.current, { visibility: "visible" });
         const templateHeader = templateRef.current.querySelector(".split-copy");
 
         if (templateHeader) {

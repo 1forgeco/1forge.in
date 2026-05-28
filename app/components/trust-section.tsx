@@ -42,6 +42,7 @@ export function TrustSection() {
           y: 35,
           willChange: "transform, opacity",
         });
+        gsap.set(introRef.current, { visibility: "visible" });
 
         // Brand logo gets reveal-blur treatment
         const firstChild = children[0];
@@ -79,6 +80,7 @@ export function TrustSection() {
           y: 30,
           willChange: "transform, opacity",
         });
+        gsap.set(gridRef.current, { visibility: "visible" });
 
         gsap.to(cards, {
           autoAlpha: 1,
