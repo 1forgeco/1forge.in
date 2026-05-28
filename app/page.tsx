@@ -5,6 +5,7 @@ import { InputShowcase } from "./components/input-showcase";
 import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { TrustSection } from "./components/trust-section";
+import { LogoCarousel } from "./components/logo-carousel";
 
 export default function Home() {
   return (
@@ -12,6 +13,7 @@ export default function Home() {
       <SiteHeader />
       <main>
         <Hero />
+        <LogoCarousel />
         <DarkSection />
         <FeatureGrid />
         <TrustSection />

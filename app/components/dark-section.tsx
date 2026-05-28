@@ -193,20 +193,7 @@ export function DarkSection() {
               textAlign: "center",
             }}
           >
-            <div
-              style={{
-                display: "inline-flex",
-                alignItems: "center",
-                gap: "12px",
-                color: "rgba(255,255,255,0.48)",
-                fontSize: "22px",
-                fontWeight: 500,
-                marginBottom: "48px",
-              }}
-            >
-              <BrandLogo tone="light" size="sm" showWord={false} />
-              1forge Services
-            </div>
+
 
             <h2
               style={{
