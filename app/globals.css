@@ -117,6 +117,15 @@ a {
   color: inherit;
 }
 
+/* Prevent image, logo, and SVG dragging and selection */
+img, svg, picture {
+  user-select: none;
+  -webkit-user-drag: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
 /* ─── GSAP: hide elements before JS hydrates ─── */
 .gsap-reveal {
   visibility: hidden;

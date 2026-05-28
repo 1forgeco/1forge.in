@@ -64,6 +64,7 @@ export function LogoCarousel() {
                 fill
                 className="object-contain"
                 sizes="190px"
+                draggable={false}
               />
             </div>
           ))}
