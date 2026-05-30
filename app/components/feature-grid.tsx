@@ -31,7 +31,7 @@ const productGroups = {
   ],
 };
 
-const templates = [
+const infrastructureSolutions = [
   ["Starter PG", "Room list, tenant profiles, fee tracking, basic reports."],
   ["Hostel Pro", "Beds, floors, complaints, staff tasks, notices, monthly analytics."],
   ["Multi-Property", "Multiple buildings, owner dashboard, role access, exports."],
@@ -354,7 +354,7 @@ export function FeatureGrid() {
                 margin: 0,
               }}
             >
-              Explore hostel and PG templates.
+              Explore hostel and PG infrastructure.
             </h3>
             <p
               style={{
@@ -365,7 +365,7 @@ export function FeatureGrid() {
                 margin: "18px 0 0",
               }}
             >
-              Leave this section ready for template previews, pricing variants,
+              Leave this section ready for infrastructure previews, pricing variants,
               screenshots, and demo links for hostel owners.
             </p>
           </div>
@@ -384,7 +384,7 @@ export function FeatureGrid() {
           }}
           className="builder-grid"
         >
-          {templates.map(([title, body]) => (
+          {infrastructureSolutions.map(([title, body]) => (
             <article
               key={title}
               className="motion-card"
@@ -406,7 +406,7 @@ export function FeatureGrid() {
                   fontSize: "13px",
                 }}
               >
-                Template preview slot →
+                Infrastructure preview slot →
               </span>
             </article>
           ))}

@@ -11,7 +11,7 @@ const faqs = [
   ],
   [
     "Can you build a hostel or PG management system?",
-    "Yes. We can start from a hostel/PG template and customize rooms, tenants, rent, complaints, staff tasks, notices, reports, and owner dashboards.",
+    "Yes. We can start from hostel/PG infrastructure and customize rooms, tenants, rent, complaints, staff tasks, notices, reports, and owner dashboards.",
   ],
   [
     "Do you only make websites?",

@@ -7,7 +7,7 @@ const linkedinUrl = "https://www.linkedin.com/company/1forgeworks/?viewAsMember=
 const footerLinks = {
   Services: ["Websites", "Mobile Apps", "Desktop Apps", "AI Agents"],
   Systems: ["Hostel / PG", "CRM", "Inventory", "Billing"],
-  Templates: ["Starter PG", "Hostel Pro", "Multi-Property", "Admin Dashboard"],
+  Infrastructure: ["Starter PG", "Hostel Pro", "Multi-Property", "Admin Dashboard"],
   Company: ["About 1forge", "Our Work", "Process", "Contact"],
   Support: ["Maintenance", "Deployment", "Training", "Automation Help"],
 };

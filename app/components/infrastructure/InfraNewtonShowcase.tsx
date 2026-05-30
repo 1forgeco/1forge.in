@@ -17,6 +17,7 @@ import {
   QrCode,
   AlertTriangle
 } from "lucide-react";
+import { OccupancyCard } from "@/components/ui/animated-dashboard-card";
 
 export function InfraNewtonShowcase() {
   const [activeTab, setActiveTab] = useState<"live" | "tracker" | "poll">("live");
@@ -859,7 +860,7 @@ export function InfraNewtonShowcase() {
             }}
           >
             {/* Left: Vertical Timeline (Dark Premium Process Steps) */}
-            <div style={{ display: "flex", flexDirection: "column", gap: "24px" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
               {[
                 { 
                   step: "01", 
@@ -885,9 +886,9 @@ export function InfraNewtonShowcase() {
                   style={{ 
                     display: "flex", 
                     gap: "20px",
-                    background: item.active ? "rgba(13, 148, 136, 0.1)" : "rgba(30, 41, 59, 0.4)",
-                    border: item.active ? "1px solid rgba(13, 148, 136, 0.3)" : "1px solid #1e293b",
-                    padding: "24px",
+                    background: "#0b1329",
+                    border: item.active ? "1px solid #0d9488" : "1px solid rgba(255, 255, 255, 0.08)",
+                    padding: "16px 20px",
                     borderRadius: "0px",
                     position: "relative"
                   }}
@@ -917,38 +918,24 @@ export function InfraNewtonShowcase() {
                     <p style={{ fontSize: "13px", color: "#94a3b8", margin: "6px 0 0", lineHeight: 1.5 }}>{item.desc}</p>
                     
                     {item.active && (
-                      <div style={{ marginTop: "16px", display: "flex", gap: "10px" }}>
-                        <button 
-                          style={{ 
-                            background: "#0d9488", 
-                            color: "#ffffff", 
-                            border: "none", 
-                            padding: "8px 14px", 
-                            fontSize: "12px", 
-                            fontWeight: 600, 
-                            cursor: "pointer", 
-                            borderRadius: "0px",
-                            display: "inline-flex",
-                            alignItems: "center",
-                            gap: "4px"
-                          }}
-                        >
-                          View Setup Guide <ChevronRight size={12} />
-                        </button>
-                        <button 
-                          style={{ 
-                            background: "transparent", 
-                            color: "#ffffff", 
-                            border: "1px solid #ffffff", 
-                            padding: "8px 14px", 
-                            fontSize: "12px", 
-                            fontWeight: 600, 
-                            cursor: "pointer", 
-                            borderRadius: "0px"
-                          }}
-                        >
-                          Download Prep Kit
-                        </button>
+                      <div 
+                        style={{ 
+                          display: "inline-flex", 
+                          alignItems: "center", 
+                          gap: "6px", 
+                          background: "rgba(13, 148, 136, 0.15)", 
+                          border: "1px solid rgba(13, 148, 136, 0.3)", 
+                          padding: "4px 10px", 
+                          color: "#2dd4bf", 
+                          fontSize: "11px", 
+                          fontWeight: 600, 
+                          textTransform: "uppercase", 
+                          letterSpacing: "0.05em",
+                          marginTop: "12px",
+                          borderRadius: "0px"
+                        }}
+                      >
+                        Easy to Setup & Errorless
                       </div>
                     )}
                   </div>
@@ -957,14 +944,13 @@ export function InfraNewtonShowcase() {
             </div>
 
             {/* Right: Setup Score & Health Meter Widget (Dark Premium Theme) */}
-            <div style={{ display: "flex", flexDirection: "column", height: "100%" }}>
+            <div style={{ display: "flex", flexDirection: "column", gap: "24px", height: "100%", justifyContent: "start" }}>
               <div 
                 style={{ 
-                  background: "#0f172a", 
-                  border: "1px solid #1e293b", 
-                  padding: "36px", 
+                  background: "#0b1329", 
+                  border: "1px solid rgba(255, 255, 255, 0.08)", 
+                  padding: "20px 24px", 
                   borderRadius: "0px",
-                  flex: 1, 
                   display: "flex", 
                   flexDirection: "column", 
                   justifyContent: "space-between",
@@ -972,35 +958,35 @@ export function InfraNewtonShowcase() {
                 }}
               >
                 <div>
-                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "20px" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: "14px" }}>
                     <span 
                       style={{ 
-                        fontSize: "11px", 
+                        fontSize: "10px", 
                         fontWeight: 700, 
                         color: "#2dd4bf", 
                         background: "rgba(13, 148, 136, 0.15)", 
-                        padding: "4px 10px", 
+                        padding: "3px 8px", 
                         border: "1px solid rgba(13, 148, 136, 0.3)" 
                       }}
                     >
                       ONLINE SETUP
                     </span>
-                    <span style={{ fontSize: "11px", color: "#94a3b8", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "4px" }}>
-                      <Clock size={11} /> Est. 8 mins remaining
+                    <span style={{ fontSize: "10px", color: "#94a3b8", fontWeight: 600, display: "inline-flex", alignItems: "center", gap: "4px" }}>
+                      <Clock size={10} /> Est. 8 mins remaining
                     </span>
                   </div>
 
-                  <div style={{ fontSize: "28px", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em" }}>Property Health Score</div>
-                  <div style={{ fontSize: "13px", color: "#94a3b8", marginTop: "4px", lineHeight: 1.45 }}>
+                  <div style={{ fontSize: "20px", fontWeight: 800, color: "#ffffff", letterSpacing: "-0.02em" }}>Property Health Score</div>
+                  <div style={{ fontSize: "12px", color: "#94a3b8", marginTop: "3px", lineHeight: 1.4 }}>
                     Your mapped room directory and digital gate pass compliance rating.
                   </div>
 
                   {/* Circular progress bar simulation */}
-                  <div style={{ display: "flex", justifyContent: "center", margin: "32px 0" }}>
+                  <div style={{ display: "flex", justifyContent: "center", margin: "16px 0" }}>
                     <div 
                       style={{ 
-                        width: "140px", 
-                        height: "140px", 
+                        width: "110px", 
+                        height: "110px", 
                         borderRadius: "50%", 
                         background: "conic-gradient(#0d9488 0% 98%, #1e293b 98% 100%)", 
                         display: "flex", 
@@ -1009,9 +995,9 @@ export function InfraNewtonShowcase() {
                         boxShadow: "0 0 15px rgba(13, 148, 136, 0.15)"
                       }}
                     >
-                      <div style={{ width: "120px", height: "120px", borderRadius: "50%", background: "#0f172a", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
-                        <span style={{ fontSize: "32px", fontWeight: 800, color: "#ffffff" }}>98%</span>
-                        <span style={{ fontSize: "10px", color: "#2dd4bf", fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", marginTop: "2px" }}>COMPLIANT</span>
+                      <div style={{ width: "92px", height: "92px", borderRadius: "50%", background: "#0f172a", display: "flex", flexDirection: "column", alignItems: "center", justifyContent: "center" }}>
+                        <span style={{ fontSize: "24px", fontWeight: 800, color: "#ffffff" }}>98%</span>
+                        <span style={{ fontSize: "9px", color: "#2dd4bf", fontWeight: 700, letterSpacing: "0.05em", textTransform: "uppercase", marginTop: "2px" }}>COMPLIANT</span>
                       </div>
                     </div>
                   </div>
@@ -1020,21 +1006,22 @@ export function InfraNewtonShowcase() {
                 <div 
                   style={{ 
                     borderTop: "1px solid #1e293b", 
-                    paddingTop: "20px",
+                    paddingTop: "14px",
                     display: "flex",
                     justifyContent: "space-between",
                     alignItems: "center"
                   }}
                 >
                   <div>
-                    <div style={{ fontSize: "12px", fontWeight: 700, color: "#ffffff" }}>Live Onboarding Status</div>
-                    <div style={{ fontSize: "11px", color: "#2dd4bf", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px", marginTop: "2px" }}>
+                    <div style={{ fontSize: "11px", fontWeight: 700, color: "#ffffff" }}>Live Onboarding Status</div>
+                    <div style={{ fontSize: "10px", color: "#2dd4bf", fontWeight: 600, display: "flex", alignItems: "center", gap: "4px", marginTop: "2px" }}>
                       <span style={{ width: "6px", height: "6px", background: "#2dd4bf", borderRadius: "50%", display: "inline-block", boxShadow: "0 0 8px #2dd4bf" }} /> READY TO GO LIVE
                     </div>
                   </div>
-                  <Smartphone size={24} style={{ color: "#64748b" }} />
+                  <Smartphone size={20} style={{ color: "#64748b" }} />
                 </div>
               </div>
+              <OccupancyCard />
             </div>
           </div>
 

@@ -12,7 +12,7 @@ if (typeof window !== "undefined") {
 const serviceRows = [
   ["Websites", "Landing + CMS", "7-21 days", "SEO-ready", "Live deploy"],
   ["Mobile Apps", "iOS + Android", "4-10 weeks", "Auth + payments", "Store-ready"],
-  ["Hostel/PG Systems", "Rooms + fees", "2-6 weeks", "Reports + staff", "Template base"],
+  ["Hostel/PG Systems", "Rooms + fees", "2-6 weeks", "Reports + staff", "Infrastructure base"],
   ["AI Automation", "Agents + workflows", "1-4 weeks", "CRM + support", "Custom"],
 ];
 
@@ -465,7 +465,7 @@ export function DarkSection() {
                   margin: "28px 0 0",
                 }}
               >
-                We can build from scratch, customize a template, or automate
+                We can build from scratch, customize infrastructure, or automate
                 the manual work your team repeats every day.
               </p>
             </div>
