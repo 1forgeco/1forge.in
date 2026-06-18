@@ -1200,3 +1200,27 @@ img, svg, picture {
     display: none !important;
   }
 }
+
+/* ─── Hide Scrollbar utility ─── */
+.no-scrollbar::-webkit-scrollbar {
+  display: none !important;
+  width: 0 !important;
+  height: 0 !important;
+  background: transparent !important;
+}
+
+.no-scrollbar::-webkit-scrollbar-track {
+  background: transparent !important;
+  display: none !important;
+}
+
+.no-scrollbar::-webkit-scrollbar-thumb {
+  background: transparent !important;
+  display: none !important;
+}
+
+.no-scrollbar {
+  -ms-overflow-style: none !important;  /* IE and Edge */
+  scrollbar-width: none !important;  /* Firefox */
+}
+

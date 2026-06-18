@@ -152,7 +152,7 @@ export function TrustSection() {
               marginTop: "48px",
             }}
           >
-            <a href="#products" className="btn-black">
+            <a href="/services" className="btn-black">
               Explore Services
             </a>
             <a href="#cta" className="btn-soft-gray">

@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import Image from "next/image";
+import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { BrandLogo } from "./brand-logo";
@@ -152,13 +153,13 @@ export function Hero() {
 
           }}
         >
-          <button id="hero-cta-primary" className="btn-primary">
+          <Link href="/#cta" id="hero-cta-primary" className="btn-primary">
             Start a Project
-          </button>
+          </Link>
 
-          <button id="hero-cta-secondary" className="btn-ghost-dark">
+          <Link href="/services" id="hero-cta-secondary" className="btn-ghost-dark">
             View Services
-          </button>
+          </Link>
         </div>
         {/* ── Phone mockup cascade — inside flex, bleeds into dark section via negative margin ── */}
         <div

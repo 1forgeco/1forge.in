@@ -6,7 +6,7 @@ import { AnimatedLogo } from "./animated-logo";
 import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
-  { label: "Services", href: "/#products" },
+  { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
   { label: "Infrastructure", href: "/infrastructure" },
   { label: "About", href: "/#about" },
