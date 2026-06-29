@@ -1177,6 +1177,77 @@ img, svg, picture {
 }
 
 /* ─── Scrollbar ─── */
+.standard-nav-link:hover {
+  color: var(--color-cosmic-violet) !important;
+}
+
+.hostin-product-link {
+  isolation: isolate;
+  overflow: hidden;
+  padding: 6px 10px !important;
+  border: 1px solid rgba(23, 143, 104, 0.22);
+  border-radius: 999px;
+  background: rgba(28, 169, 122, 0.06);
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  letter-spacing: -0.02em;
+  box-shadow: 0 0 0 0 rgba(28, 169, 122, 0);
+  transition: color 0.3s ease, background 0.3s ease, border-color 0.3s ease,
+    box-shadow 0.3s ease, transform 0.3s cubic-bezier(0.16, 1, 0.3, 1) !important;
+}
+
+.hostin-product-link::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  background: linear-gradient(110deg, transparent 20%, rgba(255, 255, 255, 0.9) 48%, transparent 76%);
+  transform: translateX(-140%);
+  transition: transform 0.55s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hostin-letter {
+  color: #17966c;
+  font-weight: 800;
+}
+
+.hostin-launch {
+  width: 0;
+  margin-left: 0;
+  opacity: 0;
+  color: #17966c;
+  transform: translate(-5px, 4px) rotate(-25deg);
+  transition: width 0.3s ease, margin-left 0.3s ease, opacity 0.25s ease,
+    transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.hostin-product-link:hover {
+  color: #102a22 !important;
+  background: rgba(28, 169, 122, 0.13);
+  border-color: rgba(23, 143, 104, 0.45);
+  box-shadow: 0 8px 22px rgba(23, 143, 104, 0.2), 0 0 0 3px rgba(28, 169, 122, 0.07);
+  transform: translateY(-2px) scale(1.035);
+}
+
+.hostin-product-link:hover::before {
+  transform: translateX(140%);
+}
+
+.hostin-product-link:hover .hostin-launch {
+  width: 12px;
+  margin-left: 5px;
+  opacity: 1;
+  transform: translate(0, 0) rotate(0deg);
+}
+
+.hostin-product-link-mobile {
+  width: fit-content;
+  margin: 12px 0;
+  padding: 10px 15px !important;
+  border-bottom: 1px solid rgba(23, 143, 104, 0.25) !important;
+  font-size: 18px !important;
+}
+
 ::-webkit-scrollbar {
   width: 6px;
 }
@@ -1223,4 +1294,3 @@ img, svg, picture {
   -ms-overflow-style: none !important;  /* IE and Edge */
   scrollbar-width: none !important;  /* Firefox */
 }
-

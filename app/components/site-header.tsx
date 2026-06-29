@@ -1,14 +1,13 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import Image from "next/image";
 import Link from "next/link";
 import { AnimatedLogo } from "./animated-logo";
 
 const navigationItems = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Hostin", displayLabel: "ostin", href: "https://host-in-beta.vercel.app/", logo: true },
+  { label: "Hostin", href: "https://host-in-beta.vercel.app/", featured: true },
   { label: "About", href: "/#about" },
 ];
 
@@ -70,6 +69,7 @@ export function SiteHeader() {
                 href={item.href}
                 id={`nav-${item.label.toLowerCase()}`}
                 aria-label={item.label}
+                className={item.featured ? "hostin-product-link" : "standard-nav-link"}
                 style={{
                   fontSize: "15px",
                   fontWeight: 400,
@@ -79,15 +79,16 @@ export function SiteHeader() {
                   padding: "4px 0",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "1px",
+                  gap: 0,
                 }}
-                onMouseEnter={(e) => { (e.target as HTMLElement).style.color = "var(--color-cosmic-violet)"; }}
-                onMouseLeave={(e) => { (e.target as HTMLElement).style.color = "var(--color-ink-black)"; }}
               >
-                {item.logo && (
-                  <Image src="/hostin-mark.png" alt="" width={18} height={18} />
-                )}
-                {item.displayLabel ?? item.label}
+                {item.featured ? (
+                  <>
+                    <span className="hostin-letter">h</span>
+                    <span>ostin</span>
+                    <span className="hostin-launch" aria-hidden="true">↗</span>
+                  </>
+                ) : item.label}
                 {item.label === "Services" && (
                   <span
                     className="nav-active-dot"
@@ -187,11 +188,12 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 aria-label={item.label}
+                className={item.featured ? "hostin-product-link hostin-product-link-mobile" : undefined}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "2px",
+                  gap: 0,
                   padding: "18px 0",
                   fontSize: "28px",
                   fontWeight: 500,
@@ -200,10 +202,13 @@ export function SiteHeader() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                {item.logo && (
-                  <Image src="/hostin-mark.png" alt="" width={28} height={28} />
-                )}
-                {item.displayLabel ?? item.label}
+                {item.featured ? (
+                  <>
+                    <span className="hostin-letter">h</span>
+                    <span>ostin</span>
+                    <span className="hostin-launch" aria-hidden="true">↗</span>
+                  </>
+                ) : item.label}
               </Link>
             ))}
           </nav>
