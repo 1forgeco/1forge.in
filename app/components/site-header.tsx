@@ -8,7 +8,7 @@ import { AnimatedLogo } from "./animated-logo";
 const navigationItems = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Hostin", href: "https://host-in-beta.vercel.app/", logo: true },
+  { label: "Hostin", displayLabel: "ostin", href: "https://host-in-beta.vercel.app/", logo: true },
   { label: "About", href: "/#about" },
 ];
 
@@ -69,6 +69,7 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 id={`nav-${item.label.toLowerCase()}`}
+                aria-label={item.label}
                 style={{
                   fontSize: "15px",
                   fontWeight: 400,
@@ -78,7 +79,7 @@ export function SiteHeader() {
                   padding: "4px 0",
                   display: "inline-flex",
                   alignItems: "center",
-                  gap: "7px",
+                  gap: "1px",
                 }}
                 onMouseEnter={(e) => { (e.target as HTMLElement).style.color = "var(--color-cosmic-violet)"; }}
                 onMouseLeave={(e) => { (e.target as HTMLElement).style.color = "var(--color-ink-black)"; }}
@@ -86,7 +87,7 @@ export function SiteHeader() {
                 {item.logo && (
                   <Image src="/hostin-mark.png" alt="" width={18} height={18} />
                 )}
-                {item.label}
+                {item.displayLabel ?? item.label}
                 {item.label === "Services" && (
                   <span
                     className="nav-active-dot"
@@ -185,11 +186,12 @@ export function SiteHeader() {
               <Link
                 key={item.label}
                 href={item.href}
+                aria-label={item.label}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
                   display: "flex",
                   alignItems: "center",
-                  gap: "10px",
+                  gap: "2px",
                   padding: "18px 0",
                   fontSize: "28px",
                   fontWeight: 500,
@@ -201,7 +203,7 @@ export function SiteHeader() {
                 {item.logo && (
                   <Image src="/hostin-mark.png" alt="" width={28} height={28} />
                 )}
-                {item.label}
+                {item.displayLabel ?? item.label}
               </Link>
             ))}
           </nav>
