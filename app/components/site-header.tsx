@@ -1,14 +1,14 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 import Link from "next/link";
 import { AnimatedLogo } from "./animated-logo";
-import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
   { label: "Services", href: "/services" },
   { label: "Work", href: "/work" },
-  { label: "Infrastructure", href: "/infrastructure" },
+  { label: "Hostin", href: "https://host-in-beta.vercel.app/", logo: true },
   { label: "About", href: "/#about" },
 ];
 
@@ -76,10 +76,16 @@ export function SiteHeader() {
                   transition: "color 0.2s ease",
                   position: "relative",
                   padding: "4px 0",
+                  display: "inline-flex",
+                  alignItems: "center",
+                  gap: "7px",
                 }}
                 onMouseEnter={(e) => { (e.target as HTMLElement).style.color = "var(--color-cosmic-violet)"; }}
                 onMouseLeave={(e) => { (e.target as HTMLElement).style.color = "var(--color-ink-black)"; }}
               >
+                {item.logo && (
+                  <Image src="/hostin-mark.png" alt="" width={18} height={18} />
+                )}
                 {item.label}
                 {item.label === "Services" && (
                   <span
@@ -181,7 +187,9 @@ export function SiteHeader() {
                 href={item.href}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
-                  display: "block",
+                  display: "flex",
+                  alignItems: "center",
+                  gap: "10px",
                   padding: "18px 0",
                   fontSize: "28px",
                   fontWeight: 500,
@@ -190,6 +198,9 @@ export function SiteHeader() {
                   letterSpacing: "-0.02em",
                 }}
               >
+                {item.logo && (
+                  <Image src="/hostin-mark.png" alt="" width={28} height={28} />
+                )}
                 {item.label}
               </Link>
             ))}
