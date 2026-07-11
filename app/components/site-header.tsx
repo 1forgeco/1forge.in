@@ -6,6 +6,7 @@ import { AnimatedLogo } from "./animated-logo";
 
 const navigationItems = [
   { label: "Services", href: "/services" },
+  { label: "Apps", href: "/apps" },
   { label: "Work", href: "/work" },
   { label: "Hostin", href: "https://host-in-beta.vercel.app/", featured: true },
   { label: "About", href: "/#about" },
