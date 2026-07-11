@@ -7,6 +7,7 @@ import { BrandLogo } from "./brand-logo";
 
 const navigationItems = [
   { label: "Services", href: "/services" },
+  { label: "Apps", href: "/apps" },
   { label: "Work", href: "/work" },
   { label: "Infrastructure", href: "/infrastructure" },
   { label: "About", href: "/#about" },
