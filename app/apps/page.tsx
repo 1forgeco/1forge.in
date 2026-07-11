@@ -63,7 +63,6 @@ export default function AppsPage() {
         <p className="softly-intro">We create grounded mobile experiences that help people make progress—without asking for more of their attention.</p>
         <div className="softly-actions"><Link href="/#cta" className="softly-primary-button">Build an app with us <Arrow /></Link><a href="#app-experience" className="softly-secondary-button">See the feeling <span>↓</span></a></div>
       </div>
-      <div className="softly-hero-marker softly-reveal is-visible">slow tech<br />for real life <span>↘</span></div>
     </section>
 
     <section className="softly-scenarios softly-reveal" aria-labelledby="scenario-heading">
