@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
 import "./forge-experiments.css";
+import "./loading-system.css";
 
 export const metadata: Metadata = {
   title: "1forge Studio",

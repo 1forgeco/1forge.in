@@ -1,6 +1,8 @@
 "use client";
 
 import Image from "next/image";
+import { useState } from "react";
+import { MediaSkeleton } from "./media-skeleton";
 
 /* ─────────────────────────────────────────────────────────── */
 /*  Logo data — same companies from the work page              */
@@ -20,6 +22,26 @@ const logos = [
 
 /* Double the array for seamless loop */
 const doubledLogos = [...logos, ...logos];
+
+function CarouselLogo({ logo }: { logo: (typeof logos)[number] }) {
+  const [ready, setReady] = useState(false);
+
+  return (
+    <>
+      <MediaSkeleton active={!ready} label="" tone="light" compact />
+      <Image
+        src={logo.src}
+        alt={logo.name}
+        fill
+        className="object-contain"
+        sizes="190px"
+        draggable={false}
+        onLoad={() => setReady(true)}
+        onError={() => setReady(true)}
+      />
+    </>
+  );
+}
 
 export function LogoCarousel() {
   return (
@@ -58,14 +80,7 @@ export function LogoCarousel() {
               key={`${logo.name}-${i}`}
               className="relative flex h-14 w-[160px] shrink-0 items-center justify-center sm:h-16 sm:w-[190px] opacity-90 hover:opacity-100 transition-opacity duration-200"
             >
-              <Image
-                src={logo.src}
-                alt={logo.name}
-                fill
-                className="object-contain"
-                sizes="190px"
-                draggable={false}
-              />
+              <CarouselLogo logo={logo} />
             </div>
           ))}
         </div>

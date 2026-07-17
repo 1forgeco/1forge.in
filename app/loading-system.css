@@ -1,0 +1,200 @@
+.forge-loader {
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  display: grid;
+  place-items: center;
+  overflow: hidden;
+  background: #080809;
+  opacity: 1;
+  visibility: visible;
+  transition: opacity 0.52s ease, visibility 0.52s ease;
+}
+
+.forge-loader--leaving {
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.forge-loader__aura {
+  position: absolute;
+  width: min(75vw, 850px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(121, 77, 255, 0.2), rgba(240, 106, 42, 0.06) 35%, transparent 68%);
+  filter: blur(30px);
+  animation: forge-breathe 3.2s ease-in-out infinite;
+}
+
+.forge-loader__content {
+  position: relative;
+  display: flex;
+  width: min(390px, calc(100vw - 56px));
+  flex-direction: column;
+  align-items: center;
+}
+
+.forge-loader__content > img {
+  width: min(250px, 65vw);
+  height: auto;
+  filter: drop-shadow(0 0 28px rgba(114, 72, 255, 0.22));
+}
+
+.forge-loader__content > span {
+  margin-top: 17px;
+  color: rgba(243, 239, 232, 0.38);
+  font-size: 9px;
+  letter-spacing: 0.42em;
+}
+
+.forge-loader__track {
+  width: 100%;
+  height: 1px;
+  margin-top: 46px;
+  overflow: hidden;
+  background: rgba(255, 255, 255, 0.11);
+}
+
+.forge-loader__track i {
+  display: block;
+  width: 100%;
+  height: 100%;
+  transform-origin: left;
+  background: linear-gradient(90deg, #6840ff, #a889ff, #f06a2a);
+  box-shadow: 0 0 18px rgba(131, 89, 255, 0.7);
+  transition: transform 0.32s ease;
+}
+
+.forge-loader__meta {
+  display: flex;
+  width: 100%;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 13px;
+  color: rgba(243, 239, 232, 0.45);
+}
+
+.forge-loader__meta small {
+  font-size: 8px;
+  letter-spacing: 0.24em;
+}
+
+.forge-loader__meta b {
+  color: rgba(243, 239, 232, 0.78);
+  font-family: Georgia, "Times New Roman", serif;
+  font-size: 17px;
+  font-weight: 400;
+}
+
+.site-preload-content {
+  position: relative;
+}
+
+.media-skeleton {
+  position: absolute;
+  inset: 0;
+  z-index: 2;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 13px;
+  overflow: hidden;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: none;
+  transition: opacity 0.45s ease, visibility 0.45s ease;
+}
+
+.media-skeleton--dark {
+  background: radial-gradient(circle at 50% 34%, rgba(126, 83, 255, 0.12), transparent 36%), linear-gradient(135deg, #161618, #0d0d0f 60%, #141115);
+}
+
+.media-skeleton--light {
+  background: radial-gradient(circle at 50% 34%, rgba(126, 83, 255, 0.1), transparent 40%), linear-gradient(135deg, #f7f5fb, #ece9f2 60%, #f5f2f8);
+}
+
+.media-skeleton--hidden {
+  opacity: 0;
+  visibility: hidden;
+}
+
+.media-skeleton__glow {
+  position: absolute;
+  top: -25%;
+  bottom: -25%;
+  width: 42%;
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.09), transparent);
+  filter: blur(8px);
+  transform: translateX(-190%) skewX(-14deg);
+  animation: skeleton-sweep 1.6s ease-in-out infinite;
+}
+
+.media-skeleton--light .media-skeleton__glow {
+  background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.72), transparent);
+}
+
+.media-skeleton > img {
+  position: relative;
+  width: min(92px, 38%);
+  height: auto;
+  opacity: 0.48;
+}
+
+.media-skeleton--light > img {
+  opacity: 0.3;
+  mix-blend-mode: multiply;
+}
+
+.media-skeleton > span {
+  position: relative;
+  color: rgba(243, 239, 232, 0.36);
+  font-size: 8px;
+  letter-spacing: 0.22em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.media-skeleton--light > span {
+  color: rgba(34, 29, 29, 0.38);
+}
+
+.media-skeleton--compact {
+  gap: 0;
+  border-radius: 12px;
+}
+
+.media-skeleton--compact > img {
+  width: 62px;
+}
+
+.hero-phone-media {
+  position: relative;
+  width: 100%;
+  height: 100%;
+  overflow: hidden;
+  border-radius: clamp(22px, 3vw, 40px);
+}
+
+@keyframes forge-breathe {
+  0%, 100% { transform: scale(0.92); opacity: 0.72; }
+  50% { transform: scale(1.05); opacity: 1; }
+}
+
+@keyframes skeleton-sweep {
+  0% { transform: translateX(-190%) skewX(-14deg); }
+  100% { transform: translateX(290%) skewX(-14deg); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .forge-loader,
+  .media-skeleton {
+    transition-duration: 0.01ms;
+  }
+
+  .forge-loader__aura,
+  .media-skeleton__glow {
+    animation: none;
+  }
+}

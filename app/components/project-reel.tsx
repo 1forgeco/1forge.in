@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
+import { MediaSkeleton } from "./media-skeleton";
 
 const reelItems = [
   {
@@ -68,6 +69,8 @@ type ReelItem = (typeof reelItems)[number];
 function ReelVideo({ item }: { item: ReelItem }) {
   const shellRef = useRef<HTMLDivElement>(null);
   const videoRef = useRef<HTMLVideoElement>(null);
+  const isVisibleRef = useRef(false);
+  const reducedMotionRef = useRef(false);
   const [loadVideo, setLoadVideo] = useState(false);
   const [ready, setReady] = useState(false);
 
@@ -76,11 +79,12 @@ function ReelVideo({ item }: { item: ReelItem }) {
     const video = videoRef.current;
     if (!shell || !video) return;
 
-    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    reducedMotionRef.current = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     const observer = new IntersectionObserver(
       ([entry]) => {
+        isVisibleRef.current = entry.intersectionRatio > 0.4;
         if (entry.isIntersecting) setLoadVideo(true);
-        if (entry.intersectionRatio > 0.4 && !reduced) video.play().catch(() => undefined);
+        if (isVisibleRef.current && !reducedMotionRef.current) video.play().catch(() => undefined);
         else video.pause();
       },
       { rootMargin: "240px 80px", threshold: [0, 0.4] },
@@ -89,9 +93,21 @@ function ReelVideo({ item }: { item: ReelItem }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!loadVideo) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+
+    if (isVisibleRef.current && !reducedMotionRef.current) {
+      video.play().catch(() => undefined);
+    }
+  }, [loadVideo]);
+
   return (
     <div ref={shellRef} className={`project-reel__media ${ready ? "is-ready" : ""}`}>
-      <div className="project-reel__skeleton" aria-hidden="true" />
+      <MediaSkeleton active={!ready} label={`${item.number} / Loading motion`} />
       <video
         ref={videoRef}
         src={loadVideo ? item.video : undefined}

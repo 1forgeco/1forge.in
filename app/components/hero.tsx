@@ -1,12 +1,13 @@
 "use client";
 
-import { useEffect, useRef } from "react";
+import { useEffect, useRef, useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { DynamicIsland } from "./dynamic-island";
 import { AvailabilityIndicator } from "./availability-indicator";
+import { MediaSkeleton } from "./media-skeleton";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -19,6 +20,7 @@ export function Hero() {
   const pRef = useRef<HTMLParagraphElement>(null);
   const ctaRef = useRef<HTMLDivElement>(null);
   const phonesRef = useRef<HTMLDivElement>(null);
+  const [phoneReady, setPhoneReady] = useState({ left: false, center: false, right: false });
 
   useEffect(() => {
     const ctx = gsap.context(() => {
@@ -188,8 +190,9 @@ export function Hero() {
               zIndex: 5,
             }}
           >
-            <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src="/Left.svg" alt="1forge website project screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority draggable={false} />
+            <div className="animate-float hero-phone-media">
+              <MediaSkeleton active={!phoneReady.left} label="Loading preview" tone="light" />
+              <Image src="/Left.svg" alt="1forge website project screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority draggable={false} onLoad={() => setPhoneReady((current) => ({ ...current, left: true }))} />
             </div>
           </div>
 
@@ -205,8 +208,9 @@ export function Hero() {
               zIndex: 10,
             }}
           >
-            <div style={{ position: "relative", width: "100%", height: "100%" }}>
-              <Image src="/Mid.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority draggable={false} />
+            <div className="hero-phone-media">
+              <MediaSkeleton active={!phoneReady.center} label="Loading preview" tone="light" />
+              <Image src="/Mid.svg" alt="1forge business dashboard screen" fill sizes="clamp(180px,20vw,260px)" style={{ objectFit: "contain" }} priority draggable={false} onLoad={() => setPhoneReady((current) => ({ ...current, center: true }))} />
               {/* Dynamic Island overlay */}
               <DynamicIsland />
             </div>
@@ -224,8 +228,9 @@ export function Hero() {
               zIndex: 5,
             }}
           >
-            <div className="animate-float" style={{ position: "relative", width: "100%", height: "100%", animationDelay: "350ms" }}>
-              <Image src="/Right.svg" alt="1forge automation results screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority draggable={false} />
+            <div className="animate-float hero-phone-media" style={{ animationDelay: "350ms" }}>
+              <MediaSkeleton active={!phoneReady.right} label="Loading preview" tone="light" />
+              <Image src="/Right.svg" alt="1forge automation results screen" fill sizes="clamp(160px,18vw,230px)" style={{ objectFit: "contain" }} priority draggable={false} onLoad={() => setPhoneReady((current) => ({ ...current, right: true }))} />
             </div>
           </div>
         </div>
