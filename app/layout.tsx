@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import "./globals.css";
 import "./forge-experiments.css";
 import "./loading-system.css";
+import "./modern-home.css";
+import { ForgeCommandBar } from "./components/forge-command-bar";
 
 export const metadata: Metadata = {
   title: "1forge Studio",
@@ -31,8 +33,11 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" className="h-full antialiased" suppressHydrationWarning>
-      <body className="min-h-full font-sans" suppressHydrationWarning>{children}</body>
+    <html lang="en" className="h-full antialiased" data-scroll-behavior="smooth" suppressHydrationWarning>
+      <body className="min-h-full font-sans" suppressHydrationWarning>
+        {children}
+        <ForgeCommandBar showTrigger={false} />
+      </body>
     </html>
   );
 }

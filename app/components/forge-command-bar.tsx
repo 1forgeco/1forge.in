@@ -39,7 +39,7 @@ const commands = [
   },
 ];
 
-export function ForgeCommandBar() {
+export function ForgeCommandBar({ showTrigger = true }: { showTrigger?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
 
@@ -52,21 +52,29 @@ export function ForgeCommandBar() {
       if (event.key === "Escape") setIsOpen(false);
     };
 
+    const handleOpenRequest = () => setIsOpen(true);
+
     window.addEventListener("keydown", handleKeyDown);
-    return () => window.removeEventListener("keydown", handleKeyDown);
+    window.addEventListener("forge:open-command", handleOpenRequest);
+    return () => {
+      window.removeEventListener("keydown", handleKeyDown);
+      window.removeEventListener("forge:open-command", handleOpenRequest);
+    };
   }, []);
 
   useEffect(() => {
-    document.body.style.overflow = isOpen ? "hidden" : "";
-    if (isOpen) dialogRef.current?.focus();
+    if (!isOpen) return;
+    const previousOverflow = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    dialogRef.current?.focus();
     return () => {
-      document.body.style.overflow = "";
+      document.body.style.overflow = previousOverflow;
     };
   }, [isOpen]);
 
   return (
     <>
-      <button
+      {showTrigger ? <button
         type="button"
         className="forge-command-trigger"
         onClick={() => setIsOpen(true)}
@@ -75,7 +83,7 @@ export function ForgeCommandBar() {
         <Command size={15} strokeWidth={2} aria-hidden="true" />
         <span>Ask 1Forge</span>
         <kbd>⌘ K</kbd>
-      </button>
+      </button> : null}
 
       {isOpen && (
         <div className="forge-command-backdrop" role="presentation" onMouseDown={() => setIsOpen(false)}>

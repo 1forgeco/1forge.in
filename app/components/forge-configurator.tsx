@@ -1,148 +1,145 @@
 "use client";
 
-import { useState } from "react";
-import {
-  ArrowRight,
-  Bot,
-  Check,
-  Globe2,
-  LayoutDashboard,
-  Smartphone,
-} from "lucide-react";
+import { ArrowRight, Bot, Check, Clipboard, Globe2, LayoutDashboard, Smartphone } from "lucide-react";
+import { useMemo, useState } from "react";
 
-const buildOptions = [
-  {
-    id: "website",
-    label: "Website",
-    eyebrow: "WEB EXPERIENCE",
-    title: "A sharper digital front door.",
-    body: "A high-converting presence with the pages, content structure and launch support your business needs.",
-    timeline: "2–4 weeks",
-    features: ["Responsive interface", "CMS-ready structure", "SEO foundation", "Launch support"],
-    icon: Globe2,
-    tone: "violet",
-  },
-  {
-    id: "app",
-    label: "Mobile app",
-    eyebrow: "PRODUCT EXPERIENCE",
-    title: "A useful product people return to.",
-    body: "A clear mobile flow from onboarding to the daily actions that make your app valuable.",
-    timeline: "6–10 weeks",
-    features: ["UX flows", "Account & auth", "Core product loop", "Store-ready build"],
-    icon: Smartphone,
-    tone: "coral",
-  },
-  {
-    id: "system",
-    label: "Business system",
-    eyebrow: "OPERATIONS SYSTEM",
-    title: "Your workflow, finally in one place.",
-    body: "A custom operating layer for customers, staff, inventory, properties, reports or whatever runs the business.",
-    timeline: "5–12 weeks",
-    features: ["Role-based access", "Operational dashboard", "Reports & exports", "Scalable modules"],
-    icon: LayoutDashboard,
-    tone: "blue",
-  },
-  {
-    id: "automation",
-    label: "AI automation",
-    eyebrow: "INTELLIGENT WORKFLOW",
-    title: "Give repetitive work to the machine.",
-    body: "An AI-assisted workflow that moves information, answers routine questions and keeps your team focused.",
-    timeline: "2–6 weeks",
-    features: ["Workflow mapping", "AI agent", "Tool integrations", "Human handoff"],
-    icon: Bot,
-    tone: "green",
-  },
+const projectTypes = [
+  { id: "website", label: "Web platform", icon: Globe2, base: 2, outcome: "A fast, conversion-focused digital front door" },
+  { id: "app", label: "Mobile product", icon: Smartphone, base: 6, outcome: "A focused product for customers or staff" },
+  { id: "system", label: "Business system", icon: LayoutDashboard, base: 5, outcome: "One operating layer for your core workflow" },
+  { id: "automation", label: "AI workflow", icon: Bot, base: 3, outcome: "A supervised agent for repetitive work" },
 ] as const;
 
-type BuildOption = (typeof buildOptions)[number];
+const complexityOptions = [
+  { id: "focused", label: "Focused", detail: "One clear journey", add: 0, level: 1 },
+  { id: "growth", label: "Growth", detail: "Roles, data and workflows", add: 3, level: 2 },
+  { id: "platform", label: "Platform", detail: "Multiple modules and teams", add: 7, level: 3 },
+] as const;
 
-function ConfiguratorPreview({ option }: { option: BuildOption }) {
-  return (
-    <div className={`configurator-preview is-${option.tone}`} aria-hidden="true">
-      <div className="configurator-preview__chrome">
-        <span /><span /><span />
-        <small>preview.1forge.in/{option.id}</small>
-      </div>
-      <div className="configurator-preview__canvas">
-        <div className="configurator-preview__sidebar">
-          <span className="is-active" />
-          <span />
-          <span />
-          <span />
-        </div>
-        <div className="configurator-preview__workspace">
-          <div className="configurator-preview__topline">
-            <i />
-            <i />
-          </div>
-          <div className="configurator-preview__hero-card">
-            <small>{option.eyebrow}</small>
-            <strong>{option.label}</strong>
-            <span />
-          </div>
-          <div className="configurator-preview__mini-grid">
-            <div><i /><span /><span /></div>
-            <div><i /><span /><span /></div>
-            <div><i /><span /><span /></div>
-          </div>
-        </div>
-      </div>
-      <div className="configurator-preview__cursor">Build</div>
-    </div>
-  );
-}
+const supportOptions = [
+  { id: "launch", label: "Launch", detail: "Handoff and deployment" },
+  { id: "growth", label: "Growth", detail: "90-day improvement cycle" },
+  { id: "partner", label: "Product partner", detail: "Ongoing roadmap and releases" },
+] as const;
+
+type ProjectId = (typeof projectTypes)[number]["id"];
+type ComplexityId = (typeof complexityOptions)[number]["id"];
+type SupportId = (typeof supportOptions)[number]["id"];
 
 export function ForgeConfigurator() {
-  const [activeId, setActiveId] = useState<BuildOption["id"]>("website");
-  const activeOption = buildOptions.find((option) => option.id === activeId) ?? buildOptions[0];
+  const [projectId, setProjectId] = useState<ProjectId>("system");
+  const [complexityId, setComplexityId] = useState<ComplexityId>("growth");
+  const [integrations, setIntegrations] = useState(2);
+  const [supportId, setSupportId] = useState<SupportId>("growth");
+  const [copied, setCopied] = useState(false);
+
+  const project = projectTypes.find((item) => item.id === projectId) ?? projectTypes[0];
+  const complexity = complexityOptions.find((item) => item.id === complexityId) ?? complexityOptions[0];
+  const support = supportOptions.find((item) => item.id === supportId) ?? supportOptions[0];
+
+  const estimate = useMemo(() => {
+    const minimum = project.base + complexity.add + Math.max(0, integrations - 1);
+    const maximum = minimum + 2 + complexity.level * 2;
+    const score = project.base + complexity.level * 3 + integrations;
+    const shape = score <= 8 ? "Focused build" : score <= 14 ? "Growth build" : "Platform build";
+    const phases = complexity.level === 1
+      ? ["Scope", "Design", "Build", "Launch"]
+      : ["Discovery", "System design", "Build cycles", "QA", "Launch"];
+
+    return { minimum, maximum, shape, phases };
+  }, [complexity, integrations, project.base]);
+
+  const summary = `${project.label} — ${complexity.label} scope, ${integrations} integrations, ${support.label} support. Indicative delivery: ${estimate.minimum}–${estimate.maximum} weeks.`;
+
+  const sendPlan = () => {
+    window.dispatchEvent(new CustomEvent("forge:estimate", { detail: { summary } }));
+    document.querySelector("#cta")?.scrollIntoView({ behavior: "smooth" });
+  };
+
+  const copyPlan = async () => {
+    await navigator.clipboard?.writeText(summary);
+    setCopied(true);
+    window.setTimeout(() => setCopied(false), 1800);
+  };
 
   return (
-    <section id="forge-configurator" className="forge-configurator experiment-section">
-      <div className="experiment-shell">
-        <div className="experiment-heading experiment-heading--split">
-          <div>
-            <span className="experiment-kicker">FORGE CONFIGURATOR</span>
-            <h2>What should we <em>forge?</em></h2>
+    <section id="build-estimator" className="build-estimator">
+      <div className="modern-shell">
+        <div className="modern-section-heading modern-section-heading--dark">
+          <span className="modern-kicker">LIVE BUILD ESTIMATOR</span>
+          <h2>Shape the build before the first meeting.</h2>
+          <p>This is an indicative planning tool, not a locked quote. Adjust the system and take a useful brief into the conversation.</p>
+        </div>
+
+        <div className="build-estimator__layout">
+          <div className="estimator-controls">
+            <fieldset>
+              <legend><span>01</span> What are we building?</legend>
+              <div className="estimator-choice-grid estimator-choice-grid--projects">
+                {projectTypes.map(({ icon: Icon, ...item }) => (
+                  <button type="button" className={projectId === item.id ? "is-active" : ""} onClick={() => setProjectId(item.id)} key={item.id}>
+                    <Icon size={18} /><strong>{item.label}</strong><small>{item.outcome}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>02</span> How deep is the first release?</legend>
+              <div className="estimator-choice-grid">
+                {complexityOptions.map((item) => (
+                  <button type="button" className={complexityId === item.id ? "is-active" : ""} onClick={() => setComplexityId(item.id)} key={item.id}>
+                    <strong>{item.label}</strong><small>{item.detail}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>03</span> External integrations</legend>
+              <div className="estimator-range">
+                <input type="range" min="0" max="6" value={integrations} onChange={(event) => setIntegrations(Number(event.target.value))} aria-label="Number of external integrations" />
+                <output>{integrations === 0 ? "None" : `${integrations} integration${integrations === 1 ? "" : "s"}`}</output>
+              </div>
+            </fieldset>
+
+            <fieldset>
+              <legend><span>04</span> Support after release</legend>
+              <div className="estimator-choice-grid">
+                {supportOptions.map((item) => (
+                  <button type="button" className={supportId === item.id ? "is-active" : ""} onClick={() => setSupportId(item.id)} key={item.id}>
+                    <strong>{item.label}</strong><small>{item.detail}</small>
+                  </button>
+                ))}
+              </div>
+            </fieldset>
           </div>
-          <p>Choose what you are building. The scope below reshapes around the kind of outcome you need.</p>
-        </div>
 
-        <div className="configurator-tabs" role="tablist" aria-label="Choose a project type">
-          {buildOptions.map(({ icon: Icon, ...option }) => (
-            <button
-              type="button"
-              role="tab"
-              aria-selected={activeId === option.id}
-              className={activeId === option.id ? "is-active" : ""}
-              key={option.id}
-              onClick={() => setActiveId(option.id)}
-            >
-              <Icon size={18} strokeWidth={1.8} />
-              {option.label}
-            </button>
-          ))}
-        </div>
+          <aside className="estimate-output" aria-live="polite">
+            <div className="estimate-output__status"><i /> LIVE PLAN <span>1F–{projectId.toUpperCase()}</span></div>
+            <small>RECOMMENDED ENGAGEMENT</small>
+            <h3>{estimate.shape}</h3>
+            <p>{project.outcome} with a {complexity.label.toLowerCase()} first release and {support.label.toLowerCase()} support.</p>
 
-        <div className="configurator-stage">
-          <div className="configurator-copy" key={activeOption.id}>
-            <span>{activeOption.eyebrow}</span>
-            <h3>{activeOption.title}</h3>
-            <p>{activeOption.body}</p>
-            <div className="configurator-timeline">
-              <small>Typical launch window</small>
-              <strong>{activeOption.timeline}</strong>
+            <div className="estimate-output__timeline">
+              <span>Indicative delivery</span>
+              <strong>{estimate.minimum}–{estimate.maximum} weeks</strong>
             </div>
-            <ul>
-              {activeOption.features.map((feature) => (
-                <li key={feature}><Check size={14} strokeWidth={2.4} /> {feature}</li>
+
+            <ol>
+              {estimate.phases.map((phase, index) => (
+                <li key={phase}><span>{String(index + 1).padStart(2, "0")}</span><strong>{phase}</strong><Check size={14} /></li>
               ))}
-            </ul>
-            <a href="#cta">Plan this build <ArrowRight size={16} /></a>
-          </div>
-          <ConfiguratorPreview option={activeOption} />
+            </ol>
+
+            <button type="button" className="estimate-output__primary" onClick={sendPlan}>
+              Send this build plan <ArrowRight size={17} />
+            </button>
+            <button type="button" className="estimate-output__copy" onClick={copyPlan}>
+              {copied ? <Check size={15} /> : <Clipboard size={15} />} {copied ? "Brief copied" : "Copy brief"}
+            </button>
+            <small className="estimate-output__note">Final scope follows discovery. No invented instant quote.</small>
+          </aside>
         </div>
       </div>
     </section>

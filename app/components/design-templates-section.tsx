@@ -3,6 +3,7 @@
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
 import { MediaSkeleton } from "./media-skeleton";
+import { useAdaptiveMedia } from "./use-adaptive-media";
 
 const DESIGNS_URL =
   process.env.NEXT_PUBLIC_DESIGNS_URL ?? "https://1forgedesign.vercel.app/";
@@ -13,6 +14,7 @@ const templatePreviews = [
     title: "Midnight Couture",
     category: "Luxury / Editorial",
     video: "/designs/template-02.mp4",
+    mobileVideo: "/designs/template-02-mobile.mp4",
     poster: "/designs/hero-dark-luxury-2.webp",
   },
   {
@@ -20,6 +22,7 @@ const templatePreviews = [
     title: "Enchanted Diary",
     category: "Minimal / Portfolio",
     video: "/designs/template-03.mp4",
+    mobileVideo: "/designs/template-03-mobile.mp4",
     poster: "/designs/hero-minimal-bold-2.webp",
   },
   {
@@ -27,6 +30,7 @@ const templatePreviews = [
     title: "Dulce Flask",
     category: "Product / Commerce",
     video: "/designs/template-09.mp4",
+    mobileVideo: "/designs/template-09-mobile.mp4",
     poster: "/designs/hero-stats-flutuantes-3.webp",
   },
   {
@@ -34,6 +38,7 @@ const templatePreviews = [
     title: "Aqua Veil",
     category: "Glass / Interface",
     video: "/designs/template-21.mp4",
+    mobileVideo: "/designs/template-21-mobile.mp4",
     poster: "/designs/hero-aqua-glass-1.webp",
   },
   {
@@ -41,6 +46,7 @@ const templatePreviews = [
     title: "Ferrari 296 GTB",
     category: "Automotive / Launch",
     video: "/designs/template-26.mp4",
+    mobileVideo: "/designs/template-26-mobile.mp4",
     poster: "/designs/hero-ferrari-296-1.webp",
   },
   {
@@ -48,6 +54,7 @@ const templatePreviews = [
     title: "Crystal Lotus",
     category: "Wellness / Brand",
     video: "/designs/template-28.mp4",
+    mobileVideo: "/designs/template-28-mobile.mp4",
     poster: "/designs/hero-crystal-lotus-1.webp",
   },
   {
@@ -55,6 +62,7 @@ const templatePreviews = [
     title: "Smart Key",
     category: "Technology / Product",
     video: "/designs/template-34.mp4",
+    mobileVideo: "/designs/template-34-mobile.mp4",
     poster: "/designs/hero-smart-key-1.webp",
   },
   {
@@ -62,6 +70,7 @@ const templatePreviews = [
     title: "Techwear",
     category: "Fashion / Campaign",
     video: "/designs/template-36.mp4",
+    mobileVideo: "/designs/template-36-mobile.mp4",
     poster: "/designs/hero-techwear-1.webp",
   },
 ];
@@ -75,6 +84,7 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
   const reducedMotionRef = useRef(false);
   const [shouldLoad, setShouldLoad] = useState(false);
   const [isReady, setIsReady] = useState(false);
+  const { initialized, allowMotion, compact } = useAdaptiveMedia();
 
   useEffect(() => {
     const shell = shellRef.current;
@@ -91,7 +101,7 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
 
         if (entry.isIntersecting) setShouldLoad(true);
 
-        if (isVisibleRef.current && !reducedMotionRef.current) {
+        if (isVisibleRef.current && !reducedMotionRef.current && allowMotion) {
           video.play().catch(() => undefined);
         } else {
           video.pause();
@@ -102,10 +112,10 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
 
     observer.observe(shell);
     return () => observer.disconnect();
-  }, []);
+  }, [allowMotion]);
 
   useEffect(() => {
-    if (!shouldLoad) return;
+    if (!shouldLoad || !allowMotion) return;
 
     const video = videoRef.current;
     if (!video) return;
@@ -114,7 +124,13 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
     if (isVisibleRef.current && !reducedMotionRef.current) {
       video.play().catch(() => undefined);
     }
-  }, [shouldLoad]);
+  }, [allowMotion, shouldLoad]);
+
+  useEffect(() => {
+    if (initialized && !allowMotion) videoRef.current?.pause();
+  }, [allowMotion, initialized]);
+
+  const mediaReady = isReady || (initialized && !allowMotion);
 
   const handleCanPlay = () => {
     setIsReady(true);
@@ -126,16 +142,16 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
   return (
     <div
       ref={shellRef}
-      className={`design-preview-media ${isReady ? "is-ready" : ""}`}
+      className={`design-preview-media ${mediaReady ? "is-ready" : ""}`}
     >
-      <MediaSkeleton active={!isReady} label={`${item.number} / Loading preview`} />
+      <MediaSkeleton active={!mediaReady && allowMotion} label={`${item.number} / Loading preview`} />
       <video
         ref={videoRef}
-        src={shouldLoad ? item.video : undefined}
+        src={shouldLoad && allowMotion ? (compact ? item.mobileVideo : item.video) : undefined}
         muted
         loop
         playsInline
-        preload="none"
+        preload={shouldLoad && allowMotion ? "metadata" : "none"}
         poster={item.poster}
         aria-label={`${item.title} animated design preview`}
         onCanPlay={handleCanPlay}
@@ -191,18 +207,18 @@ export function DesignTemplatesSection() {
           <div>
             <div className="design-showcase-eyebrow">
               <span className="design-showcase-ring" aria-hidden="true" />
-              1FORGE DESIGNS
+              1FORGE DESIGN LAB
             </div>
             <h2>
-              Interfaces with
+              Interface experiments,
               <br />
-              <em>motion built in.</em>
+              <em>ready to become products.</em>
             </h2>
           </div>
           <div className="design-showcase-intro">
             <p>
-              Premium UI/UX templates for landing pages, products and digital
-              brands—fully editable and made to help good ideas launch faster.
+              A separate collection of production-ready templates and motion studies.
+              Custom client work remains scoped and built specifically for the business.
             </p>
             <div className="design-carousel-controls" aria-label="Carousel controls">
               <button
@@ -245,7 +261,7 @@ export function DesignTemplatesSection() {
         </div>
 
         <div className="design-showcase-footer">
-          <p>Explore the full collection and find a starting point for your next interface.</p>
+          <p>Explore the Design Lab when a proven visual starting point is more useful than beginning from a blank canvas.</p>
           <a href={DESIGNS_URL} target="_blank" rel="noreferrer">
             See more designs
             <ArrowUpRight size={18} strokeWidth={1.8} />
