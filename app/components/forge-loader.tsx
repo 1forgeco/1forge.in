@@ -2,6 +2,7 @@
 
 import Image from "next/image";
 import { useEffect, useRef, useState } from "react";
+import { readAdaptiveMediaProfile } from "./use-adaptive-media";
 
 type ForgeLoaderProps = {
   assets: readonly string[];
@@ -12,7 +13,7 @@ const wait = (duration: number) =>
   new Promise<void>((resolve) => window.setTimeout(resolve, duration));
 
 export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
-  const [loaded, setLoaded] = useState(0);
+  const [loadState, setLoadState] = useState({ loaded: 0, total: assets.length });
   const [leaving, setLeaving] = useState(false);
   const onCompleteRef = useRef(onComplete);
 
@@ -25,6 +26,12 @@ export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
     let finishing = false;
     const startedAt = performance.now();
     let cursor = 0;
+    const returningVisitor = window.sessionStorage.getItem("1forge:ready") === "true";
+    const mediaProfile = readAdaptiveMediaProfile();
+    const selectedAssets = returningVisitor || mediaProfile.compact || mediaProfile.constrained || !mediaProfile.allowMotion
+      ? assets.filter((asset) => !asset.endsWith(".mp4"))
+      : assets;
+    const minimumVisibleTime = returningVisitor ? 360 : 1000;
 
     const preloadAsset = async (url: string) => {
       try {
@@ -34,7 +41,12 @@ export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
       } catch {
         // A failed asset is released to its local skeleton instead of blocking the site.
       } finally {
-        if (!stopped) setLoaded((current) => Math.min(current + 1, assets.length));
+        if (!stopped) {
+          setLoadState((current) => ({
+            loaded: Math.min(current.loaded + 1, selectedAssets.length),
+            total: selectedAssets.length,
+          }));
+        }
       }
     };
 
@@ -42,32 +54,28 @@ export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
       while (!stopped) {
         const index = cursor;
         cursor += 1;
-        if (index >= assets.length) return;
-        await preloadAsset(assets[index]);
+        if (index >= selectedAssets.length) return;
+        await preloadAsset(selectedAssets[index]);
       }
     };
-
-    const waitForPage = () =>
-      document.readyState === "complete"
-        ? Promise.resolve()
-        : new Promise<void>((resolve) =>
-            window.addEventListener("load", () => resolve(), { once: true }),
-          );
 
     const finish = async () => {
       if (finishing || stopped) return;
       finishing = true;
 
-      const minimumDelay = Math.max(0, 1100 - (performance.now() - startedAt));
+      const minimumDelay = Math.max(0, minimumVisibleTime - (performance.now() - startedAt));
       if (minimumDelay) await wait(minimumDelay);
       if (stopped) return;
 
-      setLoaded(assets.length);
+      setLoadState({ loaded: selectedAssets.length, total: selectedAssets.length });
       await wait(140);
       if (stopped) return;
       setLeaving(true);
       await wait(520);
-      if (!stopped) onCompleteRef.current();
+      if (!stopped) {
+        window.sessionStorage.setItem("1forge:ready", "true");
+        onCompleteRef.current();
+      }
     };
 
     const safetyTimer = window.setTimeout(() => void finish(), 24000);
@@ -75,9 +83,8 @@ export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
     void (async () => {
       const fontReady = document.fonts?.ready ?? Promise.resolve();
       await Promise.all([
-        Promise.all(Array.from({ length: Math.min(4, assets.length) }, worker)),
+        Promise.all(Array.from({ length: Math.min(4, selectedAssets.length) }, worker)),
         fontReady,
-        waitForPage(),
       ]);
       window.clearTimeout(safetyTimer);
       await finish();
@@ -89,7 +96,7 @@ export function ForgeLoader({ assets, onComplete }: ForgeLoaderProps) {
     };
   }, [assets]);
 
-  const progress = assets.length === 0 ? 100 : Math.round((loaded / assets.length) * 100);
+  const progress = loadState.total === 0 ? 100 : Math.min(100, Math.round((loadState.loaded / loadState.total) * 100));
 
   return (
     <div

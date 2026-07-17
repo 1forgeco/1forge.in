@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { PhoneInput } from "react-international-phone";
 import "react-international-phone/style.css";
 
@@ -25,13 +25,23 @@ const faqs = [
 
 type FormStatus = "idle" | "loading" | "success" | "error";
 
-export function InputShowcase() {
+export function InputShowcase({ showFaq = true }: { showFaq?: boolean }) {
   const [email, setEmail] = useState("");
   const [phone, setPhone] = useState("");
   const [message, setMessage] = useState("");
   const [status, setStatus] = useState<FormStatus>("idle");
   const [errorMsg, setErrorMsg] = useState("");
   const [openIndex, setOpenIndex] = useState<number | null>(null);
+
+  useEffect(() => {
+    const receiveEstimate = (event: Event) => {
+      const detail = (event as CustomEvent<{ summary?: string }>).detail;
+      if (detail?.summary) setMessage(`I used the 1Forge build estimator:\n\n${detail.summary}`);
+    };
+
+    window.addEventListener("forge:estimate", receiveEstimate);
+    return () => window.removeEventListener("forge:estimate", receiveEstimate);
+  }, []);
 
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -77,7 +87,7 @@ export function InputShowcase() {
 
   return (
     <>
-      <section
+      {showFaq ? <section
         id="faq"
         style={{
           padding: "80px 24px 80px",
@@ -176,7 +186,7 @@ export function InputShowcase() {
             </a>
           </div>
         </div>
-      </section>
+      </section> : null}
 
       <section
         id="cta"
@@ -207,7 +217,7 @@ export function InputShowcase() {
               maxWidth: "440px",
             }}
           >
-            Tell us what you want to build.
+            Bring us the bottleneck. We&apos;ll shape the build.
             <a
               href="mailto:studio@1forge.in"
               style={{

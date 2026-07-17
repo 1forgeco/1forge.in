@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import Link from "next/link";
 import { ArrowLeft, ArrowRight, ArrowUpRight, Play } from "lucide-react";
 import { MediaSkeleton } from "./media-skeleton";
+import { useAdaptiveMedia } from "./use-adaptive-media";
 
 const reelItems = [
   {
@@ -73,6 +74,7 @@ function ReelVideo({ item }: { item: ReelItem }) {
   const reducedMotionRef = useRef(false);
   const [loadVideo, setLoadVideo] = useState(false);
   const [ready, setReady] = useState(false);
+  const { initialized, allowMotion, compact } = useAdaptiveMedia();
 
   useEffect(() => {
     const shell = shellRef.current;
@@ -84,17 +86,17 @@ function ReelVideo({ item }: { item: ReelItem }) {
       ([entry]) => {
         isVisibleRef.current = entry.intersectionRatio > 0.4;
         if (entry.isIntersecting) setLoadVideo(true);
-        if (isVisibleRef.current && !reducedMotionRef.current) video.play().catch(() => undefined);
+        if (isVisibleRef.current && !reducedMotionRef.current && allowMotion) video.play().catch(() => undefined);
         else video.pause();
       },
       { rootMargin: "240px 80px", threshold: [0, 0.4] },
     );
     observer.observe(shell);
     return () => observer.disconnect();
-  }, []);
+  }, [allowMotion]);
 
   useEffect(() => {
-    if (!loadVideo) return;
+    if (!loadVideo || !allowMotion) return;
 
     const video = videoRef.current;
     if (!video) return;
@@ -103,19 +105,25 @@ function ReelVideo({ item }: { item: ReelItem }) {
     if (isVisibleRef.current && !reducedMotionRef.current) {
       video.play().catch(() => undefined);
     }
-  }, [loadVideo]);
+  }, [allowMotion, loadVideo]);
+
+  useEffect(() => {
+    if (initialized && !allowMotion) videoRef.current?.pause();
+  }, [allowMotion, initialized]);
+
+  const mediaReady = ready || (initialized && !allowMotion);
 
   return (
-    <div ref={shellRef} className={`project-reel__media ${ready ? "is-ready" : ""}`}>
-      <MediaSkeleton active={!ready} label={`${item.number} / Loading motion`} />
+    <div ref={shellRef} className={`project-reel__media ${mediaReady ? "is-ready" : ""}`}>
+      <MediaSkeleton active={!mediaReady && allowMotion} label={`${item.number} / Loading motion`} />
       <video
         ref={videoRef}
-        src={loadVideo ? item.video : undefined}
+        src={loadVideo && allowMotion ? (compact ? item.video.replace(".mp4", "-mobile.mp4") : item.video) : undefined}
         poster={item.poster}
         muted
         loop
         playsInline
-        preload="none"
+        preload={loadVideo && allowMotion ? "metadata" : "none"}
         aria-label={`${item.title} motion preview`}
         onCanPlay={() => setReady(true)}
         onPlaying={() => setReady(true)}
