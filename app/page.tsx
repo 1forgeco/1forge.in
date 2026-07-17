@@ -37,8 +37,8 @@ export default function Home() {
           </Link>
         </section>
         <DarkSection />
-        <FeatureGrid />
         <DesignTemplatesSection />
+        <FeatureGrid />
         <TrustSection />
         <InputShowcase />
       </main>
