@@ -33,6 +33,34 @@ const reelItems = [
     video: "/designs/template-28.mp4",
     poster: "/designs/hero-crystal-lotus-1.webp",
   },
+  {
+    number: "05",
+    title: "Midnight couture",
+    type: "Editorial direction",
+    video: "/designs/template-02.mp4",
+    poster: "/designs/hero-dark-luxury-2.webp",
+  },
+  {
+    number: "06",
+    title: "Enchanted diary",
+    type: "Portfolio study",
+    video: "/designs/template-03.mp4",
+    poster: "/designs/hero-minimal-bold-2.webp",
+  },
+  {
+    number: "07",
+    title: "Dulce product",
+    type: "Commerce direction",
+    video: "/designs/template-09.mp4",
+    poster: "/designs/hero-stats-flutuantes-3.webp",
+  },
+  {
+    number: "08",
+    title: "Smart key",
+    type: "Technology study",
+    video: "/designs/template-34.mp4",
+    poster: "/designs/hero-smart-key-1.webp",
+  },
 ] as const;
 
 type ReelItem = (typeof reelItems)[number];

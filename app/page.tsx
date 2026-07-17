@@ -7,12 +7,10 @@ import { SiteHeader } from "./components/site-header";
 import { TrustSection } from "./components/trust-section";
 import { LogoCarousel } from "./components/logo-carousel";
 import { DesignTemplatesSection } from "./components/design-templates-section";
-import { CosmicRootsBackground } from "./components/cosmic-roots-background";
 import { EcosystemSwitcher } from "./components/ecosystem-switcher";
 import { ForgeCommandBar } from "./components/forge-command-bar";
 import { ForgeConfigurator } from "./components/forge-configurator";
 import { TransformationShowcase } from "./components/transformation-showcase";
-import { LaunchTimeline } from "./components/launch-timeline";
 import { ProductShowcaseDock } from "./components/product-showcase-dock";
 import { ProjectReel } from "./components/project-reel";
 import Link from "next/link";
@@ -20,7 +18,6 @@ import Link from "next/link";
 export default function Home() {
   return (
     <div id="top" className="forge-experiment-page min-h-screen bg-white-canvas text-ink-black">
-      <CosmicRootsBackground />
       <SiteHeader />
       <main>
         <Hero />
@@ -50,7 +47,6 @@ export default function Home() {
         <ForgeConfigurator />
         <TransformationShowcase />
         <FeatureGrid />
-        <LaunchTimeline />
         <ProductShowcaseDock />
         <ProjectReel />
         <TrustSection />
