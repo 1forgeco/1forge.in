@@ -5,8 +5,8 @@ import Image from "next/image";
 import Link from "next/link";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
-import { BrandLogo } from "./brand-logo";
 import { DynamicIsland } from "./dynamic-island";
+import { AvailabilityIndicator } from "./availability-indicator";
 
 if (typeof window !== "undefined") {
   gsap.registerPlugin(ScrollTrigger);
@@ -161,6 +161,7 @@ export function Hero() {
             View Services
           </Link>
         </div>
+        <AvailabilityIndicator />
         {/* ── Phone mockup cascade — inside flex, bleeds into dark section via negative margin ── */}
         <div
           ref={phonesRef}
