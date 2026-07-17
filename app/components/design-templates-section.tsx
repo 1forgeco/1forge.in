@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, ArrowRight, ArrowUpRight } from "lucide-react";
+import { MediaSkeleton } from "./media-skeleton";
 
 const DESIGNS_URL =
   process.env.NEXT_PUBLIC_DESIGNS_URL ?? "https://1forgedesign.vercel.app/";
@@ -103,6 +104,18 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
     return () => observer.disconnect();
   }, []);
 
+  useEffect(() => {
+    if (!shouldLoad) return;
+
+    const video = videoRef.current;
+    if (!video) return;
+    video.load();
+
+    if (isVisibleRef.current && !reducedMotionRef.current) {
+      video.play().catch(() => undefined);
+    }
+  }, [shouldLoad]);
+
   const handleCanPlay = () => {
     setIsReady(true);
     if (isVisibleRef.current && !reducedMotionRef.current) {
@@ -115,7 +128,7 @@ function DesignPreviewVideo({ item }: { item: TemplatePreview }) {
       ref={shellRef}
       className={`design-preview-media ${isReady ? "is-ready" : ""}`}
     >
-      <div className="design-preview-skeleton" aria-hidden="true" />
+      <MediaSkeleton active={!isReady} label={`${item.number} / Loading preview`} />
       <video
         ref={videoRef}
         src={shouldLoad ? item.video : undefined}

@@ -1602,27 +1602,6 @@ img, svg, picture {
   transform: scale(1.025);
 }
 
-.design-preview-skeleton {
-  position: absolute;
-  inset: 0;
-  z-index: 2;
-  pointer-events: none;
-  opacity: 1;
-  background: linear-gradient(105deg, #181819 18%, #292829 42%, #181819 64%);
-  background-size: 220% 100%;
-  animation: design-preview-shimmer 1.5s linear infinite;
-  transition: opacity 0.45s ease;
-}
-
-.design-preview-media.is-ready .design-preview-skeleton {
-  opacity: 0;
-}
-
-@keyframes design-preview-shimmer {
-  from { background-position: 180% 0; }
-  to { background-position: -40% 0; }
-}
-
 .design-carousel-meta {
   display: grid;
   grid-template-columns: 32px 1fr;
