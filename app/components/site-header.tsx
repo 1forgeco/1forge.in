@@ -4,13 +4,50 @@ import { useEffect, useState } from "react";
 import Link from "next/link";
 import { AnimatedLogo } from "./animated-logo";
 
-const navigationItems = [
+type NavigationItem = {
+  label: string;
+  href: string;
+  product?: "designs" | "hostin";
+};
+
+const navigationItems: readonly NavigationItem[] = [
   { label: "Services", href: "/services" },
   { label: "Apps", href: "/apps" },
   { label: "Work", href: "/work" },
-  { label: "Hostin", href: "https://host-in-beta.vercel.app/", featured: true },
+  {
+    label: "Designs",
+    href: process.env.NEXT_PUBLIC_DESIGNS_URL ?? "https://1forgedesign.vercel.app/",
+    product: "designs",
+  },
+  {
+    label: "Hostin",
+    href: "https://host-in-beta.vercel.app/",
+    product: "hostin",
+  },
   { label: "About", href: "/#about" },
 ];
+
+function ProductNavLabel({ product }: { product: "designs" | "hostin" }) {
+  if (product === "designs") {
+    return (
+      <>
+        <span className="designs-orbit" aria-hidden="true">
+          <span />
+        </span>
+        <span>Designs</span>
+        <span className="designs-launch" aria-hidden="true">↗</span>
+      </>
+    );
+  }
+
+  return (
+    <>
+      <span className="hostin-letter">h</span>
+      <span>ostin</span>
+      <span className="hostin-launch" aria-hidden="true">↗</span>
+    </>
+  );
+}
 
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -70,7 +107,7 @@ export function SiteHeader() {
                 href={item.href}
                 id={`nav-${item.label.toLowerCase()}`}
                 aria-label={item.label}
-                className={item.featured ? "hostin-product-link" : "standard-nav-link"}
+                className={item.product ? `${item.product}-product-link` : "standard-nav-link"}
                 style={{
                   fontSize: "15px",
                   fontWeight: 400,
@@ -83,13 +120,7 @@ export function SiteHeader() {
                   gap: 0,
                 }}
               >
-                {item.featured ? (
-                  <>
-                    <span className="hostin-letter">h</span>
-                    <span>ostin</span>
-                    <span className="hostin-launch" aria-hidden="true">↗</span>
-                  </>
-                ) : item.label}
+                {item.product ? <ProductNavLabel product={item.product} /> : item.label}
                 {item.label === "Services" && (
                   <span
                     className="nav-active-dot"
@@ -189,7 +220,7 @@ export function SiteHeader() {
                 key={item.label}
                 href={item.href}
                 aria-label={item.label}
-                className={item.featured ? "hostin-product-link hostin-product-link-mobile" : undefined}
+                className={item.product ? `${item.product}-product-link ${item.product}-product-link-mobile` : undefined}
                 onClick={() => setIsMobileMenuOpen(false)}
                 style={{
                   display: "flex",
@@ -203,13 +234,7 @@ export function SiteHeader() {
                   letterSpacing: "-0.02em",
                 }}
               >
-                {item.featured ? (
-                  <>
-                    <span className="hostin-letter">h</span>
-                    <span>ostin</span>
-                    <span className="hostin-launch" aria-hidden="true">↗</span>
-                  </>
-                ) : item.label}
+                {item.product ? <ProductNavLabel product={item.product} /> : item.label}
               </Link>
             ))}
           </nav>

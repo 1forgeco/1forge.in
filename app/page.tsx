@@ -6,6 +6,7 @@ import { SiteFooter } from "./components/site-footer";
 import { SiteHeader } from "./components/site-header";
 import { TrustSection } from "./components/trust-section";
 import { LogoCarousel } from "./components/logo-carousel";
+import { DesignTemplatesSection } from "./components/design-templates-section";
 import Link from "next/link";
 
 export default function Home() {
@@ -37,6 +38,7 @@ export default function Home() {
         </section>
         <DarkSection />
         <FeatureGrid />
+        <DesignTemplatesSection />
         <TrustSection />
         <InputShowcase />
       </main>
