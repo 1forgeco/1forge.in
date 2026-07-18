@@ -7,10 +7,11 @@ const products = [
   {
     name: "Studio",
     label: "Software, apps & AI",
-    href: "#top",
+    href: "/",
     tone: "purple",
     icon: Layers3,
     external: false,
+    current: true,
   },
   {
     name: "Designs",
@@ -19,6 +20,7 @@ const products = [
     tone: "orange",
     icon: Boxes,
     external: true,
+    current: false,
   },
   {
     name: "Hostin",
@@ -27,6 +29,7 @@ const products = [
     tone: "green",
     icon: ServerCog,
     external: true,
+    current: false,
   },
 ] as const;
 
@@ -61,7 +64,8 @@ export function EcosystemSwitcher() {
           <a
             key={product.name}
             href={product.href}
-            className={`ecosystem-switcher__product is-${product.tone}`}
+            className={`ecosystem-switcher__product is-${product.tone} ${product.current ? "is-current" : ""}`}
+            aria-current={product.current ? "page" : undefined}
             target={product.external ? "_blank" : undefined}
             rel={product.external ? "noreferrer" : undefined}
             onClick={() => setIsOpen(false)}
@@ -73,7 +77,7 @@ export function EcosystemSwitcher() {
               <strong>{product.name}</strong>
               <small>{product.label}</small>
             </span>
-            <span className="ecosystem-switcher__arrow" aria-hidden="true">↗</span>
+            <span className="ecosystem-switcher__arrow" aria-hidden="true">{product.current ? "CURRENT" : "↗"}</span>
           </a>
         ))}
       </div>

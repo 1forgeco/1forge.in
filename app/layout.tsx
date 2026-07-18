@@ -4,6 +4,7 @@ import "./forge-experiments.css";
 import "./loading-system.css";
 import "./modern-home.css";
 import { ForgeCommandBar } from "./components/forge-command-bar";
+import { EcosystemSwitcher } from "./components/ecosystem-switcher";
 
 export const metadata: Metadata = {
   title: "1forge Studio",
@@ -37,6 +38,7 @@ export default function RootLayout({
       <body className="min-h-full font-sans" suppressHydrationWarning>
         {children}
         <ForgeCommandBar showTrigger={false} />
+        <EcosystemSwitcher />
       </body>
     </html>
   );
