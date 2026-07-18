@@ -11,6 +11,7 @@ import {
   Smartphone,
   X,
 } from "lucide-react";
+import { useCommandShortcut } from "./use-command-shortcut";
 
 const commands = [
   {
@@ -42,6 +43,7 @@ const commands = [
 export function ForgeCommandBar({ showTrigger = true }: { showTrigger?: boolean }) {
   const [isOpen, setIsOpen] = useState(false);
   const dialogRef = useRef<HTMLDivElement>(null);
+  const shortcut = useCommandShortcut();
 
   useEffect(() => {
     const handleKeyDown = (event: KeyboardEvent) => {
@@ -82,7 +84,7 @@ export function ForgeCommandBar({ showTrigger = true }: { showTrigger?: boolean 
       >
         <Command size={15} strokeWidth={2} aria-hidden="true" />
         <span>Ask 1Forge</span>
-        <kbd>⌘ K</kbd>
+        <kbd>{shortcut.label}</kbd>
       </button> : null}
 
       {isOpen && (
@@ -123,7 +125,7 @@ export function ForgeCommandBar({ showTrigger = true }: { showTrigger?: boolean 
             </div>
 
             <div className="forge-command-footer">
-              <span>Not sure where to start?</span>
+              <span>{shortcut.label} opens this help menu anywhere.</span>
               <a href="mailto:studio@1forge.in">
                 Talk to the studio <ArrowUpRight size={15} />
               </a>

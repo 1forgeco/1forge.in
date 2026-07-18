@@ -327,6 +327,10 @@
   transform: translateX(2px);
 }
 
+.ecosystem-switcher__product.is-current {
+  background: rgba(148, 127, 255, 0.08);
+}
+
 .ecosystem-switcher__icon {
   display: grid;
   width: 36px;
@@ -347,7 +351,7 @@
 
 .ecosystem-switcher__product strong { font-size: 13px; }
 .ecosystem-switcher__product small { margin-top: 3px; color: rgba(255, 255, 255, 0.42); font-size: 10px; }
-.ecosystem-switcher__arrow { color: rgba(255, 255, 255, 0.34); font-size: 14px; }
+.ecosystem-switcher__arrow { color: rgba(255, 255, 255, 0.34); font-size: 9px; letter-spacing: 0.08em; }
 
 /* ─── Command palette ─── */
 .forge-command-trigger {

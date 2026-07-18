@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import { AnimatedLogo } from "./animated-logo";
 import { MotionToggle } from "./motion-toggle";
 import { TransitionLink } from "./transition-link";
+import { useCommandShortcut } from "./use-command-shortcut";
 
 const navigationItems = [
   { label: "Services", href: "/services", design: false },
@@ -16,6 +17,7 @@ const navigationItems = [
 export function SiteHeader() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+  const shortcut = useCommandShortcut();
 
   useEffect(() => {
     const handleScroll = () => setIsScrolled(window.scrollY > 10);
@@ -54,7 +56,7 @@ export function SiteHeader() {
           <div className="modern-header__tools">
             <MotionToggle />
             <button type="button" className="modern-header__command" onClick={openCommand}>
-              <Command size={14} /><span>Ask 1Forge</span><kbd>⌘K</kbd>
+              <Command size={14} /><span>Ask 1Forge</span><kbd>{shortcut.label}</kbd>
             </button>
             <TransitionLink href="/#build-estimator" className="modern-header__cta">Get a build plan</TransitionLink>
             <button

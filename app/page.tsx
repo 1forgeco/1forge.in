@@ -1,6 +1,5 @@
 import { CapabilityArchitecture } from "./components/capability-architecture";
 import { DesignTemplatesSection } from "./components/design-templates-section";
-import { EcosystemSwitcher } from "./components/ecosystem-switcher";
 import { ForgeConfigurator } from "./components/forge-configurator";
 import { InputShowcase } from "./components/input-showcase";
 import { LivingCaseStudies } from "./components/living-case-studies";
@@ -25,7 +24,6 @@ export default function Home() {
           <InputShowcase showFaq={false} />
         </main>
         <SiteFooter />
-        <EcosystemSwitcher />
       </div>
     </SitePreloader>
   );
