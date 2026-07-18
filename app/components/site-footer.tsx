@@ -3,6 +3,7 @@
 import { ArrowUpRight } from "lucide-react";
 import { BrandLogo } from "./brand-logo";
 import { TransitionLink } from "./transition-link";
+import { EcosystemVisualSection } from "./ecosystem-navigation";
 
 const footerGroups = [
   {
@@ -41,6 +42,7 @@ export function SiteFooter() {
   return (
     <footer id="site-footer" className="modern-footer">
       <div className="modern-shell">
+        <EcosystemVisualSection />
         <div className="modern-footer__statement">
           <span className="modern-kicker">READY WHEN THE BOTTLENECK IS</span>
           <h2>Software should remove work, not add another layer.</h2>

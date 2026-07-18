@@ -6,6 +6,7 @@ import { AnimatedLogo } from "./animated-logo";
 import { MotionToggle } from "./motion-toggle";
 import { TransitionLink } from "./transition-link";
 import { useCommandShortcut } from "./use-command-shortcut";
+import { EcosystemTopBar } from "./ecosystem-navigation";
 
 const navigationItems = [
   { label: "Services", href: "/services", design: false },
@@ -39,6 +40,7 @@ export function SiteHeader() {
 
   return (
     <>
+      <EcosystemTopBar />
       <header id="site-header" className={`modern-header ${isScrolled ? "is-scrolled" : ""}`}>
         <div className="modern-header__inner">
           <TransitionLink href="/" id="header-logo" className="modern-header__logo" aria-label="1Forge home">
