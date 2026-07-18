@@ -48,11 +48,12 @@ export function EcosystemTopBar() {
             rel={product.external ? "noreferrer" : undefined}
           >
             <Icon size={14} strokeWidth={1.8} aria-hidden="true" />
-            <span>{product.name}</span>
+            <span>{product.name}<em>{product.label}</em></span>
             {product.current ? <small>YOU ARE HERE</small> : <b aria-hidden="true">↗</b>}
           </a>
         ))}
       </div>
+      <span className="forge-product-bar__promise">One forge / three products</span>
     </nav>
   );
 }
