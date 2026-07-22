@@ -1,6 +1,7 @@
 import { CapabilityArchitecture } from "./components/capability-architecture";
 import { DesignTemplatesSection } from "./components/design-templates-section";
 import { ForgeConfigurator } from "./components/forge-configurator";
+import { ForgeOSProductStrip } from "./components/forgeos-product-strip";
 import { InputShowcase } from "./components/input-showcase";
 import { LivingCaseStudies } from "./components/living-case-studies";
 import { ProofSection } from "./components/proof-section";
@@ -18,6 +19,7 @@ export default function Home() {
           <SystemHero />
           <ProofSection />
           <LivingCaseStudies />
+          <ForgeOSProductStrip />
           <CapabilityArchitecture />
           <ForgeConfigurator />
           <DesignTemplatesSection />

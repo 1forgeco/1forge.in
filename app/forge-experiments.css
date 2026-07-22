@@ -264,6 +264,7 @@
 .ecosystem-switcher__rings i:nth-child(1) { top: 1px; left: 6px; border-color: #8d74ff; }
 .ecosystem-switcher__rings i:nth-child(2) { bottom: 1px; left: 1px; border-color: #ff7a3c; }
 .ecosystem-switcher__rings i:nth-child(3) { right: 1px; bottom: 1px; border-color: #3cb17a; }
+.ecosystem-switcher__rings i:nth-child(4) { top: 6px; right: 1px; border-color: #5d8dff; }
 
 .ecosystem-switcher__panel {
   position: absolute;
@@ -342,6 +343,7 @@
 
 .ecosystem-switcher__product.is-purple .ecosystem-switcher__icon { color: #947fff; background: rgba(148, 127, 255, 0.1); }
 .ecosystem-switcher__product.is-orange .ecosystem-switcher__icon { color: #ff8249; background: rgba(255, 130, 73, 0.1); }
+.ecosystem-switcher__product.is-blue .ecosystem-switcher__icon { color: #6f9cff; background: rgba(111, 156, 255, 0.1); }
 .ecosystem-switcher__product.is-green .ecosystem-switcher__icon { color: #4cc78c; background: rgba(76, 199, 140, 0.1); }
 
 .ecosystem-switcher__product strong,

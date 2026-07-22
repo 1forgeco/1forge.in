@@ -1,4 +1,4 @@
-import { Boxes, Layers3, ServerCog } from "lucide-react";
+import { Bot, Boxes, Layers3, ServerCog } from "lucide-react";
 
 const products = [
   {
@@ -22,6 +22,16 @@ const products = [
     external: true,
   },
   {
+    name: "ForgeOS",
+    label: "Custom browser agents",
+    description: "Create, test and deploy visual agents that work inside the browser.",
+    href: process.env.NEXT_PUBLIC_FORGEOS_URL ?? "https://forgeos-agent-studio.kamalkatal512.chatgpt.site",
+    tone: "blue",
+    icon: Bot,
+    current: false,
+    external: true,
+  },
+  {
     name: "Hostin",
     label: "Property operations",
     description: "Run hospitality and property operations from one place.",
@@ -36,7 +46,7 @@ const products = [
 export function EcosystemTopBar() {
   return (
     <nav className="forge-product-bar" aria-label="1Forge products">
-      <span className="forge-product-bar__label"><i /><i /><i />1Forge products</span>
+      <span className="forge-product-bar__label"><i /><i /><i /><i />1Forge products</span>
       <div>
         {products.map(({ icon: Icon, ...product }) => (
           <a
@@ -48,11 +58,12 @@ export function EcosystemTopBar() {
             rel={product.external ? "noreferrer" : undefined}
           >
             <Icon size={14} strokeWidth={1.8} aria-hidden="true" />
-            <span>{product.name}</span>
+            <span>{product.name}<em>{product.label}</em></span>
             {product.current ? <small>YOU ARE HERE</small> : <b aria-hidden="true">↗</b>}
           </a>
         ))}
       </div>
+      <span className="forge-product-bar__promise">One forge / four products</span>
     </nav>
   );
 }
@@ -61,7 +72,7 @@ export function EcosystemVisualSection() {
   return (
     <section className="forge-ecosystem-visual" aria-labelledby="forge-ecosystem-title">
       <header>
-        <div><span>THE 1FORGE ECOSYSTEM</span><h2 id="forge-ecosystem-title">One forge.<br /><em>Three ways to build.</em></h2></div>
+        <div><span>THE 1FORGE ECOSYSTEM</span><h2 id="forge-ecosystem-title">One forge.<br /><em>Four ways to build.</em></h2></div>
         <p>Move from shaping a digital product, to designing its presence, to operating the business behind it—all within one connected ecosystem.</p>
       </header>
       <div className="forge-ecosystem-visual__grid">

@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
-import { Boxes, ChevronUp, Layers3, ServerCog } from "lucide-react";
+import { Bot, Boxes, ChevronUp, Layers3, ServerCog } from "lucide-react";
 
 const products = [
   {
@@ -19,6 +19,15 @@ const products = [
     href: process.env.NEXT_PUBLIC_DESIGNS_URL ?? "https://1forgedesign.vercel.app/",
     tone: "orange",
     icon: Boxes,
+    external: true,
+    current: false,
+  },
+  {
+    name: "ForgeOS",
+    label: "Custom browser agents",
+    href: process.env.NEXT_PUBLIC_FORGEOS_URL ?? "https://forgeos-agent-studio.kamalkatal512.chatgpt.site",
+    tone: "blue",
+    icon: Bot,
     external: true,
     current: false,
   },
@@ -58,7 +67,7 @@ export function EcosystemSwitcher() {
       <div className="ecosystem-switcher__panel" aria-hidden={!isOpen} inert={!isOpen}>
         <div className="ecosystem-switcher__heading">
           <span>1FORGE ECOSYSTEM</span>
-          <small>One forge. Three products.</small>
+          <small>One forge. Four products.</small>
         </div>
         {products.map(({ icon: Icon, ...product }) => (
           <a
@@ -90,6 +99,7 @@ export function EcosystemSwitcher() {
         onClick={() => setIsOpen((current) => !current)}
       >
         <span className="ecosystem-switcher__rings" aria-hidden="true">
+          <i />
           <i />
           <i />
           <i />
