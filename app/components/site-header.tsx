@@ -11,6 +11,7 @@ import { EcosystemTopBar } from "./ecosystem-navigation";
 const navigationItems = [
   { label: "Services", href: "/services", design: false },
   { label: "Work", href: "/work", design: false },
+  { label: "Pricing", href: "/pricing", design: false },
   { label: "Design Lab", href: "/#designs", design: true },
   { label: "Estimator", href: "/#build-estimator", design: false },
 ] as const;

@@ -6,6 +6,7 @@ import {
   Bot,
   Building2,
   Command,
+  CreditCard,
   Globe2,
   Search,
   Smartphone,
@@ -37,6 +38,12 @@ const commands = [
     detail: "AI agents and repeatable workflows",
     href: "/services#ai-automation",
     icon: Bot,
+  },
+  {
+    title: "Show pricing",
+    detail: "Compare rough plans and starting prices",
+    href: "/pricing",
+    icon: CreditCard,
   },
 ];
 
