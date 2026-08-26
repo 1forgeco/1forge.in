@@ -11,6 +11,7 @@ const footerGroups = [
     links: [
       ["Services", "/services"],
       ["Work", "/work"],
+      ["Pricing", "/pricing"],
       ["Build estimator", "/#build-estimator"],
       ["Contact", "/#cta"],
     ],

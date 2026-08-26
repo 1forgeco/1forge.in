@@ -70,6 +70,9 @@ export function SystemHero() {
             <TransitionLink href="/work" className="modern-button modern-button--line">
               Explore real work <span aria-hidden="true">↗</span>
             </TransitionLink>
+            <TransitionLink href="/pricing" className="modern-button modern-button--line">
+              View pricing <span aria-hidden="true">↗</span>
+            </TransitionLink>
           </div>
           <div className="system-hero__promise">
             <span><i /> Product thinking</span>
