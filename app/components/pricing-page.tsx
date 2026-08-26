@@ -169,7 +169,7 @@ export function PricingPage() {
           </div>
           <div>
             <span className="modern-kicker">Hostin product plan</span>
-            <h2>Hostin starts at Rs 24,999/year</h2>
+            <h2>Hostin starts at Rs 24,999/month</h2>
             <p>
               Keep Hostin visible as its own product plan for property, hostel, PG, and institute operators.
               This avoids mixing subscription software with one-time website build pricing.
